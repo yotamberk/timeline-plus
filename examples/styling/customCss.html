@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Timeline | Custom styling</title>
+
+  <script src="../../dist/timeline.js"></script>
+  <link href="../../dist/timeline.min.css" rel="stylesheet" type="text/css" />
+
+  <style type="text/css">
+    body {
+      font-family:  purisa, 'comic sans', cursive;
+    }
+
+    .timeline-timeline {
+      border: 2px solid purple;
+      font-family:  purisa, 'comic sans', cursive;
+      font-size: 12pt;
+      background: #ffecea;
+    }
+
+    .timeline-item {
+      border-color: #F991A3;
+      background-color: pink;
+      font-size: 15pt;
+      color: purple;
+      box-shadow: 5px 5px 20px rgba(128,128,128, 0.5);
+    }
+
+    .timeline-item,
+    .timeline-item.timeline-line {
+      border-width: 3px;
+    }
+
+    .timeline-item.timeline-dot {
+      border-width: 10px;
+      border-radius: 10px;
+    }
+
+    .timeline-item.timeline-selected {
+      border-color: green;
+      background-color: lightgreen;
+    }
+
+    .timeline-time-axis .timeline-text {
+      color: purple;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
+
+    .timeline-time-axis .timeline-text.timeline-major {
+      font-weight: bold;
+    }
+
+    .timeline-time-axis .timeline-grid.timeline-minor {
+      border-width: 2px;
+      border-color: pink;
+    }
+
+    .timeline-time-axis .timeline-grid.timeline-major {
+      border-width: 2px;
+      border-color: #F991A3;
+    }
+  </style>
+
+  
+</head>
+<body>
+
+<p>
+  The style of the Timeline can be fully customized via CSS:
+</p>
+<div id="visualization"></div>
+
+<script type="text/javascript">
+  var container = document.getElementById('visualization');
+
+  // note that months are zero-based in the JavaScript Date object
+  var items = new timeline.DataSet([
+    {start: new Date(2010,7,23), content: '<div>Conversation</div><img src="../resources/img/community-users-icon.png" style="width:32px; height:32px;">'},
+    {start: new Date(2010,7,23,23,0,0), content: '<div>Mail from boss</div><img src="../resources/img/mail-icon.png" style="width:32px; height:32px;">'},
+    {start: new Date(2010,7,24,16,0,0), content: 'Report'},
+    {start: new Date(2010,7,26), end: new Date(2010,8,2), content: 'Traject A'},
+    {start: new Date(2010,7,28), content: '<div>Memo</div><img src="../resources/img/notes-edit-icon.png" style="width:48px; height:48px;">'},
+    {start: new Date(2010,7,29), content: '<div>Phone call</div><img src="../resources/img/Hardware-Mobile-Phone-icon.png" style="width:32px; height:32px;">'},
+    {start: new Date(2010,7,31), end: new Date(2010,8,3), content: 'Traject B'},
+    {start: new Date(2010,8,4,12,0,0), content: '<div>Report</div><img src="../resources/img/attachment-icon.png" style="width:32px; height:32px;">'}
+  ]);
+
+  var options = {
+    editable: true,
+    margin: {
+      item: 20,
+      axis: 40
+    }
+  };
+
+  var timeline = new timeline.Timeline(container, items, options);
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Timeline | Grid styling</title>
+
+  <script src="../../dist/timeline.js"></script>
+  <link href="../../dist/timeline.min.css" rel="stylesheet" type="text/css" />
+
+  <style type="text/css">
+    body, html {
+      font-family: sans-serif;
+    }
+
+    /* alternating column backgrounds */
+    .timeline-time-axis .timeline-grid.timeline-odd {
+      background: #f5f5f5;
+    }
+
+    /* gray background in weekends, white text color */
+    .timeline-time-axis .timeline-grid.timeline-saturday,
+    .timeline-time-axis .timeline-grid.timeline-sunday {
+      background: gray;
+    }
+    .timeline-time-axis .timeline-text.timeline-saturday,
+    .timeline-time-axis .timeline-text.timeline-sunday {
+      color: white;
+    }
+  </style>
+  
+</head>
+<body>
+<div id="visualization"></div>
+
+<script type="text/javascript">
+  // DOM element where the Timeline will be attached
+  var container = document.getElementById('visualization');
+
+  // Create a DataSet (allows two way data-binding)
+  var items = new timeline.DataSet([
+    {id: 1, content: 'custom', start: '2015-01-01'},
+    {id: 2, content: 'styling', start: '2016-01-01'},
+    {id: 3, content: 'of', start: '2017-01-01'},
+    {id: 4, content: 'background', start: '2018-01-01'},
+    {id: 5, content: 'grid', start: '2019-01-01'}
+  ]);
+
+  // Configuration for the Timeline
+  var options = {};
+
+  // Create a Timeline
+  var timeline = new timeline.Timeline(container, items, options);
+</script>
+</body>
+</html>

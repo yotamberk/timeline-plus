@@ -1,0 +1,6 @@
+misc
+node_modules
+test
+tools
+.npmignore
+.gitignore
