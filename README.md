@@ -16,7 +16,10 @@ Install via npm:
 Or download the library from the github project:
 [https://github.com/yotamberk/timeline.git](https://github.com/yotamberk/timeline.git).
 
-## Example
+## API and Examples
+[https://yotamberk.github.io/timeline-plus/](https://yotamberk.github.io/timeline-plus/)
+
+## Basic Example
 
 A basic example on loading a Timeline is shown below. More examples can be
 found in the [examples directory](https://github.com/yotamberk/timeline/tree/master/examples)
