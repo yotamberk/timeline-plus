@@ -1,5 +1,4 @@
 # timeline.js files
-dist/
 
 # npm files
 node_modules
@@ -20,3 +19,4 @@ gen/
 .nyc_output/
 coverage/
 package-lock.json
+yarn.lock
