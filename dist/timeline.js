@@ -2,7 +2,7 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @date    2018-07-01
  *
  */
@@ -81,7 +81,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 82);
+/******/ 	return __webpack_require__(__webpack_require__.s = 76);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,19 +91,19 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var _getIterator2 = __webpack_require__(83);
+var _getIterator2 = __webpack_require__(77);
 
 var _getIterator3 = _interopRequireDefault(_getIterator2);
 
-var _create = __webpack_require__(40);
+var _create = __webpack_require__(38);
 
 var _create2 = _interopRequireDefault(_create);
 
-var _keys = __webpack_require__(3);
+var _keys = __webpack_require__(6);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _typeof2 = __webpack_require__(1);
+var _typeof2 = __webpack_require__(2);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -115,8 +115,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 // use this instance. Else, load via commonjs.
 
 
-var moment = __webpack_require__(4);
-var uuid = __webpack_require__(123);
+var moment = __webpack_require__(3);
+var uuid = __webpack_require__(117);
 
 /**
  * Test whether given object is a number
@@ -1659,6 +1659,14 @@ exports.topMost = function (pile, accessors) {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+var core = module.exports = { version: '2.5.4' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1666,11 +1674,11 @@ exports.topMost = function (pile, accessors) {
 
 exports.__esModule = true;
 
-var _iterator = __webpack_require__(107);
+var _iterator = __webpack_require__(101);
 
 var _iterator2 = _interopRequireDefault(_iterator);
 
-var _symbol = __webpack_require__(109);
+var _symbol = __webpack_require__(103);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
@@ -1685,21 +1693,7 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 };
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-var core = module.exports = { version: '2.5.4' };
-if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(104), __esModule: true };
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1707,10 +1701,87 @@ module.exports = { "default": __webpack_require__(104), __esModule: true };
 
 // first check if moment.js is already loaded in the browser window, if so,
 // use this instance. Else, load via commonjs.
-module.exports = typeof window !== 'undefined' && window['moment'] || __webpack_require__(120);
+module.exports = typeof window !== 'undefined' && window['moment'] || __webpack_require__(114);
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  // eslint-disable-next-line no-new-func
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var store = __webpack_require__(35)('wks');
+var uid = __webpack_require__(24);
+var Symbol = __webpack_require__(4).Symbol;
+var USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function (name) {
+  return store[name] || (store[name] =
+    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+};
+
+$exports.store = store;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(98), __esModule: true };
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__(16);
+var IE8_DOM_DEFINE = __webpack_require__(51);
+var toPrimitive = __webpack_require__(31);
+var dP = Object.defineProperty;
+
+exports.f = __webpack_require__(8) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Thank's IE8 for his funny defineProperty
+module.exports = !__webpack_require__(18)(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1774,297 +1845,7 @@ Component.prototype._isResized = function () {
 module.exports = Component;
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self
-  // eslint-disable-next-line no-new-func
-  : Function('return this')();
-if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var store = __webpack_require__(37)('wks');
-var uid = __webpack_require__(26);
-var Symbol = __webpack_require__(6).Symbol;
-var USE_SYMBOL = typeof Symbol == 'function';
-
-var $exports = module.exports = function (name) {
-  return store[name] || (store[name] =
-    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
-};
-
-$exports.store = store;
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var anObject = __webpack_require__(17);
-var IE8_DOM_DEFINE = __webpack_require__(53);
-var toPrimitive = __webpack_require__(33);
-var dP = Object.defineProperty;
-
-exports.f = __webpack_require__(9) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if (IE8_DOM_DEFINE) try {
-    return dP(O, P, Attributes);
-  } catch (e) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(19)(function () {
-  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
-});
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function (it, key) {
-  return hasOwnProperty.call(it, key);
-};
-
-
-/***/ }),
 /* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// DOM utility methods
-
-/**
- * this prepares the JSON container for allocating SVG elements
- * @param {Object} JSONcontainer
- * @private
- */
-exports.prepareElements = function (JSONcontainer) {
-  // cleanup the redundant svgElements;
-  for (var elementType in JSONcontainer) {
-    if (JSONcontainer.hasOwnProperty(elementType)) {
-      JSONcontainer[elementType].redundant = JSONcontainer[elementType].used;
-      JSONcontainer[elementType].used = [];
-    }
-  }
-};
-
-/**
- * this cleans up all the unused SVG elements. By asking for the parentNode, we only need to supply the JSON container from
- * which to remove the redundant elements.
- *
- * @param {Object} JSONcontainer
- * @private
- */
-exports.cleanupElements = function (JSONcontainer) {
-  // cleanup the redundant svgElements;
-  for (var elementType in JSONcontainer) {
-    if (JSONcontainer.hasOwnProperty(elementType)) {
-      if (JSONcontainer[elementType].redundant) {
-        for (var i = 0; i < JSONcontainer[elementType].redundant.length; i++) {
-          JSONcontainer[elementType].redundant[i].parentNode.removeChild(JSONcontainer[elementType].redundant[i]);
-        }
-        JSONcontainer[elementType].redundant = [];
-      }
-    }
-  }
-};
-
-/**
- * Ensures that all elements are removed first up so they can be recreated cleanly
- * @param {Object} JSONcontainer
- */
-exports.resetElements = function (JSONcontainer) {
-  exports.prepareElements(JSONcontainer);
-  exports.cleanupElements(JSONcontainer);
-  exports.prepareElements(JSONcontainer);
-};
-
-/**
- * Allocate or generate an SVG element if needed. Store a reference to it in the JSON container and draw it in the svgContainer
- * the JSON container and the SVG container have to be supplied so other svg containers (like the legend) can use this.
- *
- * @param {string} elementType
- * @param {Object} JSONcontainer
- * @param {Object} svgContainer
- * @returns {Element}
- * @private
- */
-exports.getSVGElement = function (elementType, JSONcontainer, svgContainer) {
-  var element;
-  // allocate SVG element, if it doesnt yet exist, create one.
-  if (JSONcontainer.hasOwnProperty(elementType)) {
-    // this element has been created before
-    // check if there is an redundant element
-    if (JSONcontainer[elementType].redundant.length > 0) {
-      element = JSONcontainer[elementType].redundant[0];
-      JSONcontainer[elementType].redundant.shift();
-    } else {
-      // create a new element and add it to the SVG
-      element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
-      svgContainer.appendChild(element);
-    }
-  } else {
-    // create a new element and add it to the SVG, also create a new object in the svgElements to keep track of it.
-    element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
-    JSONcontainer[elementType] = { used: [], redundant: [] };
-    svgContainer.appendChild(element);
-  }
-  JSONcontainer[elementType].used.push(element);
-  return element;
-};
-
-/**
- * Allocate or generate an SVG element if needed. Store a reference to it in the JSON container and draw it in the svgContainer
- * the JSON container and the SVG container have to be supplied so other svg containers (like the legend) can use this.
- *
- * @param {string} elementType
- * @param {Object} JSONcontainer
- * @param {Element} DOMContainer
- * @param {Element} insertBefore
- * @returns {*}
- */
-exports.getDOMElement = function (elementType, JSONcontainer, DOMContainer, insertBefore) {
-  var element;
-  // allocate DOM element, if it doesnt yet exist, create one.
-  if (JSONcontainer.hasOwnProperty(elementType)) {
-    // this element has been created before
-    // check if there is an redundant element
-    if (JSONcontainer[elementType].redundant.length > 0) {
-      element = JSONcontainer[elementType].redundant[0];
-      JSONcontainer[elementType].redundant.shift();
-    } else {
-      // create a new element and add it to the SVG
-      element = document.createElement(elementType);
-      if (insertBefore !== undefined) {
-        DOMContainer.insertBefore(element, insertBefore);
-      } else {
-        DOMContainer.appendChild(element);
-      }
-    }
-  } else {
-    // create a new element and add it to the SVG, also create a new object in the svgElements to keep track of it.
-    element = document.createElement(elementType);
-    JSONcontainer[elementType] = { used: [], redundant: [] };
-    if (insertBefore !== undefined) {
-      DOMContainer.insertBefore(element, insertBefore);
-    } else {
-      DOMContainer.appendChild(element);
-    }
-  }
-  JSONcontainer[elementType].used.push(element);
-  return element;
-};
-
-/**
- * Draw a point object. This is a separate function because it can also be called by the legend.
- * The reason the JSONcontainer and the target SVG svgContainer have to be supplied is so the legend can use these functions
- * as well.
- *
- * @param {number} x
- * @param {number} y
- * @param {Object} groupTemplate: A template containing the necessary information to draw the datapoint e.g., {style: 'circle', size: 5, className: 'className' }
- * @param {Object} JSONcontainer
- * @param {Object} svgContainer
- * @param {Object} labelObj
- * @returns {timeline.PointItem}
- */
-exports.drawPoint = function (x, y, groupTemplate, JSONcontainer, svgContainer, labelObj) {
-  var point;
-  if (groupTemplate.style == 'circle') {
-    point = exports.getSVGElement('circle', JSONcontainer, svgContainer);
-    point.setAttributeNS(null, "cx", x);
-    point.setAttributeNS(null, "cy", y);
-    point.setAttributeNS(null, "r", 0.5 * groupTemplate.size);
-  } else {
-    point = exports.getSVGElement('rect', JSONcontainer, svgContainer);
-    point.setAttributeNS(null, "x", x - 0.5 * groupTemplate.size);
-    point.setAttributeNS(null, "y", y - 0.5 * groupTemplate.size);
-    point.setAttributeNS(null, "width", groupTemplate.size);
-    point.setAttributeNS(null, "height", groupTemplate.size);
-  }
-
-  if (groupTemplate.styles !== undefined) {
-    point.setAttributeNS(null, "style", groupTemplate.styles);
-  }
-  point.setAttributeNS(null, "class", groupTemplate.className + " timeline-point");
-  //handle label
-
-
-  if (labelObj) {
-    var label = exports.getSVGElement('text', JSONcontainer, svgContainer);
-    if (labelObj.xOffset) {
-      x = x + labelObj.xOffset;
-    }
-
-    if (labelObj.yOffset) {
-      y = y + labelObj.yOffset;
-    }
-    if (labelObj.content) {
-      label.textContent = labelObj.content;
-    }
-
-    if (labelObj.className) {
-      label.setAttributeNS(null, "class", labelObj.className + " timeline-label");
-    }
-    label.setAttributeNS(null, "x", x);
-    label.setAttributeNS(null, "y", y);
-  }
-
-  return point;
-};
-
-/**
- * draw a bar SVG element centered on the X coordinate
- *
- * @param {number} x
- * @param {number} y
- * @param {number} width
- * @param {number} height
- * @param {string} className
- * @param {Object} JSONcontainer
- * @param {Object} svgContainer
- * @param {string} style
- */
-exports.drawBar = function (x, y, width, height, className, JSONcontainer, svgContainer, style) {
-  if (height != 0) {
-    if (height < 0) {
-      height *= -1;
-      y -= height;
-    }
-    var rect = exports.getSVGElement('rect', JSONcontainer, svgContainer);
-    rect.setAttributeNS(null, "x", x - 0.5 * width);
-    rect.setAttributeNS(null, "y", y);
-    rect.setAttributeNS(null, "width", width);
-    rect.setAttributeNS(null, "height", height);
-    rect.setAttributeNS(null, "class", className);
-    if (style) {
-      rect.setAttributeNS(null, "style", style);
-    }
-  }
-};
-
-/***/ }),
-/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2096,8 +1877,8 @@ function hammerMock() {
 }
 
 if (typeof window !== 'undefined') {
-  var propagating = __webpack_require__(127);
-  var Hammer = window['Hammer'] || __webpack_require__(128);
+  var propagating = __webpack_require__(121);
+  var Hammer = window['Hammer'] || __webpack_require__(122);
   module.exports = propagating(Hammer, {
     preventDefault: 'mouse'
   });
@@ -2109,24 +1890,24 @@ if (typeof window !== 'undefined') {
 }
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(88);
-var defined = __webpack_require__(31);
+var IObject = __webpack_require__(82);
+var defined = __webpack_require__(29);
 module.exports = function (it) {
   return IObject(defined(it));
 };
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(8);
-var createDesc = __webpack_require__(24);
-module.exports = __webpack_require__(9) ? function (object, key, value) {
+var dP = __webpack_require__(7);
+var createDesc = __webpack_require__(22);
+module.exports = __webpack_require__(8) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
   object[key] = value;
@@ -2135,20 +1916,20 @@ module.exports = __webpack_require__(9) ? function (object, key, value) {
 
 
 /***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(119), __esModule: true };
+
+/***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(125), __esModule: true };
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(6);
-var core = __webpack_require__(2);
-var ctx = __webpack_require__(89);
-var hide = __webpack_require__(14);
-var has = __webpack_require__(10);
+var global = __webpack_require__(4);
+var core = __webpack_require__(1);
+var ctx = __webpack_require__(83);
+var hide = __webpack_require__(13);
+var has = __webpack_require__(9);
 var PROTOTYPE = 'prototype';
 
 var $export = function (type, name, source) {
@@ -2209,10 +1990,10 @@ module.exports = $export;
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(18);
+var isObject = __webpack_require__(17);
 module.exports = function (it) {
   if (!isObject(it)) throw TypeError(it + ' is not an object!');
   return it;
@@ -2220,7 +2001,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
@@ -2229,7 +2010,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = function (exec) {
@@ -2242,28 +2023,1102 @@ module.exports = function (exec) {
 
 
 /***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * used in Core to convert the options into a volatile variable
+ * 
+ * @param {function} moment
+ * @param {Object} body
+ * @param {Array | Object} hiddenDates
+ * @returns {number}
+ */
+exports.convertHiddenOptions = function (moment, body, hiddenDates) {
+  if (hiddenDates && !Array.isArray(hiddenDates)) {
+    return exports.convertHiddenOptions(moment, body, [hiddenDates]);
+  }
+
+  body.hiddenDates = [];
+  if (hiddenDates) {
+    if (Array.isArray(hiddenDates) == true) {
+      for (var i = 0; i < hiddenDates.length; i++) {
+        if (hiddenDates[i].repeat === undefined) {
+          var dateItem = {};
+          dateItem.start = moment(hiddenDates[i].start).toDate().valueOf();
+          dateItem.end = moment(hiddenDates[i].end).toDate().valueOf();
+          body.hiddenDates.push(dateItem);
+        }
+      }
+      body.hiddenDates.sort(function (a, b) {
+        return a.start - b.start;
+      }); // sort by start time
+    }
+  }
+};
+
+/**
+ * create new entrees for the repeating hidden dates
+ *
+ * @param {function} moment
+ * @param {Object} body
+ * @param {Array | Object} hiddenDates
+ * @returns {null}
+ */
+exports.updateHiddenDates = function (moment, body, hiddenDates) {
+  if (hiddenDates && !Array.isArray(hiddenDates)) {
+    return exports.updateHiddenDates(moment, body, [hiddenDates]);
+  }
+
+  if (hiddenDates && body.domProps.centerContainer.width !== undefined) {
+    exports.convertHiddenOptions(moment, body, hiddenDates);
+
+    var start = moment(body.range.start);
+    var end = moment(body.range.end);
+
+    var totalRange = body.range.end - body.range.start;
+    var pixelTime = totalRange / body.domProps.centerContainer.width;
+
+    for (var i = 0; i < hiddenDates.length; i++) {
+      if (hiddenDates[i].repeat !== undefined) {
+        var startDate = moment(hiddenDates[i].start);
+        var endDate = moment(hiddenDates[i].end);
+
+        if (startDate._d == "Invalid Date") {
+          throw new Error("Supplied start date is not valid: " + hiddenDates[i].start);
+        }
+        if (endDate._d == "Invalid Date") {
+          throw new Error("Supplied end date is not valid: " + hiddenDates[i].end);
+        }
+
+        var duration = endDate - startDate;
+        if (duration >= 4 * pixelTime) {
+
+          var offset = 0;
+          var runUntil = end.clone();
+          switch (hiddenDates[i].repeat) {
+            case "daily":
+              // case of time
+              if (startDate.day() != endDate.day()) {
+                offset = 1;
+              }
+              startDate.dayOfYear(start.dayOfYear());
+              startDate.year(start.year());
+              startDate.subtract(7, 'days');
+
+              endDate.dayOfYear(start.dayOfYear());
+              endDate.year(start.year());
+              endDate.subtract(7 - offset, 'days');
+
+              runUntil.add(1, 'weeks');
+              break;
+            case "weekly":
+              var dayOffset = endDate.diff(startDate, 'days');
+              var day = startDate.day();
+
+              // set the start date to the range.start
+              startDate.date(start.date());
+              startDate.month(start.month());
+              startDate.year(start.year());
+              endDate = startDate.clone();
+
+              // force
+              startDate.day(day);
+              endDate.day(day);
+              endDate.add(dayOffset, 'days');
+
+              startDate.subtract(1, 'weeks');
+              endDate.subtract(1, 'weeks');
+
+              runUntil.add(1, 'weeks');
+              break;
+            case "monthly":
+              if (startDate.month() != endDate.month()) {
+                offset = 1;
+              }
+              startDate.month(start.month());
+              startDate.year(start.year());
+              startDate.subtract(1, 'months');
+
+              endDate.month(start.month());
+              endDate.year(start.year());
+              endDate.subtract(1, 'months');
+              endDate.add(offset, 'months');
+
+              runUntil.add(1, 'months');
+              break;
+            case "yearly":
+              if (startDate.year() != endDate.year()) {
+                offset = 1;
+              }
+              startDate.year(start.year());
+              startDate.subtract(1, 'years');
+              endDate.year(start.year());
+              endDate.subtract(1, 'years');
+              endDate.add(offset, 'years');
+
+              runUntil.add(1, 'years');
+              break;
+            default:
+              console.log("Wrong repeat format, allowed are: daily, weekly, monthly, yearly. Given:", hiddenDates[i].repeat);
+              return;
+          }
+          while (startDate < runUntil) {
+            body.hiddenDates.push({ start: startDate.valueOf(), end: endDate.valueOf() });
+            switch (hiddenDates[i].repeat) {
+              case "daily":
+                startDate.add(1, 'days');
+                endDate.add(1, 'days');
+                break;
+              case "weekly":
+                startDate.add(1, 'weeks');
+                endDate.add(1, 'weeks');
+                break;
+              case "monthly":
+                startDate.add(1, 'months');
+                endDate.add(1, 'months');
+                break;
+              case "yearly":
+                startDate.add(1, 'y');
+                endDate.add(1, 'y');
+                break;
+              default:
+                console.log("Wrong repeat format, allowed are: daily, weekly, monthly, yearly. Given:", hiddenDates[i].repeat);
+                return;
+            }
+          }
+          body.hiddenDates.push({ start: startDate.valueOf(), end: endDate.valueOf() });
+        }
+      }
+    }
+    // remove duplicates, merge where possible
+    exports.removeDuplicates(body);
+    // ensure the new positions are not on hidden dates
+    var startHidden = exports.isHidden(body.range.start, body.hiddenDates);
+    var endHidden = exports.isHidden(body.range.end, body.hiddenDates);
+    var rangeStart = body.range.start;
+    var rangeEnd = body.range.end;
+    if (startHidden.hidden == true) {
+      rangeStart = body.range.startToFront == true ? startHidden.startDate - 1 : startHidden.endDate + 1;
+    }
+    if (endHidden.hidden == true) {
+      rangeEnd = body.range.endToFront == true ? endHidden.startDate - 1 : endHidden.endDate + 1;
+    }
+    if (startHidden.hidden == true || endHidden.hidden == true) {
+      body.range._applyRange(rangeStart, rangeEnd);
+    }
+  }
+};
+
+/**
+ * remove duplicates from the hidden dates list. Duplicates are evil. They mess everything up.
+ * Scales with N^2
+ *
+ * @param {Object} body
+ */
+exports.removeDuplicates = function (body) {
+  var hiddenDates = body.hiddenDates;
+  var safeDates = [];
+  for (var i = 0; i < hiddenDates.length; i++) {
+    for (var j = 0; j < hiddenDates.length; j++) {
+      if (i != j && hiddenDates[j].remove != true && hiddenDates[i].remove != true) {
+        // j inside i
+        if (hiddenDates[j].start >= hiddenDates[i].start && hiddenDates[j].end <= hiddenDates[i].end) {
+          hiddenDates[j].remove = true;
+        }
+        // j start inside i
+        else if (hiddenDates[j].start >= hiddenDates[i].start && hiddenDates[j].start <= hiddenDates[i].end) {
+            hiddenDates[i].end = hiddenDates[j].end;
+            hiddenDates[j].remove = true;
+          }
+          // j end inside i
+          else if (hiddenDates[j].end >= hiddenDates[i].start && hiddenDates[j].end <= hiddenDates[i].end) {
+              hiddenDates[i].start = hiddenDates[j].start;
+              hiddenDates[j].remove = true;
+            }
+      }
+    }
+  }
+
+  for (i = 0; i < hiddenDates.length; i++) {
+    if (hiddenDates[i].remove !== true) {
+      safeDates.push(hiddenDates[i]);
+    }
+  }
+
+  body.hiddenDates = safeDates;
+  body.hiddenDates.sort(function (a, b) {
+    return a.start - b.start;
+  }); // sort by start time
+};
+
+exports.printDates = function (dates) {
+  for (var i = 0; i < dates.length; i++) {
+    console.log(i, new Date(dates[i].start), new Date(dates[i].end), dates[i].start, dates[i].end, dates[i].remove);
+  }
+};
+
+/**
+ * Used in TimeStep to avoid the hidden times.
+ * @param {function} moment
+ * @param {TimeStep} timeStep
+ * @param {Date} previousTime
+ */
+exports.stepOverHiddenDates = function (moment, timeStep, previousTime) {
+  var stepInHidden = false;
+  var currentValue = timeStep.current.valueOf();
+  for (var i = 0; i < timeStep.hiddenDates.length; i++) {
+    var startDate = timeStep.hiddenDates[i].start;
+    var endDate = timeStep.hiddenDates[i].end;
+    if (currentValue >= startDate && currentValue < endDate) {
+      stepInHidden = true;
+      break;
+    }
+  }
+
+  if (stepInHidden == true && currentValue < timeStep._end.valueOf() && currentValue != previousTime) {
+    var prevValue = moment(previousTime);
+    var newValue = moment(endDate);
+    //check if the next step should be major
+    if (prevValue.year() != newValue.year()) {
+      timeStep.switchedYear = true;
+    } else if (prevValue.month() != newValue.month()) {
+      timeStep.switchedMonth = true;
+    } else if (prevValue.dayOfYear() != newValue.dayOfYear()) {
+      timeStep.switchedDay = true;
+    }
+
+    timeStep.current = newValue;
+  }
+};
+
+///**
+// * Used in TimeStep to avoid the hidden times.
+// * @param timeStep
+// * @param previousTime
+// */
+//exports.checkFirstStep = function(timeStep) {
+//  var stepInHidden = false;
+//  var currentValue = timeStep.current.valueOf();
+//  for (var i = 0; i < timeStep.hiddenDates.length; i++) {
+//    var startDate = timeStep.hiddenDates[i].start;
+//    var endDate = timeStep.hiddenDates[i].end;
+//    if (currentValue >= startDate && currentValue < endDate) {
+//      stepInHidden = true;
+//      break;
+//    }
+//  }
+//
+//  if (stepInHidden == true && currentValue <= timeStep._end.valueOf()) {
+//    var newValue = moment(endDate);
+//    timeStep.current = newValue.toDate();
+//  }
+//};
+
+/**
+ * replaces the Core toScreen methods
+ *
+ * @param {timeline.Core} Core
+ * @param {Date} time
+ * @param {number} width
+ * @returns {number}
+ */
+exports.toScreen = function (Core, time, width) {
+  var conversion;
+  if (Core.body.hiddenDates.length == 0) {
+    conversion = Core.range.conversion(width);
+    return (time.valueOf() - conversion.offset) * conversion.scale;
+  } else {
+    var hidden = exports.isHidden(time, Core.body.hiddenDates);
+    if (hidden.hidden == true) {
+      time = hidden.startDate;
+    }
+
+    var duration = exports.getHiddenDurationBetween(Core.body.hiddenDates, Core.range.start, Core.range.end);
+    if (time < Core.range.start) {
+      conversion = Core.range.conversion(width, duration);
+      var hiddenBeforeStart = exports.getHiddenDurationBeforeStart(Core.body.hiddenDates, time, conversion.offset);
+      time = Core.options.moment(time).toDate().valueOf();
+      time = time + hiddenBeforeStart;
+      return -(conversion.offset - time.valueOf()) * conversion.scale;
+    } else if (time > Core.range.end) {
+      var rangeAfterEnd = { start: Core.range.start, end: time };
+      time = exports.correctTimeForHidden(Core.options.moment, Core.body.hiddenDates, rangeAfterEnd, time);
+      conversion = Core.range.conversion(width, duration);
+      return (time.valueOf() - conversion.offset) * conversion.scale;
+    } else {
+      time = exports.correctTimeForHidden(Core.options.moment, Core.body.hiddenDates, Core.range, time);
+      conversion = Core.range.conversion(width, duration);
+      return (time.valueOf() - conversion.offset) * conversion.scale;
+    }
+  }
+};
+
+/**
+ * Replaces the core toTime methods
+ *
+ * @param {timeline.Core} Core
+ * @param {number} x
+ * @param {number} width
+ * @returns {Date}
+ */
+exports.toTime = function (Core, x, width) {
+  if (Core.body.hiddenDates.length == 0) {
+    var conversion = Core.range.conversion(width);
+    return new Date(x / conversion.scale + conversion.offset);
+  } else {
+    var hiddenDuration = exports.getHiddenDurationBetween(Core.body.hiddenDates, Core.range.start, Core.range.end);
+    var totalDuration = Core.range.end - Core.range.start - hiddenDuration;
+    var partialDuration = totalDuration * x / width;
+    var accumulatedHiddenDuration = exports.getAccumulatedHiddenDuration(Core.body.hiddenDates, Core.range, partialDuration);
+
+    return new Date(accumulatedHiddenDuration + partialDuration + Core.range.start);
+  }
+};
+
+/**
+ * Support function
+ *
+ * @param {Array.<{start: Window.start, end: *}>} hiddenDates
+ * @param {number} start
+ * @param {number} end
+ * @returns {number}
+ */
+exports.getHiddenDurationBetween = function (hiddenDates, start, end) {
+  var duration = 0;
+  for (var i = 0; i < hiddenDates.length; i++) {
+    var startDate = hiddenDates[i].start;
+    var endDate = hiddenDates[i].end;
+    // if time after the cutout, and the
+    if (startDate >= start && endDate < end) {
+      duration += endDate - startDate;
+    }
+  }
+  return duration;
+};
+
+/**
+ * Support function
+ *
+ * @param {Array.<{start: Window.start, end: *}>} hiddenDates
+ * @param {number} start
+ * @param {number} end
+ * @returns {number}
+ */
+exports.getHiddenDurationBeforeStart = function (hiddenDates, start, end) {
+  var duration = 0;
+  for (var i = 0; i < hiddenDates.length; i++) {
+    var startDate = hiddenDates[i].start;
+    var endDate = hiddenDates[i].end;
+
+    if (startDate >= start && endDate <= end) {
+      duration += endDate - startDate;
+    }
+  }
+  return duration;
+};
+
+/**
+ * Support function
+ * @param {function} moment
+ * @param {Array.<{start: Window.start, end: *}>} hiddenDates
+ * @param {{start: number, end: number}} range
+ * @param {Date} time
+ * @returns {number}
+ */
+exports.correctTimeForHidden = function (moment, hiddenDates, range, time) {
+  time = moment(time).toDate().valueOf();
+  time -= exports.getHiddenDurationBefore(moment, hiddenDates, range, time);
+  return time;
+};
+
+exports.getHiddenDurationBefore = function (moment, hiddenDates, range, time) {
+  var timeOffset = 0;
+  time = moment(time).toDate().valueOf();
+
+  for (var i = 0; i < hiddenDates.length; i++) {
+    var startDate = hiddenDates[i].start;
+    var endDate = hiddenDates[i].end;
+    // if time after the cutout, and the
+    if (startDate >= range.start && endDate < range.end) {
+      if (time >= endDate) {
+        timeOffset += endDate - startDate;
+      }
+    }
+  }
+  return timeOffset;
+};
+
+/**
+ * sum the duration from start to finish, including the hidden duration,
+ * until the required amount has been reached, return the accumulated hidden duration
+ * @param {Array.<{start: Window.start, end: *}>} hiddenDates
+ * @param {{start: number, end: number}} range
+ * @param {number} [requiredDuration=0]
+ * @returns {number}
+ */
+exports.getAccumulatedHiddenDuration = function (hiddenDates, range, requiredDuration) {
+  var hiddenDuration = 0;
+  var duration = 0;
+  var previousPoint = range.start;
+  //exports.printDates(hiddenDates)
+  for (var i = 0; i < hiddenDates.length; i++) {
+    var startDate = hiddenDates[i].start;
+    var endDate = hiddenDates[i].end;
+    // if time after the cutout, and the
+    if (startDate >= range.start && endDate < range.end) {
+      duration += startDate - previousPoint;
+      previousPoint = endDate;
+      if (duration >= requiredDuration) {
+        break;
+      } else {
+        hiddenDuration += endDate - startDate;
+      }
+    }
+  }
+
+  return hiddenDuration;
+};
+
+/**
+ * used to step over to either side of a hidden block. Correction is disabled on tablets, might be set to true
+ * @param {Array.<{start: Window.start, end: *}>} hiddenDates
+ * @param {Date} time
+ * @param {number} direction
+ * @param {boolean} correctionEnabled
+ * @returns {Date|number}
+ */
+exports.snapAwayFromHidden = function (hiddenDates, time, direction, correctionEnabled) {
+  var isHidden = exports.isHidden(time, hiddenDates);
+  if (isHidden.hidden == true) {
+    if (direction < 0) {
+      if (correctionEnabled == true) {
+        return isHidden.startDate - (isHidden.endDate - time) - 1;
+      } else {
+        return isHidden.startDate - 1;
+      }
+    } else {
+      if (correctionEnabled == true) {
+        return isHidden.endDate + (time - isHidden.startDate) + 1;
+      } else {
+        return isHidden.endDate + 1;
+      }
+    }
+  } else {
+    return time;
+  }
+};
+
+/**
+ * Check if a time is hidden
+ *
+ * @param {Date} time
+ * @param {Array.<{start: Window.start, end: *}>} hiddenDates
+ * @returns {{hidden: boolean, startDate: Window.start, endDate: *}}
+ */
+exports.isHidden = function (time, hiddenDates) {
+  for (var i = 0; i < hiddenDates.length; i++) {
+    var startDate = hiddenDates[i].start;
+    var endDate = hiddenDates[i].end;
+
+    if (time >= startDate && time < endDate) {
+      // if the start is entering a hidden zone
+      return { hidden: true, startDate: startDate, endDate: endDate };
+    }
+  }
+  return { hidden: false, startDate: startDate, endDate: endDate };
+};
+
+/***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _stringify = __webpack_require__(15);
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
-var _typeof2 = __webpack_require__(1);
+var _typeof2 = __webpack_require__(2);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
-var _keys = __webpack_require__(3);
+var _keys = __webpack_require__(6);
+
+var _keys2 = _interopRequireDefault(_keys);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var Hammer = __webpack_require__(11);
+var util = __webpack_require__(0);
+var moment = __webpack_require__(3);
+
+/**
+ * @constructor Item
+ * @param {Object} data             Object containing (optional) parameters type,
+ *                                  start, end, content, group, className.
+ * @param {{toScreen: function, toTime: function}} conversion
+ *                                  Conversion functions from time to screen and vice versa
+ * @param {Object} options          Configuration options
+ *                                  // TODO: describe available options
+ */
+function Item(data, conversion, options) {
+  this.id = null;
+  this.parent = null;
+  this.data = data;
+  this.dom = null;
+  this.conversion = conversion || {};
+  this.options = options || {};
+  this.selected = false;
+  this.displayed = false;
+  this.groupShowing = true;
+  this.dirty = true;
+
+  this.top = null;
+  this.right = null;
+  this.left = null;
+  this.width = null;
+  this.height = null;
+
+  this.editable = null;
+  this._updateEditStatus();
+}
+
+Item.prototype.stack = true;
+
+/**
+ * Select current item
+ */
+Item.prototype.select = function () {
+  this.selected = true;
+  this.dirty = true;
+  if (this.displayed) this.redraw();
+};
+
+/**
+ * Unselect current item
+ */
+Item.prototype.unselect = function () {
+  this.selected = false;
+  this.dirty = true;
+  if (this.displayed) this.redraw();
+};
+
+/**
+ * Set data for the item. Existing data will be updated. The id should not
+ * be changed. When the item is displayed, it will be redrawn immediately.
+ * @param {Object} data
+ */
+Item.prototype.setData = function (data) {
+  var groupChanged = data.group != undefined && this.data.group != data.group;
+  if (groupChanged && this.parent != null) {
+    this.parent.itemSet._moveToGroup(this, data.group);
+  }
+
+  if (this.parent) {
+    this.parent.stackDirty = true;
+  }
+
+  var subGroupChanged = data.subgroup != undefined && this.data.subgroup != data.subgroup;
+  if (subGroupChanged && this.parent != null) {
+    this.parent.changeSubgroup(this, this.data.subgroup, data.subgroup);
+  }
+
+  this.data = data;
+  this._updateEditStatus();
+  this.dirty = true;
+  if (this.displayed) this.redraw();
+};
+
+/**
+ * Set a parent for the item
+ * @param {Group} parent
+ */
+Item.prototype.setParent = function (parent) {
+  if (this.displayed) {
+    this.hide();
+    this.parent = parent;
+    if (this.parent) {
+      this.show();
+    }
+  } else {
+    this.parent = parent;
+  }
+};
+
+/**
+ * Check whether this item is visible inside given range
+ * @param {timeline.Range} range with a timestamp for start and end
+ * @returns {boolean} True if visible
+ */
+Item.prototype.isVisible = function (range) {
+  // eslint-disable-line no-unused-vars
+  return false;
+};
+
+/**
+ * Show the Item in the DOM (when not already visible)
+ * @return {Boolean} changed
+ */
+Item.prototype.show = function () {
+  return false;
+};
+
+/**
+ * Hide the Item from the DOM (when visible)
+ * @return {Boolean} changed
+ */
+Item.prototype.hide = function () {
+  return false;
+};
+
+/**
+ * Repaint the item
+ */
+Item.prototype.redraw = function () {
+  // should be implemented by the item
+};
+
+/**
+ * Reposition the Item horizontally
+ */
+Item.prototype.repositionX = function () {
+  // should be implemented by the item
+};
+
+/**
+ * Reposition the Item vertically
+ */
+Item.prototype.repositionY = function () {
+  // should be implemented by the item
+};
+
+/**
+ * Repaint a drag area on the center of the item when the item is selected
+ * @protected
+ */
+Item.prototype._repaintDragCenter = function () {
+  if (this.selected && this.options.editable.updateTime && !this.dom.dragCenter) {
+    var me = this;
+    // create and show drag area
+    var dragCenter = document.createElement('div');
+    dragCenter.className = 'timeline-drag-center';
+    dragCenter.dragCenterItem = this;
+    var hammer = new Hammer(dragCenter);
+
+    hammer.on('tap', function (event) {
+      me.parent.itemSet.body.emitter.emit('click', {
+        event: event,
+        item: me.id
+      });
+    });
+    hammer.on('doubletap', function (event) {
+      event.stopPropagation();
+      me.parent.itemSet._onUpdateItem(me);
+      me.parent.itemSet.body.emitter.emit('doubleClick', {
+        event: event,
+        item: me.id
+      });
+    });
+
+    if (this.dom.box) {
+      if (this.dom.dragLeft) {
+        this.dom.box.insertBefore(dragCenter, this.dom.dragLeft);
+      } else {
+        this.dom.box.appendChild(dragCenter);
+      }
+    } else if (this.dom.point) {
+      this.dom.point.appendChild(dragCenter);
+    }
+
+    this.dom.dragCenter = dragCenter;
+  } else if (!this.selected && this.dom.dragCenter) {
+    // delete drag area
+    if (this.dom.dragCenter.parentNode) {
+      this.dom.dragCenter.parentNode.removeChild(this.dom.dragCenter);
+    }
+    this.dom.dragCenter = null;
+  }
+};
+
+/**
+ * Repaint a delete button on the top right of the item when the item is selected
+ * @param {HTMLElement} anchor
+ * @protected
+ */
+Item.prototype._repaintDeleteButton = function (anchor) {
+  var editable = (this.options.editable.overrideItems || this.editable == null) && this.options.editable.remove || !this.options.editable.overrideItems && this.editable != null && this.editable.remove;
+
+  if (this.selected && editable && !this.dom.deleteButton) {
+    // create and show button
+    var me = this;
+
+    var deleteButton = document.createElement('div');
+
+    if (this.options.rtl) {
+      deleteButton.className = 'timeline-delete-rtl';
+    } else {
+      deleteButton.className = 'timeline-delete';
+    }
+    deleteButton.title = 'Delete this item';
+
+    // TODO: be able to destroy the delete button
+    new Hammer(deleteButton).on('tap', function (event) {
+      event.stopPropagation();
+      me.parent.removeFromDataSet(me);
+    });
+
+    anchor.appendChild(deleteButton);
+    this.dom.deleteButton = deleteButton;
+  } else if (!this.selected && this.dom.deleteButton) {
+    // remove button
+    if (this.dom.deleteButton.parentNode) {
+      this.dom.deleteButton.parentNode.removeChild(this.dom.deleteButton);
+    }
+    this.dom.deleteButton = null;
+  }
+};
+
+/**
+ * Repaint a onChange tooltip on the top right of the item when the item is selected
+ * @param {HTMLElement} anchor
+ * @protected
+ */
+Item.prototype._repaintOnItemUpdateTimeTooltip = function (anchor) {
+  if (!this.options.tooltipOnItemUpdateTime) return;
+
+  var editable = (this.options.editable.updateTime || this.data.editable === true) && this.data.editable !== false;
+
+  if (this.selected && editable && !this.dom.onItemUpdateTimeTooltip) {
+    var onItemUpdateTimeTooltip = document.createElement('div');
+
+    onItemUpdateTimeTooltip.className = 'timeline-onUpdateTime-tooltip';
+    anchor.appendChild(onItemUpdateTimeTooltip);
+    this.dom.onItemUpdateTimeTooltip = onItemUpdateTimeTooltip;
+  } else if (!this.selected && this.dom.onItemUpdateTimeTooltip) {
+    // remove button
+    if (this.dom.onItemUpdateTimeTooltip.parentNode) {
+      this.dom.onItemUpdateTimeTooltip.parentNode.removeChild(this.dom.onItemUpdateTimeTooltip);
+    }
+    this.dom.onItemUpdateTimeTooltip = null;
+  }
+
+  // position onChange tooltip
+  if (this.dom.onItemUpdateTimeTooltip) {
+
+    // only show when editing
+    this.dom.onItemUpdateTimeTooltip.style.visibility = this.parent.itemSet.touchParams.itemIsDragging ? 'visible' : 'hidden';
+
+    // position relative to item's content
+    if (this.options.rtl) {
+      this.dom.onItemUpdateTimeTooltip.style.right = this.dom.content.style.right;
+    } else {
+      this.dom.onItemUpdateTimeTooltip.style.left = this.dom.content.style.left;
+    }
+
+    // position above or below the item depending on the item's position in the window
+    var tooltipOffset = 50; // TODO: should be tooltip height (depends on template)
+    var scrollTop = this.parent.itemSet.body.domProps.scrollTop;
+
+    // TODO: this.top for orientation:true is actually the items distance from the bottom... 
+    // (should be this.bottom)
+    var itemDistanceFromTop;
+    if (this.options.orientation.item == 'top') {
+      itemDistanceFromTop = this.top;
+    } else {
+      itemDistanceFromTop = this.parent.height - this.top - this.height;
+    }
+    var isCloseToTop = itemDistanceFromTop + this.parent.top - tooltipOffset < -scrollTop;
+
+    if (isCloseToTop) {
+      this.dom.onItemUpdateTimeTooltip.style.bottom = "";
+      this.dom.onItemUpdateTimeTooltip.style.top = this.height + 2 + "px";
+    } else {
+      this.dom.onItemUpdateTimeTooltip.style.top = "";
+      this.dom.onItemUpdateTimeTooltip.style.bottom = this.height + 2 + "px";
+    }
+
+    // handle tooltip content
+    var content;
+    var templateFunction;
+
+    if (this.options.tooltipOnItemUpdateTime && this.options.tooltipOnItemUpdateTime.template) {
+      templateFunction = this.options.tooltipOnItemUpdateTime.template.bind(this);
+      content = templateFunction(this.data);
+    } else {
+      content = 'start: ' + moment(this.data.start).format('MM/DD/YYYY hh:mm');
+      if (this.data.end) {
+        content += '<br> end: ' + moment(this.data.end).format('MM/DD/YYYY hh:mm');
+      }
+    }
+    this.dom.onItemUpdateTimeTooltip.innerHTML = content;
+  }
+};
+
+/**
+ * Set HTML contents for the item
+ * @param {Element} element   HTML element to fill with the contents
+ * @private
+ */
+Item.prototype._updateContents = function (element) {
+  var content;
+  var changed;
+  var templateFunction;
+  var itemVisibleFrameContent;
+  var visibleFrameTemplateFunction;
+  var itemData = this.parent.itemSet.itemsData.get(this.id); // get a clone of the data from the dataset
+
+  var frameElement = this.dom.box || this.dom.point;
+  var itemVisibleFrameContentElement = frameElement.getElementsByClassName('timeline-item-visible-frame')[0];
+
+  if (this.options.visibleFrameTemplate) {
+    visibleFrameTemplateFunction = this.options.visibleFrameTemplate.bind(this);
+    itemVisibleFrameContent = visibleFrameTemplateFunction(itemData, frameElement);
+  } else {
+    itemVisibleFrameContent = '';
+  }
+
+  if (itemVisibleFrameContentElement) {
+    if (itemVisibleFrameContent instanceof Object && !(itemVisibleFrameContent instanceof Element)) {
+      visibleFrameTemplateFunction(itemData, itemVisibleFrameContentElement);
+    } else {
+      changed = this._contentToString(this.itemVisibleFrameContent) !== this._contentToString(itemVisibleFrameContent);
+      if (changed) {
+        // only replace the content when changed
+        if (itemVisibleFrameContent instanceof Element) {
+          itemVisibleFrameContentElement.innerHTML = '';
+          itemVisibleFrameContentElement.appendChild(itemVisibleFrameContent);
+        } else if (itemVisibleFrameContent != undefined) {
+          itemVisibleFrameContentElement.innerHTML = itemVisibleFrameContent;
+        } else {
+          if (!(this.data.type == 'background' && this.data.content === undefined)) {
+            throw new Error('Property "content" missing in item ' + this.id);
+          }
+        }
+
+        this.itemVisibleFrameContent = itemVisibleFrameContent;
+      }
+    }
+  }
+
+  if (this.options.template) {
+    templateFunction = this.options.template.bind(this);
+    content = templateFunction(itemData, element, this.data);
+  } else {
+    content = this.data.content;
+  }
+
+  if (content instanceof Object && !(content instanceof Element)) {
+    templateFunction(itemData, element);
+  } else {
+    changed = this._contentToString(this.content) !== this._contentToString(content);
+    if (changed) {
+      // only replace the content when changed
+      if (content instanceof Element) {
+        element.innerHTML = '';
+        element.appendChild(content);
+      } else if (content != undefined) {
+        element.innerHTML = content;
+      } else {
+        if (!(this.data.type == 'background' && this.data.content === undefined)) {
+          throw new Error('Property "content" missing in item ' + this.id);
+        }
+      }
+      this.content = content;
+    }
+  }
+};
+
+/**
+ * Process dataAttributes timeline option and set as data- attributes on dom.content
+ * @param {Element} element   HTML element to which the attributes will be attached
+ * @private
+ */
+Item.prototype._updateDataAttributes = function (element) {
+  if (this.options.dataAttributes && this.options.dataAttributes.length > 0) {
+    var attributes = [];
+
+    if (Array.isArray(this.options.dataAttributes)) {
+      attributes = this.options.dataAttributes;
+    } else if (this.options.dataAttributes == 'all') {
+      attributes = (0, _keys2['default'])(this.data);
+    } else {
+      return;
+    }
+
+    for (var i = 0; i < attributes.length; i++) {
+      var name = attributes[i];
+      var value = this.data[name];
+
+      if (value != null) {
+        element.setAttribute('data-' + name, value);
+      } else {
+        element.removeAttribute('data-' + name);
+      }
+    }
+  }
+};
+
+/**
+ * Update custom styles of the element
+ * @param {Element} element
+ * @private
+ */
+Item.prototype._updateStyle = function (element) {
+  // remove old styles
+  if (this.style) {
+    util.removeCssText(element, this.style);
+    this.style = null;
+  }
+
+  // append new styles
+  if (this.data.style) {
+    util.addCssText(element, this.data.style);
+    this.style = this.data.style;
+  }
+};
+
+/**
+ * Stringify the items contents
+ * @param {string | Element | undefined} content
+ * @returns {string | undefined}
+ * @private
+ */
+Item.prototype._contentToString = function (content) {
+  if (typeof content === 'string') return content;
+  if (content && 'outerHTML' in content) return content.outerHTML;
+  return content;
+};
+
+/**
+ * Update the editability of this item.
+ */
+Item.prototype._updateEditStatus = function () {
+  if (this.options) {
+    if (typeof this.options.editable === 'boolean') {
+      this.editable = {
+        updateTime: this.options.editable,
+        updateGroup: this.options.editable,
+        remove: this.options.editable
+      };
+    } else if ((0, _typeof3['default'])(this.options.editable) === 'object') {
+      this.editable = {};
+      util.selectiveExtend(['updateTime', 'updateGroup', 'remove'], this.editable, this.options.editable);
+    }
+  }
+  // Item data overrides, except if options.editable.overrideItems is set.
+  if (!this.options || !this.options.editable || this.options.editable.overrideItems !== true) {
+    if (this.data) {
+      if (typeof this.data.editable === 'boolean') {
+        this.editable = {
+          updateTime: this.data.editable,
+          updateGroup: this.data.editable,
+          remove: this.data.editable
+        };
+      } else if ((0, _typeof3['default'])(this.data.editable) === 'object') {
+        // TODO: in timeline.js 5.0, we should change this to not reset options from the timeline configuration.
+        // Basically just remove the next line...
+        this.editable = {};
+        util.selectiveExtend(['updateTime', 'updateGroup', 'remove'], this.editable, this.data.editable);
+      }
+    }
+  }
+};
+
+/**
+ * Return the width of the item left from its start date
+ * @return {number}
+ */
+Item.prototype.getWidthLeft = function () {
+  return 0;
+};
+
+/**
+ * Return the width of the item right from the max of its start and end date
+ * @return {number}
+ */
+Item.prototype.getWidthRight = function () {
+  return 0;
+};
+
+/**
+ * Return the title of the item
+ * @return {string | undefined}
+ */
+Item.prototype.getTitle = function () {
+  return this.data.title;
+};
+
+module.exports = Item;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+module.exports = {};
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = __webpack_require__(54);
+var enumBugKeys = __webpack_require__(36);
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
+};
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _stringify = __webpack_require__(14);
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
+var _typeof2 = __webpack_require__(2);
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+var _keys = __webpack_require__(6);
 
 var _keys2 = _interopRequireDefault(_keys);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var util = __webpack_require__(0);
-var Queue = __webpack_require__(61);
+var Queue = __webpack_require__(60);
 
 /**
  * DataSet
@@ -3189,1078 +4044,19 @@ DataSet.prototype._updateItem = function (item) {
 module.exports = DataSet;
 
 /***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * used in Core to convert the options into a volatile variable
- * 
- * @param {function} moment
- * @param {Object} body
- * @param {Array | Object} hiddenDates
- * @returns {number}
- */
-exports.convertHiddenOptions = function (moment, body, hiddenDates) {
-  if (hiddenDates && !Array.isArray(hiddenDates)) {
-    return exports.convertHiddenOptions(moment, body, [hiddenDates]);
-  }
-
-  body.hiddenDates = [];
-  if (hiddenDates) {
-    if (Array.isArray(hiddenDates) == true) {
-      for (var i = 0; i < hiddenDates.length; i++) {
-        if (hiddenDates[i].repeat === undefined) {
-          var dateItem = {};
-          dateItem.start = moment(hiddenDates[i].start).toDate().valueOf();
-          dateItem.end = moment(hiddenDates[i].end).toDate().valueOf();
-          body.hiddenDates.push(dateItem);
-        }
-      }
-      body.hiddenDates.sort(function (a, b) {
-        return a.start - b.start;
-      }); // sort by start time
-    }
-  }
-};
-
-/**
- * create new entrees for the repeating hidden dates
- *
- * @param {function} moment
- * @param {Object} body
- * @param {Array | Object} hiddenDates
- * @returns {null}
- */
-exports.updateHiddenDates = function (moment, body, hiddenDates) {
-  if (hiddenDates && !Array.isArray(hiddenDates)) {
-    return exports.updateHiddenDates(moment, body, [hiddenDates]);
-  }
-
-  if (hiddenDates && body.domProps.centerContainer.width !== undefined) {
-    exports.convertHiddenOptions(moment, body, hiddenDates);
-
-    var start = moment(body.range.start);
-    var end = moment(body.range.end);
-
-    var totalRange = body.range.end - body.range.start;
-    var pixelTime = totalRange / body.domProps.centerContainer.width;
-
-    for (var i = 0; i < hiddenDates.length; i++) {
-      if (hiddenDates[i].repeat !== undefined) {
-        var startDate = moment(hiddenDates[i].start);
-        var endDate = moment(hiddenDates[i].end);
-
-        if (startDate._d == "Invalid Date") {
-          throw new Error("Supplied start date is not valid: " + hiddenDates[i].start);
-        }
-        if (endDate._d == "Invalid Date") {
-          throw new Error("Supplied end date is not valid: " + hiddenDates[i].end);
-        }
-
-        var duration = endDate - startDate;
-        if (duration >= 4 * pixelTime) {
-
-          var offset = 0;
-          var runUntil = end.clone();
-          switch (hiddenDates[i].repeat) {
-            case "daily":
-              // case of time
-              if (startDate.day() != endDate.day()) {
-                offset = 1;
-              }
-              startDate.dayOfYear(start.dayOfYear());
-              startDate.year(start.year());
-              startDate.subtract(7, 'days');
-
-              endDate.dayOfYear(start.dayOfYear());
-              endDate.year(start.year());
-              endDate.subtract(7 - offset, 'days');
-
-              runUntil.add(1, 'weeks');
-              break;
-            case "weekly":
-              var dayOffset = endDate.diff(startDate, 'days');
-              var day = startDate.day();
-
-              // set the start date to the range.start
-              startDate.date(start.date());
-              startDate.month(start.month());
-              startDate.year(start.year());
-              endDate = startDate.clone();
-
-              // force
-              startDate.day(day);
-              endDate.day(day);
-              endDate.add(dayOffset, 'days');
-
-              startDate.subtract(1, 'weeks');
-              endDate.subtract(1, 'weeks');
-
-              runUntil.add(1, 'weeks');
-              break;
-            case "monthly":
-              if (startDate.month() != endDate.month()) {
-                offset = 1;
-              }
-              startDate.month(start.month());
-              startDate.year(start.year());
-              startDate.subtract(1, 'months');
-
-              endDate.month(start.month());
-              endDate.year(start.year());
-              endDate.subtract(1, 'months');
-              endDate.add(offset, 'months');
-
-              runUntil.add(1, 'months');
-              break;
-            case "yearly":
-              if (startDate.year() != endDate.year()) {
-                offset = 1;
-              }
-              startDate.year(start.year());
-              startDate.subtract(1, 'years');
-              endDate.year(start.year());
-              endDate.subtract(1, 'years');
-              endDate.add(offset, 'years');
-
-              runUntil.add(1, 'years');
-              break;
-            default:
-              console.log("Wrong repeat format, allowed are: daily, weekly, monthly, yearly. Given:", hiddenDates[i].repeat);
-              return;
-          }
-          while (startDate < runUntil) {
-            body.hiddenDates.push({ start: startDate.valueOf(), end: endDate.valueOf() });
-            switch (hiddenDates[i].repeat) {
-              case "daily":
-                startDate.add(1, 'days');
-                endDate.add(1, 'days');
-                break;
-              case "weekly":
-                startDate.add(1, 'weeks');
-                endDate.add(1, 'weeks');
-                break;
-              case "monthly":
-                startDate.add(1, 'months');
-                endDate.add(1, 'months');
-                break;
-              case "yearly":
-                startDate.add(1, 'y');
-                endDate.add(1, 'y');
-                break;
-              default:
-                console.log("Wrong repeat format, allowed are: daily, weekly, monthly, yearly. Given:", hiddenDates[i].repeat);
-                return;
-            }
-          }
-          body.hiddenDates.push({ start: startDate.valueOf(), end: endDate.valueOf() });
-        }
-      }
-    }
-    // remove duplicates, merge where possible
-    exports.removeDuplicates(body);
-    // ensure the new positions are not on hidden dates
-    var startHidden = exports.isHidden(body.range.start, body.hiddenDates);
-    var endHidden = exports.isHidden(body.range.end, body.hiddenDates);
-    var rangeStart = body.range.start;
-    var rangeEnd = body.range.end;
-    if (startHidden.hidden == true) {
-      rangeStart = body.range.startToFront == true ? startHidden.startDate - 1 : startHidden.endDate + 1;
-    }
-    if (endHidden.hidden == true) {
-      rangeEnd = body.range.endToFront == true ? endHidden.startDate - 1 : endHidden.endDate + 1;
-    }
-    if (startHidden.hidden == true || endHidden.hidden == true) {
-      body.range._applyRange(rangeStart, rangeEnd);
-    }
-  }
-};
-
-/**
- * remove duplicates from the hidden dates list. Duplicates are evil. They mess everything up.
- * Scales with N^2
- *
- * @param {Object} body
- */
-exports.removeDuplicates = function (body) {
-  var hiddenDates = body.hiddenDates;
-  var safeDates = [];
-  for (var i = 0; i < hiddenDates.length; i++) {
-    for (var j = 0; j < hiddenDates.length; j++) {
-      if (i != j && hiddenDates[j].remove != true && hiddenDates[i].remove != true) {
-        // j inside i
-        if (hiddenDates[j].start >= hiddenDates[i].start && hiddenDates[j].end <= hiddenDates[i].end) {
-          hiddenDates[j].remove = true;
-        }
-        // j start inside i
-        else if (hiddenDates[j].start >= hiddenDates[i].start && hiddenDates[j].start <= hiddenDates[i].end) {
-            hiddenDates[i].end = hiddenDates[j].end;
-            hiddenDates[j].remove = true;
-          }
-          // j end inside i
-          else if (hiddenDates[j].end >= hiddenDates[i].start && hiddenDates[j].end <= hiddenDates[i].end) {
-              hiddenDates[i].start = hiddenDates[j].start;
-              hiddenDates[j].remove = true;
-            }
-      }
-    }
-  }
-
-  for (i = 0; i < hiddenDates.length; i++) {
-    if (hiddenDates[i].remove !== true) {
-      safeDates.push(hiddenDates[i]);
-    }
-  }
-
-  body.hiddenDates = safeDates;
-  body.hiddenDates.sort(function (a, b) {
-    return a.start - b.start;
-  }); // sort by start time
-};
-
-exports.printDates = function (dates) {
-  for (var i = 0; i < dates.length; i++) {
-    console.log(i, new Date(dates[i].start), new Date(dates[i].end), dates[i].start, dates[i].end, dates[i].remove);
-  }
-};
-
-/**
- * Used in TimeStep to avoid the hidden times.
- * @param {function} moment
- * @param {TimeStep} timeStep
- * @param {Date} previousTime
- */
-exports.stepOverHiddenDates = function (moment, timeStep, previousTime) {
-  var stepInHidden = false;
-  var currentValue = timeStep.current.valueOf();
-  for (var i = 0; i < timeStep.hiddenDates.length; i++) {
-    var startDate = timeStep.hiddenDates[i].start;
-    var endDate = timeStep.hiddenDates[i].end;
-    if (currentValue >= startDate && currentValue < endDate) {
-      stepInHidden = true;
-      break;
-    }
-  }
-
-  if (stepInHidden == true && currentValue < timeStep._end.valueOf() && currentValue != previousTime) {
-    var prevValue = moment(previousTime);
-    var newValue = moment(endDate);
-    //check if the next step should be major
-    if (prevValue.year() != newValue.year()) {
-      timeStep.switchedYear = true;
-    } else if (prevValue.month() != newValue.month()) {
-      timeStep.switchedMonth = true;
-    } else if (prevValue.dayOfYear() != newValue.dayOfYear()) {
-      timeStep.switchedDay = true;
-    }
-
-    timeStep.current = newValue;
-  }
-};
-
-///**
-// * Used in TimeStep to avoid the hidden times.
-// * @param timeStep
-// * @param previousTime
-// */
-//exports.checkFirstStep = function(timeStep) {
-//  var stepInHidden = false;
-//  var currentValue = timeStep.current.valueOf();
-//  for (var i = 0; i < timeStep.hiddenDates.length; i++) {
-//    var startDate = timeStep.hiddenDates[i].start;
-//    var endDate = timeStep.hiddenDates[i].end;
-//    if (currentValue >= startDate && currentValue < endDate) {
-//      stepInHidden = true;
-//      break;
-//    }
-//  }
-//
-//  if (stepInHidden == true && currentValue <= timeStep._end.valueOf()) {
-//    var newValue = moment(endDate);
-//    timeStep.current = newValue.toDate();
-//  }
-//};
-
-/**
- * replaces the Core toScreen methods
- *
- * @param {timeline.Core} Core
- * @param {Date} time
- * @param {number} width
- * @returns {number}
- */
-exports.toScreen = function (Core, time, width) {
-  var conversion;
-  if (Core.body.hiddenDates.length == 0) {
-    conversion = Core.range.conversion(width);
-    return (time.valueOf() - conversion.offset) * conversion.scale;
-  } else {
-    var hidden = exports.isHidden(time, Core.body.hiddenDates);
-    if (hidden.hidden == true) {
-      time = hidden.startDate;
-    }
-
-    var duration = exports.getHiddenDurationBetween(Core.body.hiddenDates, Core.range.start, Core.range.end);
-    if (time < Core.range.start) {
-      conversion = Core.range.conversion(width, duration);
-      var hiddenBeforeStart = exports.getHiddenDurationBeforeStart(Core.body.hiddenDates, time, conversion.offset);
-      time = Core.options.moment(time).toDate().valueOf();
-      time = time + hiddenBeforeStart;
-      return -(conversion.offset - time.valueOf()) * conversion.scale;
-    } else if (time > Core.range.end) {
-      var rangeAfterEnd = { start: Core.range.start, end: time };
-      time = exports.correctTimeForHidden(Core.options.moment, Core.body.hiddenDates, rangeAfterEnd, time);
-      conversion = Core.range.conversion(width, duration);
-      return (time.valueOf() - conversion.offset) * conversion.scale;
-    } else {
-      time = exports.correctTimeForHidden(Core.options.moment, Core.body.hiddenDates, Core.range, time);
-      conversion = Core.range.conversion(width, duration);
-      return (time.valueOf() - conversion.offset) * conversion.scale;
-    }
-  }
-};
-
-/**
- * Replaces the core toTime methods
- *
- * @param {timeline.Core} Core
- * @param {number} x
- * @param {number} width
- * @returns {Date}
- */
-exports.toTime = function (Core, x, width) {
-  if (Core.body.hiddenDates.length == 0) {
-    var conversion = Core.range.conversion(width);
-    return new Date(x / conversion.scale + conversion.offset);
-  } else {
-    var hiddenDuration = exports.getHiddenDurationBetween(Core.body.hiddenDates, Core.range.start, Core.range.end);
-    var totalDuration = Core.range.end - Core.range.start - hiddenDuration;
-    var partialDuration = totalDuration * x / width;
-    var accumulatedHiddenDuration = exports.getAccumulatedHiddenDuration(Core.body.hiddenDates, Core.range, partialDuration);
-
-    return new Date(accumulatedHiddenDuration + partialDuration + Core.range.start);
-  }
-};
-
-/**
- * Support function
- *
- * @param {Array.<{start: Window.start, end: *}>} hiddenDates
- * @param {number} start
- * @param {number} end
- * @returns {number}
- */
-exports.getHiddenDurationBetween = function (hiddenDates, start, end) {
-  var duration = 0;
-  for (var i = 0; i < hiddenDates.length; i++) {
-    var startDate = hiddenDates[i].start;
-    var endDate = hiddenDates[i].end;
-    // if time after the cutout, and the
-    if (startDate >= start && endDate < end) {
-      duration += endDate - startDate;
-    }
-  }
-  return duration;
-};
-
-/**
- * Support function
- *
- * @param {Array.<{start: Window.start, end: *}>} hiddenDates
- * @param {number} start
- * @param {number} end
- * @returns {number}
- */
-exports.getHiddenDurationBeforeStart = function (hiddenDates, start, end) {
-  var duration = 0;
-  for (var i = 0; i < hiddenDates.length; i++) {
-    var startDate = hiddenDates[i].start;
-    var endDate = hiddenDates[i].end;
-
-    if (startDate >= start && endDate <= end) {
-      duration += endDate - startDate;
-    }
-  }
-  return duration;
-};
-
-/**
- * Support function
- * @param {function} moment
- * @param {Array.<{start: Window.start, end: *}>} hiddenDates
- * @param {{start: number, end: number}} range
- * @param {Date} time
- * @returns {number}
- */
-exports.correctTimeForHidden = function (moment, hiddenDates, range, time) {
-  time = moment(time).toDate().valueOf();
-  time -= exports.getHiddenDurationBefore(moment, hiddenDates, range, time);
-  return time;
-};
-
-exports.getHiddenDurationBefore = function (moment, hiddenDates, range, time) {
-  var timeOffset = 0;
-  time = moment(time).toDate().valueOf();
-
-  for (var i = 0; i < hiddenDates.length; i++) {
-    var startDate = hiddenDates[i].start;
-    var endDate = hiddenDates[i].end;
-    // if time after the cutout, and the
-    if (startDate >= range.start && endDate < range.end) {
-      if (time >= endDate) {
-        timeOffset += endDate - startDate;
-      }
-    }
-  }
-  return timeOffset;
-};
-
-/**
- * sum the duration from start to finish, including the hidden duration,
- * until the required amount has been reached, return the accumulated hidden duration
- * @param {Array.<{start: Window.start, end: *}>} hiddenDates
- * @param {{start: number, end: number}} range
- * @param {number} [requiredDuration=0]
- * @returns {number}
- */
-exports.getAccumulatedHiddenDuration = function (hiddenDates, range, requiredDuration) {
-  var hiddenDuration = 0;
-  var duration = 0;
-  var previousPoint = range.start;
-  //exports.printDates(hiddenDates)
-  for (var i = 0; i < hiddenDates.length; i++) {
-    var startDate = hiddenDates[i].start;
-    var endDate = hiddenDates[i].end;
-    // if time after the cutout, and the
-    if (startDate >= range.start && endDate < range.end) {
-      duration += startDate - previousPoint;
-      previousPoint = endDate;
-      if (duration >= requiredDuration) {
-        break;
-      } else {
-        hiddenDuration += endDate - startDate;
-      }
-    }
-  }
-
-  return hiddenDuration;
-};
-
-/**
- * used to step over to either side of a hidden block. Correction is disabled on tablets, might be set to true
- * @param {Array.<{start: Window.start, end: *}>} hiddenDates
- * @param {Date} time
- * @param {number} direction
- * @param {boolean} correctionEnabled
- * @returns {Date|number}
- */
-exports.snapAwayFromHidden = function (hiddenDates, time, direction, correctionEnabled) {
-  var isHidden = exports.isHidden(time, hiddenDates);
-  if (isHidden.hidden == true) {
-    if (direction < 0) {
-      if (correctionEnabled == true) {
-        return isHidden.startDate - (isHidden.endDate - time) - 1;
-      } else {
-        return isHidden.startDate - 1;
-      }
-    } else {
-      if (correctionEnabled == true) {
-        return isHidden.endDate + (time - isHidden.startDate) + 1;
-      } else {
-        return isHidden.endDate + 1;
-      }
-    }
-  } else {
-    return time;
-  }
-};
-
-/**
- * Check if a time is hidden
- *
- * @param {Date} time
- * @param {Array.<{start: Window.start, end: *}>} hiddenDates
- * @returns {{hidden: boolean, startDate: Window.start, endDate: *}}
- */
-exports.isHidden = function (time, hiddenDates) {
-  for (var i = 0; i < hiddenDates.length; i++) {
-    var startDate = hiddenDates[i].start;
-    var endDate = hiddenDates[i].end;
-
-    if (time >= startDate && time < endDate) {
-      // if the start is entering a hidden zone
-      return { hidden: true, startDate: startDate, endDate: endDate };
-    }
-  }
-  return { hidden: false, startDate: startDate, endDate: endDate };
-};
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof2 = __webpack_require__(1);
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-var _keys = __webpack_require__(3);
-
-var _keys2 = _interopRequireDefault(_keys);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var Hammer = __webpack_require__(12);
-var util = __webpack_require__(0);
-var moment = __webpack_require__(4);
-
-/**
- * @constructor Item
- * @param {Object} data             Object containing (optional) parameters type,
- *                                  start, end, content, group, className.
- * @param {{toScreen: function, toTime: function}} conversion
- *                                  Conversion functions from time to screen and vice versa
- * @param {Object} options          Configuration options
- *                                  // TODO: describe available options
- */
-function Item(data, conversion, options) {
-  this.id = null;
-  this.parent = null;
-  this.data = data;
-  this.dom = null;
-  this.conversion = conversion || {};
-  this.options = options || {};
-  this.selected = false;
-  this.displayed = false;
-  this.groupShowing = true;
-  this.dirty = true;
-
-  this.top = null;
-  this.right = null;
-  this.left = null;
-  this.width = null;
-  this.height = null;
-
-  this.editable = null;
-  this._updateEditStatus();
-}
-
-Item.prototype.stack = true;
-
-/**
- * Select current item
- */
-Item.prototype.select = function () {
-  this.selected = true;
-  this.dirty = true;
-  if (this.displayed) this.redraw();
-};
-
-/**
- * Unselect current item
- */
-Item.prototype.unselect = function () {
-  this.selected = false;
-  this.dirty = true;
-  if (this.displayed) this.redraw();
-};
-
-/**
- * Set data for the item. Existing data will be updated. The id should not
- * be changed. When the item is displayed, it will be redrawn immediately.
- * @param {Object} data
- */
-Item.prototype.setData = function (data) {
-  var groupChanged = data.group != undefined && this.data.group != data.group;
-  if (groupChanged && this.parent != null) {
-    this.parent.itemSet._moveToGroup(this, data.group);
-  }
-
-  if (this.parent) {
-    this.parent.stackDirty = true;
-  }
-
-  var subGroupChanged = data.subgroup != undefined && this.data.subgroup != data.subgroup;
-  if (subGroupChanged && this.parent != null) {
-    this.parent.changeSubgroup(this, this.data.subgroup, data.subgroup);
-  }
-
-  this.data = data;
-  this._updateEditStatus();
-  this.dirty = true;
-  if (this.displayed) this.redraw();
-};
-
-/**
- * Set a parent for the item
- * @param {Group} parent
- */
-Item.prototype.setParent = function (parent) {
-  if (this.displayed) {
-    this.hide();
-    this.parent = parent;
-    if (this.parent) {
-      this.show();
-    }
-  } else {
-    this.parent = parent;
-  }
-};
-
-/**
- * Check whether this item is visible inside given range
- * @param {timeline.Range} range with a timestamp for start and end
- * @returns {boolean} True if visible
- */
-Item.prototype.isVisible = function (range) {
-  // eslint-disable-line no-unused-vars
-  return false;
-};
-
-/**
- * Show the Item in the DOM (when not already visible)
- * @return {Boolean} changed
- */
-Item.prototype.show = function () {
-  return false;
-};
-
-/**
- * Hide the Item from the DOM (when visible)
- * @return {Boolean} changed
- */
-Item.prototype.hide = function () {
-  return false;
-};
-
-/**
- * Repaint the item
- */
-Item.prototype.redraw = function () {
-  // should be implemented by the item
-};
-
-/**
- * Reposition the Item horizontally
- */
-Item.prototype.repositionX = function () {
-  // should be implemented by the item
-};
-
-/**
- * Reposition the Item vertically
- */
-Item.prototype.repositionY = function () {
-  // should be implemented by the item
-};
-
-/**
- * Repaint a drag area on the center of the item when the item is selected
- * @protected
- */
-Item.prototype._repaintDragCenter = function () {
-  if (this.selected && this.options.editable.updateTime && !this.dom.dragCenter) {
-    var me = this;
-    // create and show drag area
-    var dragCenter = document.createElement('div');
-    dragCenter.className = 'timeline-drag-center';
-    dragCenter.dragCenterItem = this;
-    var hammer = new Hammer(dragCenter);
-
-    hammer.on('tap', function (event) {
-      me.parent.itemSet.body.emitter.emit('click', {
-        event: event,
-        item: me.id
-      });
-    });
-    hammer.on('doubletap', function (event) {
-      event.stopPropagation();
-      me.parent.itemSet._onUpdateItem(me);
-      me.parent.itemSet.body.emitter.emit('doubleClick', {
-        event: event,
-        item: me.id
-      });
-    });
-
-    if (this.dom.box) {
-      if (this.dom.dragLeft) {
-        this.dom.box.insertBefore(dragCenter, this.dom.dragLeft);
-      } else {
-        this.dom.box.appendChild(dragCenter);
-      }
-    } else if (this.dom.point) {
-      this.dom.point.appendChild(dragCenter);
-    }
-
-    this.dom.dragCenter = dragCenter;
-  } else if (!this.selected && this.dom.dragCenter) {
-    // delete drag area
-    if (this.dom.dragCenter.parentNode) {
-      this.dom.dragCenter.parentNode.removeChild(this.dom.dragCenter);
-    }
-    this.dom.dragCenter = null;
-  }
-};
-
-/**
- * Repaint a delete button on the top right of the item when the item is selected
- * @param {HTMLElement} anchor
- * @protected
- */
-Item.prototype._repaintDeleteButton = function (anchor) {
-  var editable = (this.options.editable.overrideItems || this.editable == null) && this.options.editable.remove || !this.options.editable.overrideItems && this.editable != null && this.editable.remove;
-
-  if (this.selected && editable && !this.dom.deleteButton) {
-    // create and show button
-    var me = this;
-
-    var deleteButton = document.createElement('div');
-
-    if (this.options.rtl) {
-      deleteButton.className = 'timeline-delete-rtl';
-    } else {
-      deleteButton.className = 'timeline-delete';
-    }
-    deleteButton.title = 'Delete this item';
-
-    // TODO: be able to destroy the delete button
-    new Hammer(deleteButton).on('tap', function (event) {
-      event.stopPropagation();
-      me.parent.removeFromDataSet(me);
-    });
-
-    anchor.appendChild(deleteButton);
-    this.dom.deleteButton = deleteButton;
-  } else if (!this.selected && this.dom.deleteButton) {
-    // remove button
-    if (this.dom.deleteButton.parentNode) {
-      this.dom.deleteButton.parentNode.removeChild(this.dom.deleteButton);
-    }
-    this.dom.deleteButton = null;
-  }
-};
-
-/**
- * Repaint a onChange tooltip on the top right of the item when the item is selected
- * @param {HTMLElement} anchor
- * @protected
- */
-Item.prototype._repaintOnItemUpdateTimeTooltip = function (anchor) {
-  if (!this.options.tooltipOnItemUpdateTime) return;
-
-  var editable = (this.options.editable.updateTime || this.data.editable === true) && this.data.editable !== false;
-
-  if (this.selected && editable && !this.dom.onItemUpdateTimeTooltip) {
-    var onItemUpdateTimeTooltip = document.createElement('div');
-
-    onItemUpdateTimeTooltip.className = 'timeline-onUpdateTime-tooltip';
-    anchor.appendChild(onItemUpdateTimeTooltip);
-    this.dom.onItemUpdateTimeTooltip = onItemUpdateTimeTooltip;
-  } else if (!this.selected && this.dom.onItemUpdateTimeTooltip) {
-    // remove button
-    if (this.dom.onItemUpdateTimeTooltip.parentNode) {
-      this.dom.onItemUpdateTimeTooltip.parentNode.removeChild(this.dom.onItemUpdateTimeTooltip);
-    }
-    this.dom.onItemUpdateTimeTooltip = null;
-  }
-
-  // position onChange tooltip
-  if (this.dom.onItemUpdateTimeTooltip) {
-
-    // only show when editing
-    this.dom.onItemUpdateTimeTooltip.style.visibility = this.parent.itemSet.touchParams.itemIsDragging ? 'visible' : 'hidden';
-
-    // position relative to item's content
-    if (this.options.rtl) {
-      this.dom.onItemUpdateTimeTooltip.style.right = this.dom.content.style.right;
-    } else {
-      this.dom.onItemUpdateTimeTooltip.style.left = this.dom.content.style.left;
-    }
-
-    // position above or below the item depending on the item's position in the window
-    var tooltipOffset = 50; // TODO: should be tooltip height (depends on template)
-    var scrollTop = this.parent.itemSet.body.domProps.scrollTop;
-
-    // TODO: this.top for orientation:true is actually the items distance from the bottom... 
-    // (should be this.bottom)
-    var itemDistanceFromTop;
-    if (this.options.orientation.item == 'top') {
-      itemDistanceFromTop = this.top;
-    } else {
-      itemDistanceFromTop = this.parent.height - this.top - this.height;
-    }
-    var isCloseToTop = itemDistanceFromTop + this.parent.top - tooltipOffset < -scrollTop;
-
-    if (isCloseToTop) {
-      this.dom.onItemUpdateTimeTooltip.style.bottom = "";
-      this.dom.onItemUpdateTimeTooltip.style.top = this.height + 2 + "px";
-    } else {
-      this.dom.onItemUpdateTimeTooltip.style.top = "";
-      this.dom.onItemUpdateTimeTooltip.style.bottom = this.height + 2 + "px";
-    }
-
-    // handle tooltip content
-    var content;
-    var templateFunction;
-
-    if (this.options.tooltipOnItemUpdateTime && this.options.tooltipOnItemUpdateTime.template) {
-      templateFunction = this.options.tooltipOnItemUpdateTime.template.bind(this);
-      content = templateFunction(this.data);
-    } else {
-      content = 'start: ' + moment(this.data.start).format('MM/DD/YYYY hh:mm');
-      if (this.data.end) {
-        content += '<br> end: ' + moment(this.data.end).format('MM/DD/YYYY hh:mm');
-      }
-    }
-    this.dom.onItemUpdateTimeTooltip.innerHTML = content;
-  }
-};
-
-/**
- * Set HTML contents for the item
- * @param {Element} element   HTML element to fill with the contents
- * @private
- */
-Item.prototype._updateContents = function (element) {
-  var content;
-  var changed;
-  var templateFunction;
-  var itemVisibleFrameContent;
-  var visibleFrameTemplateFunction;
-  var itemData = this.parent.itemSet.itemsData.get(this.id); // get a clone of the data from the dataset
-
-  var frameElement = this.dom.box || this.dom.point;
-  var itemVisibleFrameContentElement = frameElement.getElementsByClassName('timeline-item-visible-frame')[0];
-
-  if (this.options.visibleFrameTemplate) {
-    visibleFrameTemplateFunction = this.options.visibleFrameTemplate.bind(this);
-    itemVisibleFrameContent = visibleFrameTemplateFunction(itemData, frameElement);
-  } else {
-    itemVisibleFrameContent = '';
-  }
-
-  if (itemVisibleFrameContentElement) {
-    if (itemVisibleFrameContent instanceof Object && !(itemVisibleFrameContent instanceof Element)) {
-      visibleFrameTemplateFunction(itemData, itemVisibleFrameContentElement);
-    } else {
-      changed = this._contentToString(this.itemVisibleFrameContent) !== this._contentToString(itemVisibleFrameContent);
-      if (changed) {
-        // only replace the content when changed
-        if (itemVisibleFrameContent instanceof Element) {
-          itemVisibleFrameContentElement.innerHTML = '';
-          itemVisibleFrameContentElement.appendChild(itemVisibleFrameContent);
-        } else if (itemVisibleFrameContent != undefined) {
-          itemVisibleFrameContentElement.innerHTML = itemVisibleFrameContent;
-        } else {
-          if (!(this.data.type == 'background' && this.data.content === undefined)) {
-            throw new Error('Property "content" missing in item ' + this.id);
-          }
-        }
-
-        this.itemVisibleFrameContent = itemVisibleFrameContent;
-      }
-    }
-  }
-
-  if (this.options.template) {
-    templateFunction = this.options.template.bind(this);
-    content = templateFunction(itemData, element, this.data);
-  } else {
-    content = this.data.content;
-  }
-
-  if (content instanceof Object && !(content instanceof Element)) {
-    templateFunction(itemData, element);
-  } else {
-    changed = this._contentToString(this.content) !== this._contentToString(content);
-    if (changed) {
-      // only replace the content when changed
-      if (content instanceof Element) {
-        element.innerHTML = '';
-        element.appendChild(content);
-      } else if (content != undefined) {
-        element.innerHTML = content;
-      } else {
-        if (!(this.data.type == 'background' && this.data.content === undefined)) {
-          throw new Error('Property "content" missing in item ' + this.id);
-        }
-      }
-      this.content = content;
-    }
-  }
-};
-
-/**
- * Process dataAttributes timeline option and set as data- attributes on dom.content
- * @param {Element} element   HTML element to which the attributes will be attached
- * @private
- */
-Item.prototype._updateDataAttributes = function (element) {
-  if (this.options.dataAttributes && this.options.dataAttributes.length > 0) {
-    var attributes = [];
-
-    if (Array.isArray(this.options.dataAttributes)) {
-      attributes = this.options.dataAttributes;
-    } else if (this.options.dataAttributes == 'all') {
-      attributes = (0, _keys2['default'])(this.data);
-    } else {
-      return;
-    }
-
-    for (var i = 0; i < attributes.length; i++) {
-      var name = attributes[i];
-      var value = this.data[name];
-
-      if (value != null) {
-        element.setAttribute('data-' + name, value);
-      } else {
-        element.removeAttribute('data-' + name);
-      }
-    }
-  }
-};
-
-/**
- * Update custom styles of the element
- * @param {Element} element
- * @private
- */
-Item.prototype._updateStyle = function (element) {
-  // remove old styles
-  if (this.style) {
-    util.removeCssText(element, this.style);
-    this.style = null;
-  }
-
-  // append new styles
-  if (this.data.style) {
-    util.addCssText(element, this.data.style);
-    this.style = this.data.style;
-  }
-};
-
-/**
- * Stringify the items contents
- * @param {string | Element | undefined} content
- * @returns {string | undefined}
- * @private
- */
-Item.prototype._contentToString = function (content) {
-  if (typeof content === 'string') return content;
-  if (content && 'outerHTML' in content) return content.outerHTML;
-  return content;
-};
-
-/**
- * Update the editability of this item.
- */
-Item.prototype._updateEditStatus = function () {
-  if (this.options) {
-    if (typeof this.options.editable === 'boolean') {
-      this.editable = {
-        updateTime: this.options.editable,
-        updateGroup: this.options.editable,
-        remove: this.options.editable
-      };
-    } else if ((0, _typeof3['default'])(this.options.editable) === 'object') {
-      this.editable = {};
-      util.selectiveExtend(['updateTime', 'updateGroup', 'remove'], this.editable, this.options.editable);
-    }
-  }
-  // Item data overrides, except if options.editable.overrideItems is set.
-  if (!this.options || !this.options.editable || this.options.editable.overrideItems !== true) {
-    if (this.data) {
-      if (typeof this.data.editable === 'boolean') {
-        this.editable = {
-          updateTime: this.data.editable,
-          updateGroup: this.data.editable,
-          remove: this.data.editable
-        };
-      } else if ((0, _typeof3['default'])(this.data.editable) === 'object') {
-        // TODO: in timeline.js 5.0, we should change this to not reset options from the timeline configuration.
-        // Basically just remove the next line...
-        this.editable = {};
-        util.selectiveExtend(['updateTime', 'updateGroup', 'remove'], this.editable, this.data.editable);
-      }
-    }
-  }
-};
-
-/**
- * Return the width of the item left from its start date
- * @return {number}
- */
-Item.prototype.getWidthLeft = function () {
-  return 0;
-};
-
-/**
- * Return the width of the item right from the max of its start and end date
- * @return {number}
- */
-Item.prototype.getWidthRight = function () {
-  return 0;
-};
-
-/**
- * Return the title of the item
- * @return {string | undefined}
- */
-Item.prototype.getTitle = function () {
-  return this.data.title;
-};
-
-module.exports = Item;
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-module.exports = {};
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(56);
-var enumBugKeys = __webpack_require__(38);
-
-module.exports = Object.keys || function keys(O) {
-  return $keys(O, enumBugKeys);
-};
-
-
-/***/ }),
 /* 26 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-var id = 0;
-var px = Math.random();
-module.exports = function (key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+"use strict";
+
+
+exports.__esModule = true;
+
+exports.default = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 };
-
 
 /***/ }),
 /* 27 */
@@ -4269,14 +4065,234 @@ module.exports = function (key) {
 "use strict";
 
 
-var _keys = __webpack_require__(3);
+exports.__esModule = true;
+
+var _defineProperty = __webpack_require__(125);
+
+var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      (0, _defineProperty2.default)(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+
+module.exports = true;
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = __webpack_require__(17);
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
+  var fn, val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+var anObject = __webpack_require__(16);
+var dPs = __webpack_require__(86);
+var enumBugKeys = __webpack_require__(36);
+var IE_PROTO = __webpack_require__(34)('IE_PROTO');
+var Empty = function () { /* empty */ };
+var PROTOTYPE = 'prototype';
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var createDict = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = __webpack_require__(52)('iframe');
+  var i = enumBugKeys.length;
+  var lt = '<';
+  var gt = '>';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  __webpack_require__(90).appendChild(iframe);
+  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+  // createDict = iframe.contentWindow.Object;
+  // html.removeChild(iframe);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+  iframeDocument.close();
+  createDict = iframeDocument.F;
+  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
+  return createDict();
+};
+
+module.exports = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    Empty[PROTOTYPE] = anObject(O);
+    result = new Empty();
+    Empty[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = createDict();
+  return Properties === undefined ? result : dPs(result, Properties);
+};
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var shared = __webpack_require__(35)('keys');
+var uid = __webpack_require__(24);
+module.exports = function (key) {
+  return shared[key] || (shared[key] = uid(key));
+};
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(4);
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || (global[SHARED] = {});
+module.exports = function (key) {
+  return store[key] || (store[key] = {});
+};
+
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
+
+// IE 8- don't enum bug keys
+module.exports = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var def = __webpack_require__(7).f;
+var has = __webpack_require__(9);
+var TAG = __webpack_require__(5)('toStringTag');
+
+module.exports = function (it, tag, stat) {
+  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
+};
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(96), __esModule: true };
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports.f = __webpack_require__(5);
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(4);
+var core = __webpack_require__(1);
+var LIBRARY = __webpack_require__(30);
+var wksExt = __webpack_require__(39);
+var defineProperty = __webpack_require__(7).f;
+module.exports = function (name) {
+  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
+  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
+};
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports) {
+
+exports.f = {}.propertyIsEnumerable;
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _keys = __webpack_require__(6);
 
 var _keys2 = _interopRequireDefault(_keys);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var util = __webpack_require__(0);
-var DataSet = __webpack_require__(20);
+var DataSet = __webpack_require__(25);
 
 /**
  * DataView
@@ -4667,258 +4683,23 @@ DataView.prototype.unsubscribe = DataView.prototype.off;
 module.exports = DataView;
 
 /***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-exports.default = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _defineProperty = __webpack_require__(131);
-
-var _defineProperty2 = _interopRequireDefault(_defineProperty);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      (0, _defineProperty2.default)(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function (it) {
-  return toString.call(it).slice(8, -1);
-};
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-module.exports = true;
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(18);
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function (it, S) {
-  if (!isObject(it)) return it;
-  var fn, val;
-  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject = __webpack_require__(17);
-var dPs = __webpack_require__(92);
-var enumBugKeys = __webpack_require__(38);
-var IE_PROTO = __webpack_require__(36)('IE_PROTO');
-var Empty = function () { /* empty */ };
-var PROTOTYPE = 'prototype';
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(54)('iframe');
-  var i = enumBugKeys.length;
-  var lt = '<';
-  var gt = '>';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  __webpack_require__(96).appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
-
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty();
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-// 7.1.4 ToInteger
-var ceil = Math.ceil;
-var floor = Math.floor;
-module.exports = function (it) {
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var shared = __webpack_require__(37)('keys');
-var uid = __webpack_require__(26);
-module.exports = function (key) {
-  return shared[key] || (shared[key] = uid(key));
-};
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(6);
-var SHARED = '__core-js_shared__';
-var store = global[SHARED] || (global[SHARED] = {});
-module.exports = function (key) {
-  return store[key] || (store[key] = {});
-};
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports) {
-
-// IE 8- don't enum bug keys
-module.exports = (
-  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
-).split(',');
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var def = __webpack_require__(8).f;
-var has = __webpack_require__(10);
-var TAG = __webpack_require__(7)('toStringTag');
-
-module.exports = function (it, tag, stat) {
-  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
-};
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(102), __esModule: true };
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports.f = __webpack_require__(7);
-
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(6);
-var core = __webpack_require__(2);
-var LIBRARY = __webpack_require__(32);
-var wksExt = __webpack_require__(41);
-var defineProperty = __webpack_require__(8).f;
-module.exports = function (name) {
-  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
-  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
-};
-
-
-/***/ }),
 /* 43 */
-/***/ (function(module, exports) {
-
-exports.f = {}.propertyIsEnumerable;
-
-
-/***/ }),
-/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _typeof2 = __webpack_require__(1);
+var _typeof2 = __webpack_require__(2);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var util = __webpack_require__(0);
-var Component = __webpack_require__(5);
-var TimeStep = __webpack_require__(45);
-var DateUtil = __webpack_require__(21);
-var moment = __webpack_require__(4);
+var Component = __webpack_require__(10);
+var TimeStep = __webpack_require__(44);
+var DateUtil = __webpack_require__(19);
+var moment = __webpack_require__(3);
 
 /**
  * A horizontal time axis
@@ -5410,14 +5191,14 @@ var warnedForOverflow = false;
 module.exports = TimeAxis;
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var moment = __webpack_require__(4);
-var DateUtil = __webpack_require__(21);
+var moment = __webpack_require__(3);
+var DateUtil = __webpack_require__(19);
 var util = __webpack_require__(0);
 
 /**
@@ -6224,17 +6005,17 @@ TimeStep.prototype.getClassName = function () {
 module.exports = TimeStep;
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Hammer = __webpack_require__(12);
+var Hammer = __webpack_require__(11);
 var util = __webpack_require__(0);
-var Component = __webpack_require__(5);
-var moment = __webpack_require__(4);
-var locales = __webpack_require__(67);
+var Component = __webpack_require__(10);
+var moment = __webpack_require__(3);
+var locales = __webpack_require__(66);
 
 /**
  * A custom time bar
@@ -6497,20 +6278,20 @@ CustomTime.customTimeFromTarget = function (event) {
 module.exports = CustomTime;
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _keys = __webpack_require__(3);
+var _keys = __webpack_require__(6);
 
 var _keys2 = _interopRequireDefault(_keys);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var util = __webpack_require__(0);
-var stack = __webpack_require__(70);
+var stack = __webpack_require__(69);
 
 /**
  * @param {number | string} groupId
@@ -7476,19 +7257,19 @@ Group.prototype.changeSubgroup = function (item, oldSubgroup, newSubgroup) {
 module.exports = Group;
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _create = __webpack_require__(40);
+var _create = __webpack_require__(38);
 
 var _create2 = _interopRequireDefault(_create);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var Group = __webpack_require__(47);
+var Group = __webpack_require__(46);
 
 /**
  * @constructor BackgroundGroup
@@ -7548,13 +7329,13 @@ BackgroundGroup.prototype.show = function () {
 module.exports = BackgroundGroup;
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Item = __webpack_require__(22);
+var Item = __webpack_require__(20);
 
 /**
  * @constructor RangeItem
@@ -7936,116 +7717,14 @@ RangeItem.prototype._repaintDragRight = function () {
 module.exports = RangeItem;
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-var _typeof2 = __webpack_require__(1);
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var DOMutil = __webpack_require__(11);
-
-/**
- *
- * @param {number | string} groupId
- * @param {Object} options   // TODO: Describe options
- *
- * @constructor Points
- */
-function Points(groupId, options) {} // eslint-disable-line no-unused-vars
-
-
-/**
- * draw the data points
- *
- * @param {Array} dataset
- * @param {GraphGroup} group
- * @param {Object} framework            | SVG DOM element
- * @param {number} [offset]
- */
-Points.draw = function (dataset, group, framework, offset) {
-  offset = offset || 0;
-  var callback = getCallback(framework, group);
-
-  for (var i = 0; i < dataset.length; i++) {
-    if (!callback) {
-      // draw the point the simple way.
-      DOMutil.drawPoint(dataset[i].screen_x + offset, dataset[i].screen_y, getGroupTemplate(group), framework.svgElements, framework.svg, dataset[i].label);
-    } else {
-      var callbackResult = callback(dataset[i], group); // result might be true, false or an object
-      if (callbackResult === true || (typeof callbackResult === 'undefined' ? 'undefined' : (0, _typeof3['default'])(callbackResult)) === 'object') {
-        DOMutil.drawPoint(dataset[i].screen_x + offset, dataset[i].screen_y, getGroupTemplate(group, callbackResult), framework.svgElements, framework.svg, dataset[i].label);
-      }
-    }
-  }
-};
-
-Points.drawIcon = function (group, x, y, iconWidth, iconHeight, framework) {
-  var fillHeight = iconHeight * 0.5;
-
-  var outline = DOMutil.getSVGElement("rect", framework.svgElements, framework.svg);
-  outline.setAttributeNS(null, "x", x);
-  outline.setAttributeNS(null, "y", y - fillHeight);
-  outline.setAttributeNS(null, "width", iconWidth);
-  outline.setAttributeNS(null, "height", 2 * fillHeight);
-  outline.setAttributeNS(null, "class", "timeline-outline");
-
-  //Don't call callback on icon
-  DOMutil.drawPoint(x + 0.5 * iconWidth, y, getGroupTemplate(group), framework.svgElements, framework.svg);
-};
-
-/**
- *
- * @param {timeline.Group} group
- * @param {any} callbackResult
- * @returns {{style: *, styles: (*|string), size: *, className: *}}
- */
-function getGroupTemplate(group, callbackResult) {
-  callbackResult = typeof callbackResult === 'undefined' ? {} : callbackResult;
-  return {
-    style: callbackResult.style || group.options.drawPoints.style,
-    styles: callbackResult.styles || group.options.drawPoints.styles,
-    size: callbackResult.size || group.options.drawPoints.size,
-    className: callbackResult.className || group.className
-  };
-}
-
-/**
- *
- * @param {Object} framework            | SVG DOM element
- * @param {timeline.Group} group
- * @returns {function}
- */
-function getCallback(framework, group) {
-  var callback = undefined;
-  // check for the graph2d onRender
-  if (framework.options && framework.options.drawPoints && framework.options.drawPoints.onRender && typeof framework.options.drawPoints.onRender == 'function') {
-    callback = framework.options.drawPoints.onRender;
-  }
-
-  // override it with the group onRender if defined
-  if (group.group.options && group.group.options.drawPoints && group.group.options.drawPoints.onRender && typeof group.group.options.drawPoints.onRender == 'function') {
-    callback = group.group.options.drawPoints.onRender;
-  }
-  return callback;
-}
-
-module.exports = Points;
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(85);
-var global = __webpack_require__(6);
-var hide = __webpack_require__(14);
-var Iterators = __webpack_require__(23);
-var TO_STRING_TAG = __webpack_require__(7)('toStringTag');
+__webpack_require__(79);
+var global = __webpack_require__(4);
+var hide = __webpack_require__(13);
+var Iterators = __webpack_require__(21);
+var TO_STRING_TAG = __webpack_require__(5)('toStringTag');
 
 var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
   'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
@@ -8063,20 +7742,20 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 
 /***/ }),
-/* 52 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(32);
-var $export = __webpack_require__(16);
-var redefine = __webpack_require__(55);
-var hide = __webpack_require__(14);
-var Iterators = __webpack_require__(23);
-var $iterCreate = __webpack_require__(91);
-var setToStringTag = __webpack_require__(39);
-var getPrototypeOf = __webpack_require__(97);
-var ITERATOR = __webpack_require__(7)('iterator');
+var LIBRARY = __webpack_require__(30);
+var $export = __webpack_require__(15);
+var redefine = __webpack_require__(53);
+var hide = __webpack_require__(13);
+var Iterators = __webpack_require__(21);
+var $iterCreate = __webpack_require__(85);
+var setToStringTag = __webpack_require__(37);
+var getPrototypeOf = __webpack_require__(91);
+var ITERATOR = __webpack_require__(5)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
 var KEYS = 'keys';
@@ -8139,20 +7818,20 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(9) && !__webpack_require__(19)(function () {
-  return Object.defineProperty(__webpack_require__(54)('div'), 'a', { get: function () { return 7; } }).a != 7;
+module.exports = !__webpack_require__(8) && !__webpack_require__(18)(function () {
+  return Object.defineProperty(__webpack_require__(52)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
 
 /***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(18);
-var document = __webpack_require__(6).document;
+var isObject = __webpack_require__(17);
+var document = __webpack_require__(4).document;
 // typeof document.createElement is 'object' in old IE
 var is = isObject(document) && isObject(document.createElement);
 module.exports = function (it) {
@@ -8161,20 +7840,20 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 55 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(14);
+module.exports = __webpack_require__(13);
 
 
 /***/ }),
-/* 56 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has = __webpack_require__(10);
-var toIObject = __webpack_require__(13);
-var arrayIndexOf = __webpack_require__(93)(false);
-var IE_PROTO = __webpack_require__(36)('IE_PROTO');
+var has = __webpack_require__(9);
+var toIObject = __webpack_require__(12);
+var arrayIndexOf = __webpack_require__(87)(false);
+var IE_PROTO = __webpack_require__(34)('IE_PROTO');
 
 module.exports = function (object, names) {
   var O = toIObject(object);
@@ -8191,26 +7870,26 @@ module.exports = function (object, names) {
 
 
 /***/ }),
-/* 57 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
-var defined = __webpack_require__(31);
+var defined = __webpack_require__(29);
 module.exports = function (it) {
   return Object(defined(it));
 };
 
 
 /***/ }),
-/* 58 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var $at = __webpack_require__(98)(true);
+var $at = __webpack_require__(92)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(52)(String, 'String', function (iterated) {
+__webpack_require__(50)(String, 'String', function (iterated) {
   this._t = String(iterated); // target
   this._i = 0;                // next index
 // 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -8226,19 +7905,19 @@ __webpack_require__(52)(String, 'String', function (iterated) {
 
 
 /***/ }),
-/* 59 */
+/* 57 */
 /***/ (function(module, exports) {
 
 exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
-/* 60 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys = __webpack_require__(56);
-var hiddenKeys = __webpack_require__(38).concat('length', 'prototype');
+var $keys = __webpack_require__(54);
+var hiddenKeys = __webpack_require__(36).concat('length', 'prototype');
 
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return $keys(O, hiddenKeys);
@@ -8246,7 +7925,226 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 
 
 /***/ }),
-/* 61 */
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// DOM utility methods
+
+/**
+ * this prepares the JSON container for allocating SVG elements
+ * @param {Object} JSONcontainer
+ * @private
+ */
+exports.prepareElements = function (JSONcontainer) {
+  // cleanup the redundant svgElements;
+  for (var elementType in JSONcontainer) {
+    if (JSONcontainer.hasOwnProperty(elementType)) {
+      JSONcontainer[elementType].redundant = JSONcontainer[elementType].used;
+      JSONcontainer[elementType].used = [];
+    }
+  }
+};
+
+/**
+ * this cleans up all the unused SVG elements. By asking for the parentNode, we only need to supply the JSON container from
+ * which to remove the redundant elements.
+ *
+ * @param {Object} JSONcontainer
+ * @private
+ */
+exports.cleanupElements = function (JSONcontainer) {
+  // cleanup the redundant svgElements;
+  for (var elementType in JSONcontainer) {
+    if (JSONcontainer.hasOwnProperty(elementType)) {
+      if (JSONcontainer[elementType].redundant) {
+        for (var i = 0; i < JSONcontainer[elementType].redundant.length; i++) {
+          JSONcontainer[elementType].redundant[i].parentNode.removeChild(JSONcontainer[elementType].redundant[i]);
+        }
+        JSONcontainer[elementType].redundant = [];
+      }
+    }
+  }
+};
+
+/**
+ * Ensures that all elements are removed first up so they can be recreated cleanly
+ * @param {Object} JSONcontainer
+ */
+exports.resetElements = function (JSONcontainer) {
+  exports.prepareElements(JSONcontainer);
+  exports.cleanupElements(JSONcontainer);
+  exports.prepareElements(JSONcontainer);
+};
+
+/**
+ * Allocate or generate an SVG element if needed. Store a reference to it in the JSON container and draw it in the svgContainer
+ * the JSON container and the SVG container have to be supplied so other svg containers (like the legend) can use this.
+ *
+ * @param {string} elementType
+ * @param {Object} JSONcontainer
+ * @param {Object} svgContainer
+ * @returns {Element}
+ * @private
+ */
+exports.getSVGElement = function (elementType, JSONcontainer, svgContainer) {
+  var element;
+  // allocate SVG element, if it doesnt yet exist, create one.
+  if (JSONcontainer.hasOwnProperty(elementType)) {
+    // this element has been created before
+    // check if there is an redundant element
+    if (JSONcontainer[elementType].redundant.length > 0) {
+      element = JSONcontainer[elementType].redundant[0];
+      JSONcontainer[elementType].redundant.shift();
+    } else {
+      // create a new element and add it to the SVG
+      element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
+      svgContainer.appendChild(element);
+    }
+  } else {
+    // create a new element and add it to the SVG, also create a new object in the svgElements to keep track of it.
+    element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
+    JSONcontainer[elementType] = { used: [], redundant: [] };
+    svgContainer.appendChild(element);
+  }
+  JSONcontainer[elementType].used.push(element);
+  return element;
+};
+
+/**
+ * Allocate or generate an SVG element if needed. Store a reference to it in the JSON container and draw it in the svgContainer
+ * the JSON container and the SVG container have to be supplied so other svg containers (like the legend) can use this.
+ *
+ * @param {string} elementType
+ * @param {Object} JSONcontainer
+ * @param {Element} DOMContainer
+ * @param {Element} insertBefore
+ * @returns {*}
+ */
+exports.getDOMElement = function (elementType, JSONcontainer, DOMContainer, insertBefore) {
+  var element;
+  // allocate DOM element, if it doesnt yet exist, create one.
+  if (JSONcontainer.hasOwnProperty(elementType)) {
+    // this element has been created before
+    // check if there is an redundant element
+    if (JSONcontainer[elementType].redundant.length > 0) {
+      element = JSONcontainer[elementType].redundant[0];
+      JSONcontainer[elementType].redundant.shift();
+    } else {
+      // create a new element and add it to the SVG
+      element = document.createElement(elementType);
+      if (insertBefore !== undefined) {
+        DOMContainer.insertBefore(element, insertBefore);
+      } else {
+        DOMContainer.appendChild(element);
+      }
+    }
+  } else {
+    // create a new element and add it to the SVG, also create a new object in the svgElements to keep track of it.
+    element = document.createElement(elementType);
+    JSONcontainer[elementType] = { used: [], redundant: [] };
+    if (insertBefore !== undefined) {
+      DOMContainer.insertBefore(element, insertBefore);
+    } else {
+      DOMContainer.appendChild(element);
+    }
+  }
+  JSONcontainer[elementType].used.push(element);
+  return element;
+};
+
+/**
+ * Draw a point object. This is a separate function because it can also be called by the legend.
+ * The reason the JSONcontainer and the target SVG svgContainer have to be supplied is so the legend can use these functions
+ * as well.
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {Object} groupTemplate: A template containing the necessary information to draw the datapoint e.g., {style: 'circle', size: 5, className: 'className' }
+ * @param {Object} JSONcontainer
+ * @param {Object} svgContainer
+ * @param {Object} labelObj
+ * @returns {timeline.PointItem}
+ */
+exports.drawPoint = function (x, y, groupTemplate, JSONcontainer, svgContainer, labelObj) {
+  var point;
+  if (groupTemplate.style == 'circle') {
+    point = exports.getSVGElement('circle', JSONcontainer, svgContainer);
+    point.setAttributeNS(null, "cx", x);
+    point.setAttributeNS(null, "cy", y);
+    point.setAttributeNS(null, "r", 0.5 * groupTemplate.size);
+  } else {
+    point = exports.getSVGElement('rect', JSONcontainer, svgContainer);
+    point.setAttributeNS(null, "x", x - 0.5 * groupTemplate.size);
+    point.setAttributeNS(null, "y", y - 0.5 * groupTemplate.size);
+    point.setAttributeNS(null, "width", groupTemplate.size);
+    point.setAttributeNS(null, "height", groupTemplate.size);
+  }
+
+  if (groupTemplate.styles !== undefined) {
+    point.setAttributeNS(null, "style", groupTemplate.styles);
+  }
+  point.setAttributeNS(null, "class", groupTemplate.className + " timeline-point");
+  //handle label
+
+
+  if (labelObj) {
+    var label = exports.getSVGElement('text', JSONcontainer, svgContainer);
+    if (labelObj.xOffset) {
+      x = x + labelObj.xOffset;
+    }
+
+    if (labelObj.yOffset) {
+      y = y + labelObj.yOffset;
+    }
+    if (labelObj.content) {
+      label.textContent = labelObj.content;
+    }
+
+    if (labelObj.className) {
+      label.setAttributeNS(null, "class", labelObj.className + " timeline-label");
+    }
+    label.setAttributeNS(null, "x", x);
+    label.setAttributeNS(null, "y", y);
+  }
+
+  return point;
+};
+
+/**
+ * draw a bar SVG element centered on the X coordinate
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} width
+ * @param {number} height
+ * @param {string} className
+ * @param {Object} JSONcontainer
+ * @param {Object} svgContainer
+ * @param {string} style
+ */
+exports.drawBar = function (x, y, width, height, className, JSONcontainer, svgContainer, style) {
+  if (height != 0) {
+    if (height < 0) {
+      height *= -1;
+      y -= height;
+    }
+    var rect = exports.getSVGElement('rect', JSONcontainer, svgContainer);
+    rect.setAttributeNS(null, "x", x - 0.5 * width);
+    rect.setAttributeNS(null, "y", y);
+    rect.setAttributeNS(null, "width", width);
+    rect.setAttributeNS(null, "height", height);
+    rect.setAttributeNS(null, "class", className);
+    if (style) {
+      rect.setAttributeNS(null, "style", style);
+    }
+  }
+};
+
+/***/ }),
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8451,30 +8349,30 @@ Queue.prototype.flush = function () {
 module.exports = Queue;
 
 /***/ }),
-/* 62 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _keys = __webpack_require__(3);
+var _keys = __webpack_require__(6);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _stringify = __webpack_require__(15);
+var _stringify = __webpack_require__(14);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _typeof2 = __webpack_require__(1);
+var _typeof2 = __webpack_require__(2);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var util = __webpack_require__(0);
-var moment = __webpack_require__(4);
-var Component = __webpack_require__(5);
-var DateUtil = __webpack_require__(21);
+var moment = __webpack_require__(3);
+var Component = __webpack_require__(10);
+var DateUtil = __webpack_require__(19);
 
 /**
  * A Range controls a numeric range with a start and end value.
@@ -9361,30 +9259,30 @@ Range.prototype.moveTo = function (moveTo) {
 module.exports = Range;
 
 /***/ }),
-/* 63 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _stringify = __webpack_require__(15);
+var _stringify = __webpack_require__(14);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _typeof2 = __webpack_require__(1);
+var _typeof2 = __webpack_require__(2);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var Emitter = __webpack_require__(64);
-var Hammer = __webpack_require__(12);
-var hammerUtil = __webpack_require__(65);
+var Emitter = __webpack_require__(63);
+var Hammer = __webpack_require__(11);
+var hammerUtil = __webpack_require__(64);
 var util = __webpack_require__(0);
-var TimeAxis = __webpack_require__(44);
-var Activator = __webpack_require__(129);
-var DateUtil = __webpack_require__(21);
-var CustomTime = __webpack_require__(46);
+var TimeAxis = __webpack_require__(43);
+var Activator = __webpack_require__(123);
+var DateUtil = __webpack_require__(19);
+var CustomTime = __webpack_require__(45);
 
 /**
  * Create a timeline visualization
@@ -10735,7 +10633,7 @@ Core.prototype._createConfigurator = function () {
 module.exports = Core;
 
 /***/ }),
-/* 64 */
+/* 63 */
 /***/ (function(module, exports) {
 
 
@@ -10905,7 +10803,7 @@ Emitter.prototype.hasListeners = function(event){
 
 
 /***/ }),
-/* 65 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10979,7 +10877,7 @@ exports.disablePreventDefaultVertically = function (pinchRecognizer) {
 };
 
 /***/ }),
-/* 66 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11182,7 +11080,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11243,16 +11141,16 @@ exports['uk'] = {
 exports['uk_UA'] = exports['uk'];
 
 /***/ }),
-/* 68 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var util = __webpack_require__(0);
-var Component = __webpack_require__(5);
-var moment = __webpack_require__(4);
-var locales = __webpack_require__(67);
+var Component = __webpack_require__(10);
+var moment = __webpack_require__(3);
+var locales = __webpack_require__(66);
 
 /**
  * A current time bar
@@ -11438,35 +11336,35 @@ CurrentTime.prototype.getCurrentTime = function () {
 module.exports = CurrentTime;
 
 /***/ }),
-/* 69 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _create = __webpack_require__(40);
+var _create = __webpack_require__(38);
 
 var _create2 = _interopRequireDefault(_create);
 
-var _typeof2 = __webpack_require__(1);
+var _typeof2 = __webpack_require__(2);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var Hammer = __webpack_require__(12);
+var Hammer = __webpack_require__(11);
 var util = __webpack_require__(0);
-var DataSet = __webpack_require__(20);
-var DataView = __webpack_require__(27);
-var TimeStep = __webpack_require__(45);
-var Component = __webpack_require__(5);
-var Group = __webpack_require__(47);
-var BackgroundGroup = __webpack_require__(48);
-var BoxItem = __webpack_require__(71);
-var PointItem = __webpack_require__(72);
-var RangeItem = __webpack_require__(49);
-var BackgroundItem = __webpack_require__(73);
-var Popup = __webpack_require__(130)['default'];
+var DataSet = __webpack_require__(25);
+var DataView = __webpack_require__(42);
+var TimeStep = __webpack_require__(44);
+var Component = __webpack_require__(10);
+var Group = __webpack_require__(46);
+var BackgroundGroup = __webpack_require__(47);
+var BoxItem = __webpack_require__(70);
+var PointItem = __webpack_require__(71);
+var RangeItem = __webpack_require__(48);
+var BackgroundItem = __webpack_require__(72);
+var Popup = __webpack_require__(124)['default'];
 
 var UNGROUPED = '__ungrouped__'; // reserved group id for ungrouped items
 var BACKGROUND = '__background__'; // reserved group id for background items without group
@@ -13831,7 +13729,7 @@ ItemSet.prototype._cloneItemData = function (itemData, type) {
 module.exports = ItemSet;
 
 /***/ }),
-/* 70 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14133,13 +14031,13 @@ exports.collisionByTimes = function (a, b) {
 };
 
 /***/ }),
-/* 71 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Item = __webpack_require__(22);
+var Item = __webpack_require__(20);
 
 /**
  * @constructor BoxItem
@@ -14492,13 +14390,13 @@ BoxItem.prototype.getWidthRight = function () {
 module.exports = BoxItem;
 
 /***/ }),
-/* 72 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Item = __webpack_require__(22);
+var Item = __webpack_require__(20);
 
 /**
  * @constructor PointItem
@@ -14774,15 +14672,15 @@ PointItem.prototype.getWidthRight = function () {
 module.exports = PointItem;
 
 /***/ }),
-/* 73 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Item = __webpack_require__(22);
-var BackgroundGroup = __webpack_require__(48);
-var RangeItem = __webpack_require__(49);
+var Item = __webpack_require__(20);
+var BackgroundGroup = __webpack_require__(47);
+var RangeItem = __webpack_require__(48);
 
 /**
  * @constructor BackgroundItem
@@ -15007,7 +14905,7 @@ BackgroundItem.prototype.repositionY = function (margin) {
 module.exports = BackgroundItem;
 
 /***/ }),
-/* 74 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15018,23 +14916,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.printStyle = undefined;
 
-var _stringify = __webpack_require__(15);
+var _stringify = __webpack_require__(14);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _typeof2 = __webpack_require__(1);
+var _typeof2 = __webpack_require__(2);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
-var _keys = __webpack_require__(3);
+var _keys = __webpack_require__(6);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _classCallCheck2 = __webpack_require__(28);
+var _classCallCheck2 = __webpack_require__(26);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(29);
+var _createClass2 = __webpack_require__(27);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
@@ -15413,7 +15311,7 @@ exports['default'] = Validator;
 exports.printStyle = printStyle;
 
 /***/ }),
-/* 75 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15703,585 +15601,7 @@ exports.allOptions = allOptions;
 exports.configureOptions = configureOptions;
 
 /***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _keys = __webpack_require__(3);
-
-var _keys2 = _interopRequireDefault(_keys);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var util = __webpack_require__(0);
-var DOMutil = __webpack_require__(11);
-var Component = __webpack_require__(5);
-var DataScale = __webpack_require__(77);
-/**
- * A horizontal time axis
- * @param {Object} body
- * @param {Object} [options]        See DataAxis.setOptions for the available
- *                                  options.
- * @param {SVGElement} svg
- * @param {timeline.LineGraph.options} linegraphOptions
- * @constructor DataAxis
- * @extends Component
- */
-function DataAxis(body, options, svg, linegraphOptions) {
-  this.id = util.randomUUID();
-  this.body = body;
-
-  this.defaultOptions = {
-    orientation: 'left', // supported: 'left', 'right'
-    showMinorLabels: true,
-    showMajorLabels: true,
-    icons: false,
-    majorLinesOffset: 7,
-    minorLinesOffset: 4,
-    labelOffsetX: 10,
-    labelOffsetY: 2,
-    iconWidth: 20,
-    width: '40px',
-    visible: true,
-    alignZeros: true,
-    left: {
-      range: { min: undefined, max: undefined },
-      format: function format(value) {
-        return '' + parseFloat(value.toPrecision(3));
-      },
-      title: { text: undefined, style: undefined }
-    },
-    right: {
-      range: { min: undefined, max: undefined },
-      format: function format(value) {
-        return '' + parseFloat(value.toPrecision(3));
-      },
-      title: { text: undefined, style: undefined }
-    }
-  };
-
-  this.linegraphOptions = linegraphOptions;
-  this.linegraphSVG = svg;
-  this.props = {};
-  this.DOMelements = { // dynamic elements
-    lines: {},
-    labels: {},
-    title: {}
-  };
-
-  this.dom = {};
-  this.scale = undefined;
-  this.range = { start: 0, end: 0 };
-
-  this.options = util.extend({}, this.defaultOptions);
-  this.conversionFactor = 1;
-
-  this.setOptions(options);
-  this.width = Number(('' + this.options.width).replace("px", ""));
-  this.minWidth = this.width;
-  this.height = this.linegraphSVG.getBoundingClientRect().height;
-  this.hidden = false;
-
-  this.stepPixels = 25;
-  this.zeroCrossing = -1;
-  this.amountOfSteps = -1;
-
-  this.lineOffset = 0;
-  this.master = true;
-  this.masterAxis = null;
-  this.svgElements = {};
-  this.iconsRemoved = false;
-
-  this.groups = {};
-  this.amountOfGroups = 0;
-
-  // create the HTML DOM
-  this._create();
-  if (this.scale == undefined) {
-    this._redrawLabels();
-  }
-  this.framework = { svg: this.svg, svgElements: this.svgElements, options: this.options, groups: this.groups };
-
-  var me = this;
-  this.body.emitter.on("verticalDrag", function () {
-    me.dom.lineContainer.style.top = me.body.domProps.scrollTop + 'px';
-  });
-}
-
-DataAxis.prototype = new Component();
-
-DataAxis.prototype.addGroup = function (label, graphOptions) {
-  if (!this.groups.hasOwnProperty(label)) {
-    this.groups[label] = graphOptions;
-  }
-  this.amountOfGroups += 1;
-};
-
-DataAxis.prototype.updateGroup = function (label, graphOptions) {
-  if (!this.groups.hasOwnProperty(label)) {
-    this.amountOfGroups += 1;
-  }
-  this.groups[label] = graphOptions;
-};
-
-DataAxis.prototype.removeGroup = function (label) {
-  if (this.groups.hasOwnProperty(label)) {
-    delete this.groups[label];
-    this.amountOfGroups -= 1;
-  }
-};
-
-DataAxis.prototype.setOptions = function (options) {
-  if (options) {
-    var redraw = false;
-    if (this.options.orientation != options.orientation && options.orientation !== undefined) {
-      redraw = true;
-    }
-    var fields = ['orientation', 'showMinorLabels', 'showMajorLabels', 'icons', 'majorLinesOffset', 'minorLinesOffset', 'labelOffsetX', 'labelOffsetY', 'iconWidth', 'width', 'visible', 'left', 'right', 'alignZeros'];
-    util.selectiveDeepExtend(fields, this.options, options);
-
-    this.minWidth = Number(('' + this.options.width).replace("px", ""));
-    if (redraw === true && this.dom.frame) {
-      this.hide();
-      this.show();
-    }
-  }
-};
-
-/**
- * Create the HTML DOM for the DataAxis
- */
-DataAxis.prototype._create = function () {
-  this.dom.frame = document.createElement('div');
-  this.dom.frame.style.width = this.options.width;
-  this.dom.frame.style.height = this.height;
-
-  this.dom.lineContainer = document.createElement('div');
-  this.dom.lineContainer.style.width = '100%';
-  this.dom.lineContainer.style.height = this.height;
-  this.dom.lineContainer.style.position = 'relative';
-  this.dom.lineContainer.style.visibility = 'visible';
-  this.dom.lineContainer.style.display = 'block';
-
-  // create svg element for graph drawing.
-  this.svg = document.createElementNS('http://www.w3.org/2000/svg', "svg");
-  this.svg.style.position = "absolute";
-  this.svg.style.top = '0px';
-  this.svg.style.height = '100%';
-  this.svg.style.width = '100%';
-  this.svg.style.display = "block";
-  this.dom.frame.appendChild(this.svg);
-};
-
-DataAxis.prototype._redrawGroupIcons = function () {
-  DOMutil.prepareElements(this.svgElements);
-
-  var x;
-  var iconWidth = this.options.iconWidth;
-  var iconHeight = 15;
-  var iconOffset = 4;
-  var y = iconOffset + 0.5 * iconHeight;
-
-  if (this.options.orientation === 'left') {
-    x = iconOffset;
-  } else {
-    x = this.width - iconWidth - iconOffset;
-  }
-
-  var groupArray = (0, _keys2['default'])(this.groups);
-  groupArray.sort(function (a, b) {
-    return a < b ? -1 : 1;
-  });
-
-  for (var i = 0; i < groupArray.length; i++) {
-    var groupId = groupArray[i];
-    if (this.groups[groupId].visible === true && (this.linegraphOptions.visibility[groupId] === undefined || this.linegraphOptions.visibility[groupId] === true)) {
-      this.groups[groupId].getLegend(iconWidth, iconHeight, this.framework, x, y);
-      y += iconHeight + iconOffset;
-    }
-  }
-
-  DOMutil.cleanupElements(this.svgElements);
-  this.iconsRemoved = false;
-};
-
-DataAxis.prototype._cleanupIcons = function () {
-  if (this.iconsRemoved === false) {
-    DOMutil.prepareElements(this.svgElements);
-    DOMutil.cleanupElements(this.svgElements);
-    this.iconsRemoved = true;
-  }
-};
-
-/**
- * Create the HTML DOM for the DataAxis
- */
-DataAxis.prototype.show = function () {
-  this.hidden = false;
-  if (!this.dom.frame.parentNode) {
-    if (this.options.orientation === 'left') {
-      this.body.dom.left.appendChild(this.dom.frame);
-    } else {
-      this.body.dom.right.appendChild(this.dom.frame);
-    }
-  }
-
-  if (!this.dom.lineContainer.parentNode) {
-    this.body.dom.backgroundHorizontal.appendChild(this.dom.lineContainer);
-  }
-  this.dom.lineContainer.style.display = 'block';
-};
-
-/**
- * Create the HTML DOM for the DataAxis
- */
-DataAxis.prototype.hide = function () {
-  this.hidden = true;
-  if (this.dom.frame.parentNode) {
-    this.dom.frame.parentNode.removeChild(this.dom.frame);
-  }
-
-  this.dom.lineContainer.style.display = 'none';
-};
-
-/**
- * Set a range (start and end)
- * @param {number} start
- * @param {number} end
- */
-DataAxis.prototype.setRange = function (start, end) {
-  this.range.start = start;
-  this.range.end = end;
-};
-
-/**
- * Repaint the component
- * @return {boolean} Returns true if the component is resized
- */
-DataAxis.prototype.redraw = function () {
-  var resized = false;
-  var activeGroups = 0;
-
-  // Make sure the line container adheres to the vertical scrolling.
-  this.dom.lineContainer.style.top = this.body.domProps.scrollTop + 'px';
-
-  for (var groupId in this.groups) {
-    if (this.groups.hasOwnProperty(groupId)) {
-      if (this.groups[groupId].visible === true && (this.linegraphOptions.visibility[groupId] === undefined || this.linegraphOptions.visibility[groupId] === true)) {
-        activeGroups++;
-      }
-    }
-  }
-  if (this.amountOfGroups === 0 || activeGroups === 0) {
-    this.hide();
-  } else {
-    this.show();
-    this.height = Number(this.linegraphSVG.style.height.replace("px", ""));
-
-    // svg offsetheight did not work in firefox and explorer...
-    this.dom.lineContainer.style.height = this.height + 'px';
-    this.width = this.options.visible === true ? Number(('' + this.options.width).replace("px", "")) : 0;
-
-    var props = this.props;
-    var frame = this.dom.frame;
-
-    // update classname
-    frame.className = 'timeline-data-axis';
-
-    // calculate character width and height
-    this._calculateCharSize();
-
-    var orientation = this.options.orientation;
-    var showMinorLabels = this.options.showMinorLabels;
-    var showMajorLabels = this.options.showMajorLabels;
-
-    // determine the width and height of the elements for the axis
-    props.minorLabelHeight = showMinorLabels ? props.minorCharHeight : 0;
-    props.majorLabelHeight = showMajorLabels ? props.majorCharHeight : 0;
-
-    props.minorLineWidth = this.body.dom.backgroundHorizontal.offsetWidth - this.lineOffset - this.width + 2 * this.options.minorLinesOffset;
-    props.minorLineHeight = 1;
-    props.majorLineWidth = this.body.dom.backgroundHorizontal.offsetWidth - this.lineOffset - this.width + 2 * this.options.majorLinesOffset;
-    props.majorLineHeight = 1;
-
-    //  take frame offline while updating (is almost twice as fast)
-    if (orientation === 'left') {
-      frame.style.top = '0';
-      frame.style.left = '0';
-      frame.style.bottom = '';
-      frame.style.width = this.width + 'px';
-      frame.style.height = this.height + "px";
-      this.props.width = this.body.domProps.left.width;
-      this.props.height = this.body.domProps.left.height;
-    } else {
-      // right
-      frame.style.top = '';
-      frame.style.bottom = '0';
-      frame.style.left = '0';
-      frame.style.width = this.width + 'px';
-      frame.style.height = this.height + "px";
-      this.props.width = this.body.domProps.right.width;
-      this.props.height = this.body.domProps.right.height;
-    }
-
-    resized = this._redrawLabels();
-    resized = this._isResized() || resized;
-
-    if (this.options.icons === true) {
-      this._redrawGroupIcons();
-    } else {
-      this._cleanupIcons();
-    }
-
-    this._redrawTitle(orientation);
-  }
-  return resized;
-};
-
-/**
- * Repaint major and minor text labels and vertical grid lines
- *
- * @returns {boolean}
- * @private
- */
-DataAxis.prototype._redrawLabels = function () {
-  var _this = this;
-
-  var resized = false;
-  DOMutil.prepareElements(this.DOMelements.lines);
-  DOMutil.prepareElements(this.DOMelements.labels);
-  var orientation = this.options['orientation'];
-  var customRange = this.options[orientation].range != undefined ? this.options[orientation].range : {};
-
-  //Override range with manual options:
-  var autoScaleEnd = true;
-  if (customRange.max != undefined) {
-    this.range.end = customRange.max;
-    autoScaleEnd = false;
-  }
-  var autoScaleStart = true;
-  if (customRange.min != undefined) {
-    this.range.start = customRange.min;
-    autoScaleStart = false;
-  }
-
-  this.scale = new DataScale(this.range.start, this.range.end, autoScaleStart, autoScaleEnd, this.dom.frame.offsetHeight, this.props.majorCharHeight, this.options.alignZeros, this.options[orientation].format);
-
-  if (this.master === false && this.masterAxis != undefined) {
-    this.scale.followScale(this.masterAxis.scale);
-    this.dom.lineContainer.style.display = 'none';
-  } else {
-    this.dom.lineContainer.style.display = 'block';
-  }
-
-  //Is updated in side-effect of _redrawLabel():
-  this.maxLabelSize = 0;
-
-  var lines = this.scale.getLines();
-  lines.forEach(function (line) {
-    var y = line.y;
-    var isMajor = line.major;
-    if (_this.options['showMinorLabels'] && isMajor === false) {
-      _this._redrawLabel(y - 2, line.val, orientation, 'timeline-y-axis timeline-minor', _this.props.minorCharHeight);
-    }
-    if (isMajor) {
-      if (y >= 0) {
-        _this._redrawLabel(y - 2, line.val, orientation, 'timeline-y-axis timeline-major', _this.props.majorCharHeight);
-      }
-    }
-    if (_this.master === true) {
-      if (isMajor) {
-        _this._redrawLine(y, orientation, 'timeline-grid timeline-horizontal timeline-major', _this.options.majorLinesOffset, _this.props.majorLineWidth);
-      } else {
-        _this._redrawLine(y, orientation, 'timeline-grid timeline-horizontal timeline-minor', _this.options.minorLinesOffset, _this.props.minorLineWidth);
-      }
-    }
-  });
-
-  // Note that title is rotated, so we're using the height, not width!
-  var titleWidth = 0;
-  if (this.options[orientation].title !== undefined && this.options[orientation].title.text !== undefined) {
-    titleWidth = this.props.titleCharHeight;
-  }
-  var offset = this.options.icons === true ? Math.max(this.options.iconWidth, titleWidth) + this.options.labelOffsetX + 15 : titleWidth + this.options.labelOffsetX + 15;
-
-  // this will resize the yAxis to accommodate the labels.
-  if (this.maxLabelSize > this.width - offset && this.options.visible === true) {
-    this.width = this.maxLabelSize + offset;
-    this.options.width = this.width + "px";
-    DOMutil.cleanupElements(this.DOMelements.lines);
-    DOMutil.cleanupElements(this.DOMelements.labels);
-    this.redraw();
-    resized = true;
-  }
-  // this will resize the yAxis if it is too big for the labels.
-  else if (this.maxLabelSize < this.width - offset && this.options.visible === true && this.width > this.minWidth) {
-      this.width = Math.max(this.minWidth, this.maxLabelSize + offset);
-      this.options.width = this.width + "px";
-      DOMutil.cleanupElements(this.DOMelements.lines);
-      DOMutil.cleanupElements(this.DOMelements.labels);
-      this.redraw();
-      resized = true;
-    } else {
-      DOMutil.cleanupElements(this.DOMelements.lines);
-      DOMutil.cleanupElements(this.DOMelements.labels);
-      resized = false;
-    }
-
-  return resized;
-};
-
-DataAxis.prototype.convertValue = function (value) {
-  return this.scale.convertValue(value);
-};
-
-DataAxis.prototype.screenToValue = function (x) {
-  return this.scale.screenToValue(x);
-};
-
-/**
- * Create a label for the axis at position x
- *
- * @param {number} y
- * @param {string} text
- * @param {'top'|'right'|'bottom'|'left'} orientation
- * @param {string} className
- * @param {number} characterHeight
- * @private
- */
-DataAxis.prototype._redrawLabel = function (y, text, orientation, className, characterHeight) {
-  // reuse redundant label
-  var label = DOMutil.getDOMElement('div', this.DOMelements.labels, this.dom.frame); //this.dom.redundant.labels.shift();
-  label.className = className;
-  label.innerHTML = text;
-  if (orientation === 'left') {
-    label.style.left = '-' + this.options.labelOffsetX + 'px';
-    label.style.textAlign = "right";
-  } else {
-    label.style.right = '-' + this.options.labelOffsetX + 'px';
-    label.style.textAlign = "left";
-  }
-
-  label.style.top = y - 0.5 * characterHeight + this.options.labelOffsetY + 'px';
-
-  text += '';
-
-  var largestWidth = Math.max(this.props.majorCharWidth, this.props.minorCharWidth);
-  if (this.maxLabelSize < text.length * largestWidth) {
-    this.maxLabelSize = text.length * largestWidth;
-  }
-};
-
-/**
- * Create a minor line for the axis at position y
- * @param {number} y
- * @param {'top'|'right'|'bottom'|'left'} orientation
- * @param {string} className
- * @param {number} offset
- * @param {number} width
- */
-DataAxis.prototype._redrawLine = function (y, orientation, className, offset, width) {
-  if (this.master === true) {
-    var line = DOMutil.getDOMElement('div', this.DOMelements.lines, this.dom.lineContainer); //this.dom.redundant.lines.shift();
-    line.className = className;
-    line.innerHTML = '';
-
-    if (orientation === 'left') {
-      line.style.left = this.width - offset + 'px';
-    } else {
-      line.style.right = this.width - offset + 'px';
-    }
-
-    line.style.width = width + 'px';
-    line.style.top = y + 'px';
-  }
-};
-
-/**
- * Create a title for the axis
- * @private
- * @param {'top'|'right'|'bottom'|'left'} orientation
- */
-DataAxis.prototype._redrawTitle = function (orientation) {
-  DOMutil.prepareElements(this.DOMelements.title);
-
-  // Check if the title is defined for this axes
-  if (this.options[orientation].title !== undefined && this.options[orientation].title.text !== undefined) {
-    var title = DOMutil.getDOMElement('div', this.DOMelements.title, this.dom.frame);
-    title.className = 'timeline-y-axis timeline-title timeline-' + orientation;
-    title.innerHTML = this.options[orientation].title.text;
-
-    // Add style - if provided
-    if (this.options[orientation].title.style !== undefined) {
-      util.addCssText(title, this.options[orientation].title.style);
-    }
-
-    if (orientation === 'left') {
-      title.style.left = this.props.titleCharHeight + 'px';
-    } else {
-      title.style.right = this.props.titleCharHeight + 'px';
-    }
-
-    title.style.width = this.height + 'px';
-  }
-
-  // we need to clean up in case we did not use all elements.
-  DOMutil.cleanupElements(this.DOMelements.title);
-};
-
-/**
- * Determine the size of text on the axis (both major and minor axis).
- * The size is calculated only once and then cached in this.props.
- * @private
- */
-DataAxis.prototype._calculateCharSize = function () {
-  // determine the char width and height on the minor axis
-  if (!('minorCharHeight' in this.props)) {
-    var textMinor = document.createTextNode('0');
-    var measureCharMinor = document.createElement('div');
-    measureCharMinor.className = 'timeline-y-axis timeline-minor timeline-measure';
-    measureCharMinor.appendChild(textMinor);
-    this.dom.frame.appendChild(measureCharMinor);
-
-    this.props.minorCharHeight = measureCharMinor.clientHeight;
-    this.props.minorCharWidth = measureCharMinor.clientWidth;
-
-    this.dom.frame.removeChild(measureCharMinor);
-  }
-
-  if (!('majorCharHeight' in this.props)) {
-    var textMajor = document.createTextNode('0');
-    var measureCharMajor = document.createElement('div');
-    measureCharMajor.className = 'timeline-y-axis timeline-major timeline-measure';
-    measureCharMajor.appendChild(textMajor);
-    this.dom.frame.appendChild(measureCharMajor);
-
-    this.props.majorCharHeight = measureCharMajor.clientHeight;
-    this.props.majorCharWidth = measureCharMajor.clientWidth;
-
-    this.dom.frame.removeChild(measureCharMajor);
-  }
-
-  if (!('titleCharHeight' in this.props)) {
-    var textTitle = document.createTextNode('0');
-    var measureCharTitle = document.createElement('div');
-    measureCharTitle.className = 'timeline-y-axis timeline-title timeline-measure';
-    measureCharTitle.appendChild(textTitle);
-    this.dom.frame.appendChild(measureCharTitle);
-
-    this.props.titleCharHeight = measureCharTitle.clientHeight;
-    this.props.titleCharWidth = measureCharTitle.clientWidth;
-
-    this.dom.frame.removeChild(measureCharTitle);
-  }
-};
-
-module.exports = DataAxis;
-
-/***/ }),
-/* 77 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16531,990 +15851,7 @@ DataScale.prototype.screenToValue = function (pixels) {
 module.exports = DataScale;
 
 /***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof2 = __webpack_require__(1);
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var util = __webpack_require__(0);
-var Bars = __webpack_require__(79);
-var Lines = __webpack_require__(80);
-var Points = __webpack_require__(50);
-
-/**
- * /**
- * @param {object} group            | the object of the group from the dataset
- * @param {string} groupId          | ID of the group
- * @param {object} options          | the default options
- * @param {array} groupsUsingDefaultStyles  | this array has one entree.
- *                                            It is passed as an array so it is passed by reference.
- *                                            It enumerates through the default styles
- * @constructor GraphGroup
- */
-function GraphGroup(group, groupId, options, groupsUsingDefaultStyles) {
-  this.id = groupId;
-  var fields = ['sampling', 'style', 'sort', 'yAxisOrientation', 'barChart', 'drawPoints', 'shaded', 'interpolation', 'zIndex', 'excludeFromStacking', 'excludeFromLegend'];
-  this.options = util.selectiveBridgeObject(fields, options);
-  this.usingDefaultStyle = group.className === undefined;
-  this.groupsUsingDefaultStyles = groupsUsingDefaultStyles;
-  this.zeroPosition = 0;
-  this.update(group);
-  if (this.usingDefaultStyle == true) {
-    this.groupsUsingDefaultStyles[0] += 1;
-  }
-  this.itemsData = [];
-  this.visible = group.visible === undefined ? true : group.visible;
-}
-
-/**
- * this loads a reference to all items in this group into this group.
- * @param {array} items
- */
-GraphGroup.prototype.setItems = function (items) {
-  if (items != null) {
-    this.itemsData = items;
-    if (this.options.sort == true) {
-      util.insertSort(this.itemsData, function (a, b) {
-        return a.x > b.x ? 1 : -1;
-      });
-    }
-  } else {
-    this.itemsData = [];
-  }
-};
-
-GraphGroup.prototype.getItems = function () {
-  return this.itemsData;
-};
-
-/**
- * this is used for barcharts and shading, this way, we only have to calculate it once.
- * @param {number} pos
- */
-GraphGroup.prototype.setZeroPosition = function (pos) {
-  this.zeroPosition = pos;
-};
-
-/**
- * set the options of the graph group over the default options.
- * @param {Object} options
- */
-GraphGroup.prototype.setOptions = function (options) {
-  if (options !== undefined) {
-    var fields = ['sampling', 'style', 'sort', 'yAxisOrientation', 'barChart', 'zIndex', 'excludeFromStacking', 'excludeFromLegend'];
-    util.selectiveDeepExtend(fields, this.options, options);
-
-    // if the group's drawPoints is a function delegate the callback to the onRender property
-    if (typeof options.drawPoints == 'function') {
-      options.drawPoints = {
-        onRender: options.drawPoints
-      };
-    }
-
-    util.mergeOptions(this.options, options, 'interpolation');
-    util.mergeOptions(this.options, options, 'drawPoints');
-    util.mergeOptions(this.options, options, 'shaded');
-
-    if (options.interpolation) {
-      if ((0, _typeof3['default'])(options.interpolation) == 'object') {
-        if (options.interpolation.parametrization) {
-          if (options.interpolation.parametrization == 'uniform') {
-            this.options.interpolation.alpha = 0;
-          } else if (options.interpolation.parametrization == 'chordal') {
-            this.options.interpolation.alpha = 1.0;
-          } else {
-            this.options.interpolation.parametrization = 'centripetal';
-            this.options.interpolation.alpha = 0.5;
-          }
-        }
-      }
-    }
-  }
-};
-
-/**
- * this updates the current group class with the latest group dataset entree, used in _updateGroup in linegraph
- * @param {timeline.Group} group
- */
-GraphGroup.prototype.update = function (group) {
-  this.group = group;
-  this.content = group.content || 'graph';
-  this.className = group.className || this.className || 'timeline-graph-group' + this.groupsUsingDefaultStyles[0] % 10;
-  this.visible = group.visible === undefined ? true : group.visible;
-  this.style = group.style;
-  this.setOptions(group.options);
-};
-
-/**
- * return the legend entree for this group.
- *
- * @param {number} iconWidth
- * @param {number} iconHeight
- * @param {{svg: (*|Element), svgElements: Object, options: Object, groups: Array.<Object>}} framework
- * @param {number} x
- * @param {number} y
- * @returns {{icon: (*|Element), label: (*|string), orientation: *}}
- */
-GraphGroup.prototype.getLegend = function (iconWidth, iconHeight, framework, x, y) {
-  if (framework == undefined || framework == null) {
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', "svg");
-    framework = { svg: svg, svgElements: {}, options: this.options, groups: [this] };
-  }
-  if (x == undefined || x == null) {
-    x = 0;
-  }
-  if (y == undefined || y == null) {
-    y = 0.5 * iconHeight;
-  }
-  switch (this.options.style) {
-    case "line":
-      Lines.drawIcon(this, x, y, iconWidth, iconHeight, framework);
-      break;
-    case "points": //explicit no break
-    case "point":
-      Points.drawIcon(this, x, y, iconWidth, iconHeight, framework);
-      break;
-    case "bar":
-      Bars.drawIcon(this, x, y, iconWidth, iconHeight, framework);
-      break;
-  }
-  return { icon: framework.svg, label: this.content, orientation: this.options.yAxisOrientation };
-};
-
-GraphGroup.prototype.getYRange = function (groupData) {
-  var yMin = groupData[0].y;
-  var yMax = groupData[0].y;
-  for (var j = 0; j < groupData.length; j++) {
-    yMin = yMin > groupData[j].y ? groupData[j].y : yMin;
-    yMax = yMax < groupData[j].y ? groupData[j].y : yMax;
-  }
-  return { min: yMin, max: yMax, yAxisOrientation: this.options.yAxisOrientation };
-};
-
-module.exports = GraphGroup;
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var DOMutil = __webpack_require__(11);
-var Points = __webpack_require__(50);
-
-/**
- *
- * @param {timeline.GraphGroup.id} groupId
- * @param {Object} options   // TODO: Describe options
- * @constructor Bargraph
- */
-function Bargraph(groupId, options) {// eslint-disable-line no-unused-vars
-}
-
-Bargraph.drawIcon = function (group, x, y, iconWidth, iconHeight, framework) {
-  var fillHeight = iconHeight * 0.5;
-  var outline = DOMutil.getSVGElement("rect", framework.svgElements, framework.svg);
-  outline.setAttributeNS(null, "x", x);
-  outline.setAttributeNS(null, "y", y - fillHeight);
-  outline.setAttributeNS(null, "width", iconWidth);
-  outline.setAttributeNS(null, "height", 2 * fillHeight);
-  outline.setAttributeNS(null, "class", "timeline-outline");
-
-  var barWidth = Math.round(0.3 * iconWidth);
-  var originalWidth = group.options.barChart.width;
-  var scale = originalWidth / barWidth;
-  var bar1Height = Math.round(0.4 * iconHeight);
-  var bar2Height = Math.round(0.75 * iconHeight);
-
-  var offset = Math.round((iconWidth - 2 * barWidth) / 3);
-
-  DOMutil.drawBar(x + 0.5 * barWidth + offset, y + fillHeight - bar1Height - 1, barWidth, bar1Height, group.className + ' timeline-bar', framework.svgElements, framework.svg, group.style);
-  DOMutil.drawBar(x + 1.5 * barWidth + offset + 2, y + fillHeight - bar2Height - 1, barWidth, bar2Height, group.className + ' timeline-bar', framework.svgElements, framework.svg, group.style);
-
-  if (group.options.drawPoints.enabled == true) {
-    var groupTemplate = {
-      style: group.options.drawPoints.style,
-      styles: group.options.drawPoints.styles,
-      size: group.options.drawPoints.size / scale,
-      className: group.className
-    };
-    DOMutil.drawPoint(x + 0.5 * barWidth + offset, y + fillHeight - bar1Height - 1, groupTemplate, framework.svgElements, framework.svg);
-    DOMutil.drawPoint(x + 1.5 * barWidth + offset + 2, y + fillHeight - bar2Height - 1, groupTemplate, framework.svgElements, framework.svg);
-  }
-};
-
-/**
- * draw a bar graph
- *
- * @param {Array.<timeline.GraphGroup.id>} groupIds
- * @param {Object} processedGroupData
- * @param {{svg: Object, svgElements: Array.<Object>, options: Object, groups: Array.<timeline.Group>}} framework
- */
-Bargraph.draw = function (groupIds, processedGroupData, framework) {
-  var combinedData = [];
-  var intersections = {};
-  var coreDistance;
-  var key, drawData;
-  var group;
-  var i, j;
-  var barPoints = 0;
-
-  // combine all barchart data
-  for (i = 0; i < groupIds.length; i++) {
-    group = framework.groups[groupIds[i]];
-    if (group.options.style === 'bar') {
-      if (group.visible === true && (framework.options.groups.visibility[groupIds[i]] === undefined || framework.options.groups.visibility[groupIds[i]] === true)) {
-        for (j = 0; j < processedGroupData[groupIds[i]].length; j++) {
-          combinedData.push({
-            screen_x: processedGroupData[groupIds[i]][j].screen_x,
-            screen_end: processedGroupData[groupIds[i]][j].screen_end,
-            screen_y: processedGroupData[groupIds[i]][j].screen_y,
-            x: processedGroupData[groupIds[i]][j].x,
-            end: processedGroupData[groupIds[i]][j].end,
-            y: processedGroupData[groupIds[i]][j].y,
-            groupId: groupIds[i],
-            label: processedGroupData[groupIds[i]][j].label
-          });
-          barPoints += 1;
-        }
-      }
-    }
-  }
-
-  if (barPoints === 0) {
-    return;
-  }
-
-  // sort by time and by group
-  combinedData.sort(function (a, b) {
-    if (a.screen_x === b.screen_x) {
-      return a.groupId < b.groupId ? -1 : 1;
-    } else {
-      return a.screen_x - b.screen_x;
-    }
-  });
-
-  // get intersections
-  Bargraph._getDataIntersections(intersections, combinedData);
-
-  // plot barchart
-  for (i = 0; i < combinedData.length; i++) {
-    group = framework.groups[combinedData[i].groupId];
-    var minWidth = group.options.barChart.minWidth != undefined ? group.options.barChart.minWidth : 0.1 * group.options.barChart.width;
-
-    key = combinedData[i].screen_x;
-    var heightOffset = 0;
-    if (intersections[key] === undefined) {
-      if (i + 1 < combinedData.length) {
-        coreDistance = Math.abs(combinedData[i + 1].screen_x - key);
-      }
-      drawData = Bargraph._getSafeDrawData(coreDistance, group, minWidth);
-    } else {
-      var nextKey = i + (intersections[key].amount - intersections[key].resolved);
-      if (nextKey < combinedData.length) {
-        coreDistance = Math.abs(combinedData[nextKey].screen_x - key);
-      }
-      drawData = Bargraph._getSafeDrawData(coreDistance, group, minWidth);
-      intersections[key].resolved += 1;
-
-      if (group.options.stack === true && group.options.excludeFromStacking !== true) {
-        if (combinedData[i].screen_y < group.zeroPosition) {
-          heightOffset = intersections[key].accumulatedNegative;
-          intersections[key].accumulatedNegative += group.zeroPosition - combinedData[i].screen_y;
-        } else {
-          heightOffset = intersections[key].accumulatedPositive;
-          intersections[key].accumulatedPositive += group.zeroPosition - combinedData[i].screen_y;
-        }
-      } else if (group.options.barChart.sideBySide === true) {
-        drawData.width = drawData.width / intersections[key].amount;
-        drawData.offset += intersections[key].resolved * drawData.width - 0.5 * drawData.width * (intersections[key].amount + 1);
-      }
-    }
-
-    var dataWidth = drawData.width;
-    var start = combinedData[i].screen_x;
-
-    // are we drawing explicit boxes? (we supplied an end value)
-    if (combinedData[i].screen_end != undefined) {
-      dataWidth = combinedData[i].screen_end - combinedData[i].screen_x;
-      start += dataWidth * 0.5;
-    } else {
-      start += drawData.offset;
-    }
-
-    DOMutil.drawBar(start, combinedData[i].screen_y - heightOffset, dataWidth, group.zeroPosition - combinedData[i].screen_y, group.className + ' timeline-bar', framework.svgElements, framework.svg, group.style);
-
-    // draw points
-    if (group.options.drawPoints.enabled === true) {
-      var pointData = {
-        screen_x: combinedData[i].screen_x,
-        screen_y: combinedData[i].screen_y - heightOffset,
-        x: combinedData[i].x,
-        y: combinedData[i].y,
-        groupId: combinedData[i].groupId,
-        label: combinedData[i].label
-      };
-      Points.draw([pointData], group, framework, drawData.offset);
-      //DOMutil.drawPoint(combinedData[i].x + drawData.offset, combinedData[i].y, group, framework.svgElements, framework.svg);
-    }
-  }
-};
-
-/**
- * Fill the intersections object with counters of how many datapoints share the same x coordinates
- * @param {Object} intersections
- * @param {Array.<Object>} combinedData
- * @private
- */
-Bargraph._getDataIntersections = function (intersections, combinedData) {
-  // get intersections
-  var coreDistance;
-  for (var i = 0; i < combinedData.length; i++) {
-    if (i + 1 < combinedData.length) {
-      coreDistance = Math.abs(combinedData[i + 1].screen_x - combinedData[i].screen_x);
-    }
-    if (i > 0) {
-      coreDistance = Math.min(coreDistance, Math.abs(combinedData[i - 1].screen_x - combinedData[i].screen_x));
-    }
-    if (coreDistance === 0) {
-      if (intersections[combinedData[i].screen_x] === undefined) {
-        intersections[combinedData[i].screen_x] = {
-          amount: 0,
-          resolved: 0,
-          accumulatedPositive: 0,
-          accumulatedNegative: 0
-        };
-      }
-      intersections[combinedData[i].screen_x].amount += 1;
-    }
-  }
-};
-
-/**
- * Get the width and offset for bargraphs based on the coredistance between datapoints
- *
- * @param {number} coreDistance
- * @param {timeline.Group} group
- * @param {number} minWidth
- * @returns {{width: number, offset: number}}
- * @private
- */
-Bargraph._getSafeDrawData = function (coreDistance, group, minWidth) {
-  var width, offset;
-  if (coreDistance < group.options.barChart.width && coreDistance > 0) {
-    width = coreDistance < minWidth ? minWidth : coreDistance;
-
-    offset = 0; // recalculate offset with the new width;
-    if (group.options.barChart.align === 'left') {
-      offset -= 0.5 * coreDistance;
-    } else if (group.options.barChart.align === 'right') {
-      offset += 0.5 * coreDistance;
-    }
-  } else {
-    // default settings
-    width = group.options.barChart.width;
-    offset = 0;
-    if (group.options.barChart.align === 'left') {
-      offset -= 0.5 * group.options.barChart.width;
-    } else if (group.options.barChart.align === 'right') {
-      offset += 0.5 * group.options.barChart.width;
-    }
-  }
-
-  return { width: width, offset: offset };
-};
-
-Bargraph.getStackedYRange = function (combinedData, groupRanges, groupIds, groupLabel, orientation) {
-  if (combinedData.length > 0) {
-    // sort by time and by group
-    combinedData.sort(function (a, b) {
-      if (a.screen_x === b.screen_x) {
-        return a.groupId < b.groupId ? -1 : 1;
-      } else {
-        return a.screen_x - b.screen_x;
-      }
-    });
-    var intersections = {};
-
-    Bargraph._getDataIntersections(intersections, combinedData);
-    groupRanges[groupLabel] = Bargraph._getStackedYRange(intersections, combinedData);
-    groupRanges[groupLabel].yAxisOrientation = orientation;
-    groupIds.push(groupLabel);
-  }
-};
-
-Bargraph._getStackedYRange = function (intersections, combinedData) {
-  var key;
-  var yMin = combinedData[0].screen_y;
-  var yMax = combinedData[0].screen_y;
-  for (var i = 0; i < combinedData.length; i++) {
-    key = combinedData[i].screen_x;
-    if (intersections[key] === undefined) {
-      yMin = yMin > combinedData[i].screen_y ? combinedData[i].screen_y : yMin;
-      yMax = yMax < combinedData[i].screen_y ? combinedData[i].screen_y : yMax;
-    } else {
-      if (combinedData[i].screen_y < 0) {
-        intersections[key].accumulatedNegative += combinedData[i].screen_y;
-      } else {
-        intersections[key].accumulatedPositive += combinedData[i].screen_y;
-      }
-    }
-  }
-  for (var xpos in intersections) {
-    if (intersections.hasOwnProperty(xpos)) {
-      yMin = yMin > intersections[xpos].accumulatedNegative ? intersections[xpos].accumulatedNegative : yMin;
-      yMin = yMin > intersections[xpos].accumulatedPositive ? intersections[xpos].accumulatedPositive : yMin;
-      yMax = yMax < intersections[xpos].accumulatedNegative ? intersections[xpos].accumulatedNegative : yMax;
-      yMax = yMax < intersections[xpos].accumulatedPositive ? intersections[xpos].accumulatedPositive : yMax;
-    }
-  }
-
-  return { min: yMin, max: yMax };
-};
-
-module.exports = Bargraph;
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var DOMutil = __webpack_require__(11);
-
-/**
- *
- * @param {timeline.GraphGroup.id} groupId
- * @param {Object} options   // TODO: Describe options
- * @constructor Line
- */
-function Line(groupId, options) {// eslint-disable-line no-unused-vars
-}
-
-Line.calcPath = function (dataset, group) {
-    if (dataset != null) {
-        if (dataset.length > 0) {
-            var d = [];
-
-            // construct path from dataset
-            if (group.options.interpolation.enabled == true) {
-                d = Line._catmullRom(dataset, group);
-            } else {
-                d = Line._linear(dataset);
-            }
-            return d;
-        }
-    }
-};
-
-Line.drawIcon = function (group, x, y, iconWidth, iconHeight, framework) {
-    var fillHeight = iconHeight * 0.5;
-    var path, fillPath;
-
-    var outline = DOMutil.getSVGElement("rect", framework.svgElements, framework.svg);
-    outline.setAttributeNS(null, "x", x);
-    outline.setAttributeNS(null, "y", y - fillHeight);
-    outline.setAttributeNS(null, "width", iconWidth);
-    outline.setAttributeNS(null, "height", 2 * fillHeight);
-    outline.setAttributeNS(null, "class", "timeline-outline");
-
-    path = DOMutil.getSVGElement("path", framework.svgElements, framework.svg);
-    path.setAttributeNS(null, "class", group.className);
-    if (group.style !== undefined) {
-        path.setAttributeNS(null, "style", group.style);
-    }
-
-    path.setAttributeNS(null, "d", "M" + x + "," + y + " L" + (x + iconWidth) + "," + y + "");
-    if (group.options.shaded.enabled == true) {
-        fillPath = DOMutil.getSVGElement("path", framework.svgElements, framework.svg);
-        if (group.options.shaded.orientation == 'top') {
-            fillPath.setAttributeNS(null, "d", "M" + x + ", " + (y - fillHeight) + "L" + x + "," + y + " L" + (x + iconWidth) + "," + y + " L" + (x + iconWidth) + "," + (y - fillHeight));
-        } else {
-            fillPath.setAttributeNS(null, "d", "M" + x + "," + y + " " + "L" + x + "," + (y + fillHeight) + " " + "L" + (x + iconWidth) + "," + (y + fillHeight) + "L" + (x + iconWidth) + "," + y);
-        }
-        fillPath.setAttributeNS(null, "class", group.className + " timeline-icon-fill");
-        if (group.options.shaded.style !== undefined && group.options.shaded.style !== "") {
-            fillPath.setAttributeNS(null, "style", group.options.shaded.style);
-        }
-    }
-
-    if (group.options.drawPoints.enabled == true) {
-        var groupTemplate = {
-            style: group.options.drawPoints.style,
-            styles: group.options.drawPoints.styles,
-            size: group.options.drawPoints.size,
-            className: group.className
-        };
-        DOMutil.drawPoint(x + 0.5 * iconWidth, y, groupTemplate, framework.svgElements, framework.svg);
-    }
-};
-
-Line.drawShading = function (pathArray, group, subPathArray, framework) {
-    // append shading to the path
-    if (group.options.shaded.enabled == true) {
-        var svgHeight = Number(framework.svg.style.height.replace('px', ''));
-        var fillPath = DOMutil.getSVGElement('path', framework.svgElements, framework.svg);
-        var type = "L";
-        if (group.options.interpolation.enabled == true) {
-            type = "C";
-        }
-        var dFill;
-        var zero = 0;
-        if (group.options.shaded.orientation == 'top') {
-            zero = 0;
-        } else if (group.options.shaded.orientation == 'bottom') {
-            zero = svgHeight;
-        } else {
-            zero = Math.min(Math.max(0, group.zeroPosition), svgHeight);
-        }
-        if (group.options.shaded.orientation == 'group' && subPathArray != null && subPathArray != undefined) {
-            dFill = 'M' + pathArray[0][0] + "," + pathArray[0][1] + " " + this.serializePath(pathArray, type, false) + ' L' + subPathArray[subPathArray.length - 1][0] + "," + subPathArray[subPathArray.length - 1][1] + " " + this.serializePath(subPathArray, type, true) + subPathArray[0][0] + "," + subPathArray[0][1] + " Z";
-        } else {
-            dFill = 'M' + pathArray[0][0] + "," + pathArray[0][1] + " " + this.serializePath(pathArray, type, false) + ' V' + zero + ' H' + pathArray[0][0] + " Z";
-        }
-
-        fillPath.setAttributeNS(null, 'class', group.className + ' timeline-fill');
-        if (group.options.shaded.style !== undefined) {
-            fillPath.setAttributeNS(null, 'style', group.options.shaded.style);
-        }
-        fillPath.setAttributeNS(null, 'd', dFill);
-    }
-};
-
-/**
- * draw a line graph
- *
- * @param {Array.<Object>} pathArray
- * @param {timeline.Group} group
- * @param {{svg: Object, svgElements: Array.<Object>, options: Object, groups: Array.<timeline.Group>}} framework
- */
-Line.draw = function (pathArray, group, framework) {
-    if (pathArray != null && pathArray != undefined) {
-        var path = DOMutil.getSVGElement('path', framework.svgElements, framework.svg);
-        path.setAttributeNS(null, "class", group.className);
-        if (group.style !== undefined) {
-            path.setAttributeNS(null, "style", group.style);
-        }
-
-        var type = "L";
-        if (group.options.interpolation.enabled == true) {
-            type = "C";
-        }
-        // copy properties to path for drawing.
-        path.setAttributeNS(null, 'd', 'M' + pathArray[0][0] + "," + pathArray[0][1] + " " + this.serializePath(pathArray, type, false));
-    }
-};
-
-Line.serializePath = function (pathArray, type, inverse) {
-    if (pathArray.length < 2) {
-        //Too little data to create a path.
-        return "";
-    }
-    var d = type;
-    var i;
-    if (inverse) {
-        for (i = pathArray.length - 2; i > 0; i--) {
-            d += pathArray[i][0] + "," + pathArray[i][1] + " ";
-        }
-    } else {
-        for (i = 1; i < pathArray.length; i++) {
-            d += pathArray[i][0] + "," + pathArray[i][1] + " ";
-        }
-    }
-    return d;
-};
-
-/**
- * This uses an uniform parametrization of the interpolation algorithm:
- * 'On the Parameterization of Catmull-Rom Curves' by Cem Yuksel et al.
- * @param {Array.<Object>} data
- * @returns {string}
- * @private
- */
-Line._catmullRomUniform = function (data) {
-    // catmull rom
-    var p0, p1, p2, p3, bp1, bp2;
-    var d = [];
-    d.push([Math.round(data[0].screen_x), Math.round(data[0].screen_y)]);
-    var normalization = 1 / 6;
-    var length = data.length;
-    for (var i = 0; i < length - 1; i++) {
-
-        p0 = i == 0 ? data[0] : data[i - 1];
-        p1 = data[i];
-        p2 = data[i + 1];
-        p3 = i + 2 < length ? data[i + 2] : p2;
-
-        // Catmull-Rom to Cubic Bezier conversion matrix
-        //    0       1       0       0
-        //  -1/6      1      1/6      0
-        //    0      1/6      1     -1/6
-        //    0       0       1       0
-
-        //    bp0 = { x: p1.x,                               y: p1.y };
-        bp1 = {
-            screen_x: (-p0.screen_x + 6 * p1.screen_x + p2.screen_x) * normalization,
-            screen_y: (-p0.screen_y + 6 * p1.screen_y + p2.screen_y) * normalization
-        };
-        bp2 = {
-            screen_x: (p1.screen_x + 6 * p2.screen_x - p3.screen_x) * normalization,
-            screen_y: (p1.screen_y + 6 * p2.screen_y - p3.screen_y) * normalization
-        };
-        //    bp0 = { x: p2.x,                               y: p2.y };
-
-        d.push([bp1.screen_x, bp1.screen_y]);
-        d.push([bp2.screen_x, bp2.screen_y]);
-        d.push([p2.screen_x, p2.screen_y]);
-    }
-
-    return d;
-};
-
-/**
- * This uses either the chordal or centripetal parameterization of the catmull-rom algorithm.
- * By default, the centripetal parameterization is used because this gives the nicest results.
- * These parameterizations are relatively heavy because the distance between 4 points have to be calculated.
- *
- * One optimization can be used to reuse distances since this is a sliding window approach.
- * @param {Array.<Object>} data
- * @param {timeline.GraphGroup} group
- * @returns {string}
- * @private
- */
-Line._catmullRom = function (data, group) {
-    var alpha = group.options.interpolation.alpha;
-    if (alpha == 0 || alpha === undefined) {
-        return this._catmullRomUniform(data);
-    } else {
-        var p0, p1, p2, p3, bp1, bp2, d1, d2, d3, A, B, N, M;
-        var d3powA, d2powA, d3pow2A, d2pow2A, d1pow2A, d1powA;
-        var d = [];
-        d.push([Math.round(data[0].screen_x), Math.round(data[0].screen_y)]);
-        var length = data.length;
-        for (var i = 0; i < length - 1; i++) {
-
-            p0 = i == 0 ? data[0] : data[i - 1];
-            p1 = data[i];
-            p2 = data[i + 1];
-            p3 = i + 2 < length ? data[i + 2] : p2;
-
-            d1 = Math.sqrt(Math.pow(p0.screen_x - p1.screen_x, 2) + Math.pow(p0.screen_y - p1.screen_y, 2));
-            d2 = Math.sqrt(Math.pow(p1.screen_x - p2.screen_x, 2) + Math.pow(p1.screen_y - p2.screen_y, 2));
-            d3 = Math.sqrt(Math.pow(p2.screen_x - p3.screen_x, 2) + Math.pow(p2.screen_y - p3.screen_y, 2));
-
-            // Catmull-Rom to Cubic Bezier conversion matrix
-
-            // A = 2d1^2a + 3d1^a * d2^a + d3^2a
-            // B = 2d3^2a + 3d3^a * d2^a + d2^2a
-
-            // [   0             1            0          0          ]
-            // [   -d2^2a /N     A/N          d1^2a /N   0          ]
-            // [   0             d3^2a /M     B/M        -d2^2a /M  ]
-            // [   0             0            1          0          ]
-
-            d3powA = Math.pow(d3, alpha);
-            d3pow2A = Math.pow(d3, 2 * alpha);
-            d2powA = Math.pow(d2, alpha);
-            d2pow2A = Math.pow(d2, 2 * alpha);
-            d1powA = Math.pow(d1, alpha);
-            d1pow2A = Math.pow(d1, 2 * alpha);
-
-            A = 2 * d1pow2A + 3 * d1powA * d2powA + d2pow2A;
-            B = 2 * d3pow2A + 3 * d3powA * d2powA + d2pow2A;
-            N = 3 * d1powA * (d1powA + d2powA);
-            if (N > 0) {
-                N = 1 / N;
-            }
-            M = 3 * d3powA * (d3powA + d2powA);
-            if (M > 0) {
-                M = 1 / M;
-            }
-
-            bp1 = {
-                screen_x: (-d2pow2A * p0.screen_x + A * p1.screen_x + d1pow2A * p2.screen_x) * N,
-                screen_y: (-d2pow2A * p0.screen_y + A * p1.screen_y + d1pow2A * p2.screen_y) * N
-            };
-
-            bp2 = {
-                screen_x: (d3pow2A * p1.screen_x + B * p2.screen_x - d2pow2A * p3.screen_x) * M,
-                screen_y: (d3pow2A * p1.screen_y + B * p2.screen_y - d2pow2A * p3.screen_y) * M
-            };
-
-            if (bp1.screen_x == 0 && bp1.screen_y == 0) {
-                bp1 = p1;
-            }
-            if (bp2.screen_x == 0 && bp2.screen_y == 0) {
-                bp2 = p2;
-            }
-            d.push([bp1.screen_x, bp1.screen_y]);
-            d.push([bp2.screen_x, bp2.screen_y]);
-            d.push([p2.screen_x, p2.screen_y]);
-        }
-
-        return d;
-    }
-};
-
-/**
- * this generates the SVG path for a linear drawing between datapoints.
- * @param {Array.<Object>} data
- * @returns {string}
- * @private
- */
-Line._linear = function (data) {
-    // linear
-    var d = [];
-    for (var i = 0; i < data.length; i++) {
-        d.push([data[i].screen_x, data[i].screen_y]);
-    }
-    return d;
-};
-
-module.exports = Line;
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _keys = __webpack_require__(3);
-
-var _keys2 = _interopRequireDefault(_keys);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var util = __webpack_require__(0);
-var DOMutil = __webpack_require__(11);
-var Component = __webpack_require__(5);
-
-/**
- * Legend for Graph2d
- *
- * @param {timeline.Graph2d.body} body
- * @param {timeline.Graph2d.options} options
- * @param {number} side
- * @param {timeline.LineGraph.options} linegraphOptions
- * @constructor Legend
- * @extends Component
- */
-function Legend(body, options, side, linegraphOptions) {
-  this.body = body;
-  this.defaultOptions = {
-    enabled: false,
-    icons: true,
-    iconSize: 20,
-    iconSpacing: 6,
-    left: {
-      visible: true,
-      position: 'top-left' // top/bottom - left,center,right
-    },
-    right: {
-      visible: true,
-      position: 'top-right' // top/bottom - left,center,right
-    }
-  };
-
-  this.side = side;
-  this.options = util.extend({}, this.defaultOptions);
-  this.linegraphOptions = linegraphOptions;
-
-  this.svgElements = {};
-  this.dom = {};
-  this.groups = {};
-  this.amountOfGroups = 0;
-  this._create();
-  this.framework = { svg: this.svg, svgElements: this.svgElements, options: this.options, groups: this.groups };
-
-  this.setOptions(options);
-}
-
-Legend.prototype = new Component();
-
-Legend.prototype.clear = function () {
-  this.groups = {};
-  this.amountOfGroups = 0;
-};
-
-Legend.prototype.addGroup = function (label, graphOptions) {
-
-  // Include a group only if the group option 'excludeFromLegend: false' is not set.
-  if (graphOptions.options.excludeFromLegend != true) {
-    if (!this.groups.hasOwnProperty(label)) {
-      this.groups[label] = graphOptions;
-    }
-    this.amountOfGroups += 1;
-  }
-};
-
-Legend.prototype.updateGroup = function (label, graphOptions) {
-  this.groups[label] = graphOptions;
-};
-
-Legend.prototype.removeGroup = function (label) {
-  if (this.groups.hasOwnProperty(label)) {
-    delete this.groups[label];
-    this.amountOfGroups -= 1;
-  }
-};
-
-Legend.prototype._create = function () {
-  this.dom.frame = document.createElement('div');
-  this.dom.frame.className = 'timeline-legend';
-  this.dom.frame.style.position = "absolute";
-  this.dom.frame.style.top = "10px";
-  this.dom.frame.style.display = "block";
-
-  this.dom.textArea = document.createElement('div');
-  this.dom.textArea.className = 'timeline-legend-text';
-  this.dom.textArea.style.position = "relative";
-  this.dom.textArea.style.top = "0px";
-
-  this.svg = document.createElementNS('http://www.w3.org/2000/svg', "svg");
-  this.svg.style.position = 'absolute';
-  this.svg.style.top = 0 + 'px';
-  this.svg.style.width = this.options.iconSize + 5 + 'px';
-  this.svg.style.height = '100%';
-
-  this.dom.frame.appendChild(this.svg);
-  this.dom.frame.appendChild(this.dom.textArea);
-};
-
-/**
- * Hide the component from the DOM
- */
-Legend.prototype.hide = function () {
-  // remove the frame containing the items
-  if (this.dom.frame.parentNode) {
-    this.dom.frame.parentNode.removeChild(this.dom.frame);
-  }
-};
-
-/**
- * Show the component in the DOM (when not already visible).
- */
-Legend.prototype.show = function () {
-  // show frame containing the items
-  if (!this.dom.frame.parentNode) {
-    this.body.dom.center.appendChild(this.dom.frame);
-  }
-};
-
-Legend.prototype.setOptions = function (options) {
-  var fields = ['enabled', 'orientation', 'icons', 'left', 'right'];
-  util.selectiveDeepExtend(fields, this.options, options);
-};
-
-Legend.prototype.redraw = function () {
-  var activeGroups = 0;
-  var groupArray = (0, _keys2['default'])(this.groups);
-  groupArray.sort(function (a, b) {
-    return a < b ? -1 : 1;
-  });
-
-  for (var i = 0; i < groupArray.length; i++) {
-    var groupId = groupArray[i];
-    if (this.groups[groupId].visible == true && (this.linegraphOptions.visibility[groupId] === undefined || this.linegraphOptions.visibility[groupId] == true)) {
-      activeGroups++;
-    }
-  }
-
-  if (this.options[this.side].visible == false || this.amountOfGroups == 0 || this.options.enabled == false || activeGroups == 0) {
-    this.hide();
-  } else {
-    this.show();
-    if (this.options[this.side].position == 'top-left' || this.options[this.side].position == 'bottom-left') {
-      this.dom.frame.style.left = '4px';
-      this.dom.frame.style.textAlign = "left";
-      this.dom.textArea.style.textAlign = "left";
-      this.dom.textArea.style.left = this.options.iconSize + 15 + 'px';
-      this.dom.textArea.style.right = '';
-      this.svg.style.left = 0 + 'px';
-      this.svg.style.right = '';
-    } else {
-      this.dom.frame.style.right = '4px';
-      this.dom.frame.style.textAlign = "right";
-      this.dom.textArea.style.textAlign = "right";
-      this.dom.textArea.style.right = this.options.iconSize + 15 + 'px';
-      this.dom.textArea.style.left = '';
-      this.svg.style.right = 0 + 'px';
-      this.svg.style.left = '';
-    }
-
-    if (this.options[this.side].position == 'top-left' || this.options[this.side].position == 'top-right') {
-      this.dom.frame.style.top = 4 - Number(this.body.dom.center.style.top.replace("px", "")) + 'px';
-      this.dom.frame.style.bottom = '';
-    } else {
-      var scrollableHeight = this.body.domProps.center.height - this.body.domProps.centerContainer.height;
-      this.dom.frame.style.bottom = 4 + scrollableHeight + Number(this.body.dom.center.style.top.replace("px", "")) + 'px';
-      this.dom.frame.style.top = '';
-    }
-
-    if (this.options.icons == false) {
-      this.dom.frame.style.width = this.dom.textArea.offsetWidth + 10 + 'px';
-      this.dom.textArea.style.right = '';
-      this.dom.textArea.style.left = '';
-      this.svg.style.width = '0px';
-    } else {
-      this.dom.frame.style.width = this.options.iconSize + 15 + this.dom.textArea.offsetWidth + 10 + 'px';
-      this.drawLegendIcons();
-    }
-
-    var content = '';
-    for (i = 0; i < groupArray.length; i++) {
-      groupId = groupArray[i];
-      if (this.groups[groupId].visible == true && (this.linegraphOptions.visibility[groupId] === undefined || this.linegraphOptions.visibility[groupId] == true)) {
-        content += this.groups[groupId].content + '<br />';
-      }
-    }
-    this.dom.textArea.innerHTML = content;
-    this.dom.textArea.style.lineHeight = 0.75 * this.options.iconSize + this.options.iconSpacing + 'px';
-  }
-};
-
-Legend.prototype.drawLegendIcons = function () {
-  if (this.dom.frame.parentNode) {
-    var groupArray = (0, _keys2['default'])(this.groups);
-    groupArray.sort(function (a, b) {
-      return a < b ? -1 : 1;
-    });
-
-    // this resets the elements so the order is maintained
-    DOMutil.resetElements(this.svgElements);
-
-    var padding = window.getComputedStyle(this.dom.frame).paddingTop;
-    var iconOffset = Number(padding.replace('px', ''));
-    var x = iconOffset;
-    var iconWidth = this.options.iconSize;
-    var iconHeight = 0.75 * this.options.iconSize;
-    var y = iconOffset + 0.5 * iconHeight + 3;
-
-    this.svg.style.width = iconWidth + 5 + iconOffset + 'px';
-
-    for (var i = 0; i < groupArray.length; i++) {
-      var groupId = groupArray[i];
-      if (this.groups[groupId].visible == true && (this.linegraphOptions.visibility[groupId] === undefined || this.linegraphOptions.visibility[groupId] == true)) {
-        this.groups[groupId].getLegend(iconWidth, iconHeight, this.framework, x, y);
-        y += iconHeight + this.options.iconSpacing;
-      }
-    }
-  }
-};
-
-module.exports = Legend;
-
-/***/ }),
-/* 82 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17522,82 +15859,79 @@ module.exports = Legend;
 
 // utils
 exports.util = __webpack_require__(0);
-exports.DOMutil = __webpack_require__(11);
+exports.DOMutil = __webpack_require__(59);
 
 // data
-exports.DataSet = __webpack_require__(20);
-exports.DataView = __webpack_require__(27);
-exports.Queue = __webpack_require__(61);
+exports.DataSet = __webpack_require__(25);
+exports.DataView = __webpack_require__(42);
+exports.Queue = __webpack_require__(60);
 
 // Timeline
-exports.Timeline = __webpack_require__(126);
+exports.Timeline = __webpack_require__(120);
 exports.timeline = {
-  Core: __webpack_require__(63),
-  DateUtil: __webpack_require__(21),
-  Range: __webpack_require__(62),
-  stack: __webpack_require__(70),
-  TimeStep: __webpack_require__(45),
+  Core: __webpack_require__(62),
+  DateUtil: __webpack_require__(19),
+  Range: __webpack_require__(61),
+  stack: __webpack_require__(69),
+  TimeStep: __webpack_require__(44),
 
   components: {
     items: {
-      Item: __webpack_require__(22),
-      BackgroundItem: __webpack_require__(73),
-      BoxItem: __webpack_require__(71),
-      PointItem: __webpack_require__(72),
-      RangeItem: __webpack_require__(49)
+      Item: __webpack_require__(20),
+      BackgroundItem: __webpack_require__(72),
+      BoxItem: __webpack_require__(70),
+      PointItem: __webpack_require__(71),
+      RangeItem: __webpack_require__(48)
     },
 
-    BackgroundGroup: __webpack_require__(48),
-    Component: __webpack_require__(5),
-    CurrentTime: __webpack_require__(68),
-    CustomTime: __webpack_require__(46),
-    DataAxis: __webpack_require__(76),
-    DataScale: __webpack_require__(77),
-    GraphGroup: __webpack_require__(78),
-    Group: __webpack_require__(47),
-    ItemSet: __webpack_require__(69),
-    Legend: __webpack_require__(81),
-    LineGraph: __webpack_require__(136),
-    TimeAxis: __webpack_require__(44)
+    BackgroundGroup: __webpack_require__(47),
+    Component: __webpack_require__(10),
+    CurrentTime: __webpack_require__(67),
+    CustomTime: __webpack_require__(45),
+    DataAxis: __webpack_require__(130),
+    DataScale: __webpack_require__(75),
+    Group: __webpack_require__(46),
+    ItemSet: __webpack_require__(68),
+    TimeAxis: __webpack_require__(43)
   }
 };
 
 // bundled external libraries
-exports.moment = __webpack_require__(4);
-exports.Hammer = __webpack_require__(12);
-exports.keycharm = __webpack_require__(66);
+exports.moment = __webpack_require__(3);
+exports.Hammer = __webpack_require__(11);
+exports.keycharm = __webpack_require__(65);
 
 /***/ }),
-/* 83 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(84), __esModule: true };
+module.exports = { "default": __webpack_require__(78), __esModule: true };
 
 /***/ }),
-/* 84 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(51);
-__webpack_require__(58);
-module.exports = __webpack_require__(99);
+__webpack_require__(49);
+__webpack_require__(56);
+module.exports = __webpack_require__(93);
 
 
 /***/ }),
-/* 85 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(86);
-var step = __webpack_require__(87);
-var Iterators = __webpack_require__(23);
-var toIObject = __webpack_require__(13);
+var addToUnscopables = __webpack_require__(80);
+var step = __webpack_require__(81);
+var Iterators = __webpack_require__(21);
+var toIObject = __webpack_require__(12);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
 // 22.1.3.29 Array.prototype.values()
 // 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(52)(Array, 'Array', function (iterated, kind) {
+module.exports = __webpack_require__(50)(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); // target
   this._i = 0;                   // next index
   this._k = kind;                // kind
@@ -17624,14 +15958,14 @@ addToUnscopables('entries');
 
 
 /***/ }),
-/* 86 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports = function () { /* empty */ };
 
 
 /***/ }),
-/* 87 */
+/* 81 */
 /***/ (function(module, exports) {
 
 module.exports = function (done, value) {
@@ -17640,11 +15974,11 @@ module.exports = function (done, value) {
 
 
 /***/ }),
-/* 88 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(30);
+var cof = __webpack_require__(28);
 // eslint-disable-next-line no-prototype-builtins
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
@@ -17652,11 +15986,11 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 
 /***/ }),
-/* 89 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // optional / simple context binding
-var aFunction = __webpack_require__(90);
+var aFunction = __webpack_require__(84);
 module.exports = function (fn, that, length) {
   aFunction(fn);
   if (that === undefined) return fn;
@@ -17678,7 +16012,7 @@ module.exports = function (fn, that, length) {
 
 
 /***/ }),
-/* 90 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
@@ -17688,18 +16022,18 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 91 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var create = __webpack_require__(34);
-var descriptor = __webpack_require__(24);
-var setToStringTag = __webpack_require__(39);
+var create = __webpack_require__(32);
+var descriptor = __webpack_require__(22);
+var setToStringTag = __webpack_require__(37);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(14)(IteratorPrototype, __webpack_require__(7)('iterator'), function () { return this; });
+__webpack_require__(13)(IteratorPrototype, __webpack_require__(5)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -17708,14 +16042,14 @@ module.exports = function (Constructor, NAME, next) {
 
 
 /***/ }),
-/* 92 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(8);
-var anObject = __webpack_require__(17);
-var getKeys = __webpack_require__(25);
+var dP = __webpack_require__(7);
+var anObject = __webpack_require__(16);
+var getKeys = __webpack_require__(23);
 
-module.exports = __webpack_require__(9) ? Object.defineProperties : function defineProperties(O, Properties) {
+module.exports = __webpack_require__(8) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
   var keys = getKeys(Properties);
   var length = keys.length;
@@ -17727,14 +16061,14 @@ module.exports = __webpack_require__(9) ? Object.defineProperties : function def
 
 
 /***/ }),
-/* 93 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(13);
-var toLength = __webpack_require__(94);
-var toAbsoluteIndex = __webpack_require__(95);
+var toIObject = __webpack_require__(12);
+var toLength = __webpack_require__(88);
+var toAbsoluteIndex = __webpack_require__(89);
 module.exports = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
     var O = toIObject($this);
@@ -17756,11 +16090,11 @@ module.exports = function (IS_INCLUDES) {
 
 
 /***/ }),
-/* 94 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
-var toInteger = __webpack_require__(35);
+var toInteger = __webpack_require__(33);
 var min = Math.min;
 module.exports = function (it) {
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -17768,10 +16102,10 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 95 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(35);
+var toInteger = __webpack_require__(33);
 var max = Math.max;
 var min = Math.min;
 module.exports = function (index, length) {
@@ -17781,21 +16115,21 @@ module.exports = function (index, length) {
 
 
 /***/ }),
-/* 96 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var document = __webpack_require__(6).document;
+var document = __webpack_require__(4).document;
 module.exports = document && document.documentElement;
 
 
 /***/ }),
-/* 97 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has = __webpack_require__(10);
-var toObject = __webpack_require__(57);
-var IE_PROTO = __webpack_require__(36)('IE_PROTO');
+var has = __webpack_require__(9);
+var toObject = __webpack_require__(55);
+var IE_PROTO = __webpack_require__(34)('IE_PROTO');
 var ObjectProto = Object.prototype;
 
 module.exports = Object.getPrototypeOf || function (O) {
@@ -17808,11 +16142,11 @@ module.exports = Object.getPrototypeOf || function (O) {
 
 
 /***/ }),
-/* 98 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(35);
-var defined = __webpack_require__(31);
+var toInteger = __webpack_require__(33);
+var defined = __webpack_require__(29);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function (TO_STRING) {
@@ -17831,12 +16165,12 @@ module.exports = function (TO_STRING) {
 
 
 /***/ }),
-/* 99 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var anObject = __webpack_require__(17);
-var get = __webpack_require__(100);
-module.exports = __webpack_require__(2).getIterator = function (it) {
+var anObject = __webpack_require__(16);
+var get = __webpack_require__(94);
+module.exports = __webpack_require__(1).getIterator = function (it) {
   var iterFn = get(it);
   if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
   return anObject(iterFn.call(it));
@@ -17844,13 +16178,13 @@ module.exports = __webpack_require__(2).getIterator = function (it) {
 
 
 /***/ }),
-/* 100 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(101);
-var ITERATOR = __webpack_require__(7)('iterator');
-var Iterators = __webpack_require__(23);
-module.exports = __webpack_require__(2).getIteratorMethod = function (it) {
+var classof = __webpack_require__(95);
+var ITERATOR = __webpack_require__(5)('iterator');
+var Iterators = __webpack_require__(21);
+module.exports = __webpack_require__(1).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR]
     || it['@@iterator']
     || Iterators[classof(it)];
@@ -17858,12 +16192,12 @@ module.exports = __webpack_require__(2).getIteratorMethod = function (it) {
 
 
 /***/ }),
-/* 101 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(30);
-var TAG = __webpack_require__(7)('toStringTag');
+var cof = __webpack_require__(28);
+var TAG = __webpack_require__(5)('toStringTag');
 // ES3 wrong here
 var ARG = cof(function () { return arguments; }()) == 'Arguments';
 
@@ -17887,42 +16221,42 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 102 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(103);
-var $Object = __webpack_require__(2).Object;
+__webpack_require__(97);
+var $Object = __webpack_require__(1).Object;
 module.exports = function create(P, D) {
   return $Object.create(P, D);
 };
 
 
 /***/ }),
-/* 103 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(16);
+var $export = __webpack_require__(15);
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', { create: __webpack_require__(34) });
+$export($export.S, 'Object', { create: __webpack_require__(32) });
 
 
 /***/ }),
-/* 104 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(105);
-module.exports = __webpack_require__(2).Object.keys;
+__webpack_require__(99);
+module.exports = __webpack_require__(1).Object.keys;
 
 
 /***/ }),
-/* 105 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 Object.keys(O)
-var toObject = __webpack_require__(57);
-var $keys = __webpack_require__(25);
+var toObject = __webpack_require__(55);
+var $keys = __webpack_require__(23);
 
-__webpack_require__(106)('keys', function () {
+__webpack_require__(100)('keys', function () {
   return function keys(it) {
     return $keys(toObject(it));
   };
@@ -17930,13 +16264,13 @@ __webpack_require__(106)('keys', function () {
 
 
 /***/ }),
-/* 106 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
-var $export = __webpack_require__(16);
-var core = __webpack_require__(2);
-var fails = __webpack_require__(19);
+var $export = __webpack_require__(15);
+var core = __webpack_require__(1);
+var fails = __webpack_require__(18);
 module.exports = function (KEY, exec) {
   var fn = (core.Object || {})[KEY] || Object[KEY];
   var exp = {};
@@ -17946,69 +16280,69 @@ module.exports = function (KEY, exec) {
 
 
 /***/ }),
-/* 107 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(108), __esModule: true };
+module.exports = { "default": __webpack_require__(102), __esModule: true };
 
 /***/ }),
-/* 108 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(58);
-__webpack_require__(51);
-module.exports = __webpack_require__(41).f('iterator');
+__webpack_require__(56);
+__webpack_require__(49);
+module.exports = __webpack_require__(39).f('iterator');
 
 
 /***/ }),
-/* 109 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(110), __esModule: true };
+module.exports = { "default": __webpack_require__(104), __esModule: true };
 
 /***/ }),
-/* 110 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(105);
 __webpack_require__(111);
-__webpack_require__(117);
-__webpack_require__(118);
-__webpack_require__(119);
-module.exports = __webpack_require__(2).Symbol;
+__webpack_require__(112);
+__webpack_require__(113);
+module.exports = __webpack_require__(1).Symbol;
 
 
 /***/ }),
-/* 111 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // ECMAScript 6 symbols shim
-var global = __webpack_require__(6);
-var has = __webpack_require__(10);
-var DESCRIPTORS = __webpack_require__(9);
-var $export = __webpack_require__(16);
-var redefine = __webpack_require__(55);
-var META = __webpack_require__(112).KEY;
-var $fails = __webpack_require__(19);
-var shared = __webpack_require__(37);
-var setToStringTag = __webpack_require__(39);
-var uid = __webpack_require__(26);
-var wks = __webpack_require__(7);
-var wksExt = __webpack_require__(41);
-var wksDefine = __webpack_require__(42);
-var enumKeys = __webpack_require__(113);
-var isArray = __webpack_require__(114);
-var anObject = __webpack_require__(17);
-var isObject = __webpack_require__(18);
-var toIObject = __webpack_require__(13);
-var toPrimitive = __webpack_require__(33);
-var createDesc = __webpack_require__(24);
-var _create = __webpack_require__(34);
-var gOPNExt = __webpack_require__(115);
-var $GOPD = __webpack_require__(116);
-var $DP = __webpack_require__(8);
-var $keys = __webpack_require__(25);
+var global = __webpack_require__(4);
+var has = __webpack_require__(9);
+var DESCRIPTORS = __webpack_require__(8);
+var $export = __webpack_require__(15);
+var redefine = __webpack_require__(53);
+var META = __webpack_require__(106).KEY;
+var $fails = __webpack_require__(18);
+var shared = __webpack_require__(35);
+var setToStringTag = __webpack_require__(37);
+var uid = __webpack_require__(24);
+var wks = __webpack_require__(5);
+var wksExt = __webpack_require__(39);
+var wksDefine = __webpack_require__(40);
+var enumKeys = __webpack_require__(107);
+var isArray = __webpack_require__(108);
+var anObject = __webpack_require__(16);
+var isObject = __webpack_require__(17);
+var toIObject = __webpack_require__(12);
+var toPrimitive = __webpack_require__(31);
+var createDesc = __webpack_require__(22);
+var _create = __webpack_require__(32);
+var gOPNExt = __webpack_require__(109);
+var $GOPD = __webpack_require__(110);
+var $DP = __webpack_require__(7);
+var $keys = __webpack_require__(23);
 var gOPD = $GOPD.f;
 var dP = $DP.f;
 var gOPN = gOPNExt.f;
@@ -18131,11 +16465,11 @@ if (!USE_NATIVE) {
 
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
-  __webpack_require__(60).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(43).f = $propertyIsEnumerable;
-  __webpack_require__(59).f = $getOwnPropertySymbols;
+  __webpack_require__(58).f = gOPNExt.f = $getOwnPropertyNames;
+  __webpack_require__(41).f = $propertyIsEnumerable;
+  __webpack_require__(57).f = $getOwnPropertySymbols;
 
-  if (DESCRIPTORS && !__webpack_require__(32)) {
+  if (DESCRIPTORS && !__webpack_require__(30)) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -18209,7 +16543,7 @@ $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
 });
 
 // 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(14)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(13)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 // 19.4.3.5 Symbol.prototype[@@toStringTag]
 setToStringTag($Symbol, 'Symbol');
 // 20.2.1.9 Math[@@toStringTag]
@@ -18219,18 +16553,18 @@ setToStringTag(global.JSON, 'JSON', true);
 
 
 /***/ }),
-/* 112 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var META = __webpack_require__(26)('meta');
-var isObject = __webpack_require__(18);
-var has = __webpack_require__(10);
-var setDesc = __webpack_require__(8).f;
+var META = __webpack_require__(24)('meta');
+var isObject = __webpack_require__(17);
+var has = __webpack_require__(9);
+var setDesc = __webpack_require__(7).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
   return true;
 };
-var FREEZE = !__webpack_require__(19)(function () {
+var FREEZE = !__webpack_require__(18)(function () {
   return isExtensible(Object.preventExtensions({}));
 });
 var setMeta = function (it) {
@@ -18278,13 +16612,13 @@ var meta = module.exports = {
 
 
 /***/ }),
-/* 113 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(25);
-var gOPS = __webpack_require__(59);
-var pIE = __webpack_require__(43);
+var getKeys = __webpack_require__(23);
+var gOPS = __webpack_require__(57);
+var pIE = __webpack_require__(41);
 module.exports = function (it) {
   var result = getKeys(it);
   var getSymbols = gOPS.f;
@@ -18299,23 +16633,23 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 114 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(30);
+var cof = __webpack_require__(28);
 module.exports = Array.isArray || function isArray(arg) {
   return cof(arg) == 'Array';
 };
 
 
 /***/ }),
-/* 115 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(13);
-var gOPN = __webpack_require__(60).f;
+var toIObject = __webpack_require__(12);
+var gOPN = __webpack_require__(58).f;
 var toString = {}.toString;
 
 var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -18335,18 +16669,18 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 
 /***/ }),
-/* 116 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pIE = __webpack_require__(43);
-var createDesc = __webpack_require__(24);
-var toIObject = __webpack_require__(13);
-var toPrimitive = __webpack_require__(33);
-var has = __webpack_require__(10);
-var IE8_DOM_DEFINE = __webpack_require__(53);
+var pIE = __webpack_require__(41);
+var createDesc = __webpack_require__(22);
+var toIObject = __webpack_require__(12);
+var toPrimitive = __webpack_require__(31);
+var has = __webpack_require__(9);
+var IE8_DOM_DEFINE = __webpack_require__(51);
 var gOPD = Object.getOwnPropertyDescriptor;
 
-exports.f = __webpack_require__(9) ? gOPD : function getOwnPropertyDescriptor(O, P) {
+exports.f = __webpack_require__(8) ? gOPD : function getOwnPropertyDescriptor(O, P) {
   O = toIObject(O);
   P = toPrimitive(P, true);
   if (IE8_DOM_DEFINE) try {
@@ -18357,27 +16691,27 @@ exports.f = __webpack_require__(9) ? gOPD : function getOwnPropertyDescriptor(O,
 
 
 /***/ }),
-/* 117 */
+/* 111 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 118 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(42)('asyncIterator');
+__webpack_require__(40)('asyncIterator');
 
 
 /***/ }),
-/* 119 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(42)('observable');
+__webpack_require__(40)('observable');
 
 
 /***/ }),
-/* 120 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var require;//! moment.js
@@ -22887,10 +21221,10 @@ __webpack_require__(42)('observable');
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(121)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(115)(module)))
 
 /***/ }),
-/* 121 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -22918,7 +21252,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 122 */
+/* 116 */
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -22927,10 +21261,10 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 122;
+webpackEmptyContext.id = 116;
 
 /***/ }),
-/* 123 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23146,10 +21480,10 @@ uuid.parse = parse;
 uuid.unparse = unparse;
 
 module.exports = uuid;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(124)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(118)))
 
 /***/ }),
-/* 124 */
+/* 118 */
 /***/ (function(module, exports) {
 
 var g;
@@ -23176,10 +21510,10 @@ module.exports = g;
 
 
 /***/ }),
-/* 125 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var core = __webpack_require__(2);
+var core = __webpack_require__(1);
 var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
 module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
   return $JSON.stringify.apply($JSON, arguments);
@@ -23187,29 +21521,29 @@ module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
 
 
 /***/ }),
-/* 126 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var moment = __webpack_require__(4);
+var moment = __webpack_require__(3);
 var util = __webpack_require__(0);
-var DataSet = __webpack_require__(20);
-var DataView = __webpack_require__(27);
-var Range = __webpack_require__(62);
-var Core = __webpack_require__(63);
-var TimeAxis = __webpack_require__(44);
-var CurrentTime = __webpack_require__(68);
-var CustomTime = __webpack_require__(46);
-var ItemSet = __webpack_require__(69);
+var DataSet = __webpack_require__(25);
+var DataView = __webpack_require__(42);
+var Range = __webpack_require__(61);
+var Core = __webpack_require__(62);
+var TimeAxis = __webpack_require__(43);
+var CurrentTime = __webpack_require__(67);
+var CustomTime = __webpack_require__(45);
+var ItemSet = __webpack_require__(68);
 
-var printStyle = __webpack_require__(74).printStyle;
-var allOptions = __webpack_require__(75).allOptions;
-var configureOptions = __webpack_require__(75).configureOptions;
+var printStyle = __webpack_require__(73).printStyle;
+var allOptions = __webpack_require__(74).allOptions;
+var configureOptions = __webpack_require__(74).configureOptions;
 
-var Configurator = __webpack_require__(134)['default'];
-var Validator = __webpack_require__(74)['default'];
+var Configurator = __webpack_require__(128)['default'];
+var Validator = __webpack_require__(73)['default'];
 
 /**
  * Create a timeline visualization
@@ -23985,7 +22319,7 @@ Timeline.prototype.toggleRollingMode = function () {
 module.exports = Timeline;
 
 /***/ }),
-/* 127 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24226,7 +22560,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 128 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -26876,15 +25210,15 @@ if (true) {
 
 
 /***/ }),
-/* 129 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var keycharm = __webpack_require__(66);
-var Emitter = __webpack_require__(64);
-var Hammer = __webpack_require__(12);
+var keycharm = __webpack_require__(65);
+var Emitter = __webpack_require__(63);
+var Hammer = __webpack_require__(11);
 var util = __webpack_require__(0);
 
 /**
@@ -27040,7 +25374,7 @@ function _hasParent(element, parent) {
 module.exports = Activator;
 
 /***/ }),
-/* 130 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27050,11 +25384,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(28);
+var _classCallCheck2 = __webpack_require__(26);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(29);
+var _createClass2 = __webpack_require__(27);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
@@ -27214,33 +25548,33 @@ var Popup = function () {
 exports['default'] = Popup;
 
 /***/ }),
-/* 131 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(132), __esModule: true };
+module.exports = { "default": __webpack_require__(126), __esModule: true };
 
 /***/ }),
-/* 132 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(133);
-var $Object = __webpack_require__(2).Object;
+__webpack_require__(127);
+var $Object = __webpack_require__(1).Object;
 module.exports = function defineProperty(it, key, desc) {
   return $Object.defineProperty(it, key, desc);
 };
 
 
 /***/ }),
-/* 133 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(16);
+var $export = __webpack_require__(15);
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !__webpack_require__(9), 'Object', { defineProperty: __webpack_require__(8).f });
+$export($export.S + $export.F * !__webpack_require__(8), 'Object', { defineProperty: __webpack_require__(7).f });
 
 
 /***/ }),
-/* 134 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27250,19 +25584,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = __webpack_require__(15);
+var _stringify = __webpack_require__(14);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _typeof2 = __webpack_require__(1);
+var _typeof2 = __webpack_require__(2);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
-var _classCallCheck2 = __webpack_require__(28);
+var _classCallCheck2 = __webpack_require__(26);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(29);
+var _createClass2 = __webpack_require__(27);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
@@ -27270,7 +25604,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var util = __webpack_require__(0);
 
-var ColorPicker = __webpack_require__(135)['default'];
+var ColorPicker = __webpack_require__(129)['default'];
 
 /**
  * The way this works is for all properties of this.possible options, you can supply the property name in any form to list the options.
@@ -28103,7 +26437,7 @@ var Configurator = function () {
 exports['default'] = Configurator;
 
 /***/ }),
-/* 135 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28113,22 +26447,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = __webpack_require__(15);
+var _stringify = __webpack_require__(14);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _classCallCheck2 = __webpack_require__(28);
+var _classCallCheck2 = __webpack_require__(26);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(29);
+var _createClass2 = __webpack_require__(27);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var Hammer = __webpack_require__(12);
-var hammerUtil = __webpack_require__(65);
+var Hammer = __webpack_require__(11);
+var hammerUtil = __webpack_require__(64);
 var util = __webpack_require__(0);
 
 var htmlColors = { black: '#000000', navy: '#000080', darkblue: '#00008B', mediumblue: '#0000CD', blue: '#0000FF', darkgreen: '#006400', green: '#008000', teal: '#008080', darkcyan: '#008B8B', deepskyblue: '#00BFFF', darkturquoise: '#00CED1', mediumspringgreen: '#00FA9A', lime: '#00FF00', springgreen: '#00FF7F', aqua: '#00FFFF', cyan: '#00FFFF', midnightblue: '#191970', dodgerblue: '#1E90FF', lightseagreen: '#20B2AA', forestgreen: '#228B22', seagreen: '#2E8B57', darkslategray: '#2F4F4F', limegreen: '#32CD32', mediumseagreen: '#3CB371', turquoise: '#40E0D0', royalblue: '#4169E1', steelblue: '#4682B4', darkslateblue: '#483D8B', mediumturquoise: '#48D1CC', indigo: '#4B0082', darkolivegreen: '#556B2F', cadetblue: '#5F9EA0', cornflowerblue: '#6495ED', mediumaquamarine: '#66CDAA', dimgray: '#696969', slateblue: '#6A5ACD', olivedrab: '#6B8E23', slategray: '#708090', lightslategray: '#778899', mediumslateblue: '#7B68EE', lawngreen: '#7CFC00', chartreuse: '#7FFF00', aquamarine: '#7FFFD4', maroon: '#800000', purple: '#800080', olive: '#808000', gray: '#808080', skyblue: '#87CEEB', lightskyblue: '#87CEFA', blueviolet: '#8A2BE2', darkred: '#8B0000', darkmagenta: '#8B008B', saddlebrown: '#8B4513', darkseagreen: '#8FBC8F', lightgreen: '#90EE90', mediumpurple: '#9370D8', darkviolet: '#9400D3', palegreen: '#98FB98', darkorchid: '#9932CC', yellowgreen: '#9ACD32', sienna: '#A0522D', brown: '#A52A2A', darkgray: '#A9A9A9', lightblue: '#ADD8E6', greenyellow: '#ADFF2F', paleturquoise: '#AFEEEE', lightsteelblue: '#B0C4DE', powderblue: '#B0E0E6', firebrick: '#B22222', darkgoldenrod: '#B8860B', mediumorchid: '#BA55D3', rosybrown: '#BC8F8F', darkkhaki: '#BDB76B', silver: '#C0C0C0', mediumvioletred: '#C71585', indianred: '#CD5C5C', peru: '#CD853F', chocolate: '#D2691E', tan: '#D2B48C', lightgrey: '#D3D3D3', palevioletred: '#D87093', thistle: '#D8BFD8', orchid: '#DA70D6', goldenrod: '#DAA520', crimson: '#DC143C', gainsboro: '#DCDCDC', plum: '#DDA0DD', burlywood: '#DEB887', lightcyan: '#E0FFFF', lavender: '#E6E6FA', darksalmon: '#E9967A', violet: '#EE82EE', palegoldenrod: '#EEE8AA', lightcoral: '#F08080', khaki: '#F0E68C', aliceblue: '#F0F8FF', honeydew: '#F0FFF0', azure: '#F0FFFF', sandybrown: '#F4A460', wheat: '#F5DEB3', beige: '#F5F5DC', whitesmoke: '#F5F5F5', mintcream: '#F5FFFA', ghostwhite: '#F8F8FF', salmon: '#FA8072', antiquewhite: '#FAEBD7', linen: '#FAF0E6', lightgoldenrodyellow: '#FAFAD2', oldlace: '#FDF5E6', red: '#FF0000', fuchsia: '#FF00FF', magenta: '#FF00FF', deeppink: '#FF1493', orangered: '#FF4500', tomato: '#FF6347', hotpink: '#FF69B4', coral: '#FF7F50', darkorange: '#FF8C00', lightsalmon: '#FFA07A', orange: '#FFA500', lightpink: '#FFB6C1', pink: '#FFC0CB', gold: '#FFD700', peachpuff: '#FFDAB9', navajowhite: '#FFDEAD', moccasin: '#FFE4B5', bisque: '#FFE4C4', mistyrose: '#FFE4E1', blanchedalmond: '#FFEBCD', papayawhip: '#FFEFD5', lavenderblush: '#FFF0F5', seashell: '#FFF5EE', cornsilk: '#FFF8DC', lemonchiffon: '#FFFACD', floralwhite: '#FFFAF0', snow: '#FFFAFA', yellow: '#FFFF00', lightyellow: '#FFFFE0', ivory: '#FFFFF0', white: '#FFFFFF' };
@@ -28760,1092 +27094,582 @@ var ColorPicker = function () {
 exports['default'] = ColorPicker;
 
 /***/ }),
-/* 136 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _typeof2 = __webpack_require__(1);
+var _keys = __webpack_require__(6);
 
-var _typeof3 = _interopRequireDefault(_typeof2);
+var _keys2 = _interopRequireDefault(_keys);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var util = __webpack_require__(0);
-var DOMutil = __webpack_require__(11);
-var DataSet = __webpack_require__(20);
-var DataView = __webpack_require__(27);
-var Component = __webpack_require__(5);
-var DataAxis = __webpack_require__(76);
-var GraphGroup = __webpack_require__(78);
-var Legend = __webpack_require__(81);
-var Bars = __webpack_require__(79);
-var Lines = __webpack_require__(80);
-var Points = __webpack_require__(50);
-
-var UNGROUPED = '__ungrouped__'; // reserved group id for ungrouped items
-
+var DOMutil = __webpack_require__(59);
+var Component = __webpack_require__(10);
+var DataScale = __webpack_require__(75);
 /**
- * This is the constructor of the LineGraph. It requires a Timeline body and options.
- *
- * @param {timeline.Timeline.body} body
- * @param {Object} options
- * @constructor LineGraph
+ * A horizontal time axis
+ * @param {Object} body
+ * @param {Object} [options]        See DataAxis.setOptions for the available
+ *                                  options.
+ * @param {SVGElement} svg
+ * @param {timeline.LineGraph.options} linegraphOptions
+ * @constructor DataAxis
  * @extends Component
  */
-function LineGraph(body, options) {
+function DataAxis(body, options, svg, linegraphOptions) {
   this.id = util.randomUUID();
   this.body = body;
 
   this.defaultOptions = {
-    yAxisOrientation: 'left',
-    defaultGroup: 'default',
-    sort: true,
-    sampling: true,
-    stack: false,
-    graphHeight: '400px',
-    shaded: {
-      enabled: false,
-      orientation: 'bottom' // top, bottom, zero
+    orientation: 'left', // supported: 'left', 'right'
+    showMinorLabels: true,
+    showMajorLabels: true,
+    icons: false,
+    majorLinesOffset: 7,
+    minorLinesOffset: 4,
+    labelOffsetX: 10,
+    labelOffsetY: 2,
+    iconWidth: 20,
+    width: '40px',
+    visible: true,
+    alignZeros: true,
+    left: {
+      range: { min: undefined, max: undefined },
+      format: function format(value) {
+        return '' + parseFloat(value.toPrecision(3));
+      },
+      title: { text: undefined, style: undefined }
     },
-    style: 'line', // line, bar
-    barChart: {
-      width: 50,
-      sideBySide: false,
-      align: 'center' // left, center, right
-    },
-    interpolation: {
-      enabled: true,
-      parametrization: 'centripetal', // uniform (alpha = 0.0), chordal (alpha = 1.0), centripetal (alpha = 0.5)
-      alpha: 0.5
-    },
-    drawPoints: {
-      enabled: true,
-      size: 6,
-      style: 'square' // square, circle
-    },
-    dataAxis: {}, //Defaults are done on DataAxis level
-    legend: {}, //Defaults are done on Legend level
-    groups: {
-      visibility: {}
+    right: {
+      range: { min: undefined, max: undefined },
+      format: function format(value) {
+        return '' + parseFloat(value.toPrecision(3));
+      },
+      title: { text: undefined, style: undefined }
     }
   };
 
-  // options is shared by this lineGraph and all its items
-  this.options = util.extend({}, this.defaultOptions);
-  this.dom = {};
+  this.linegraphOptions = linegraphOptions;
+  this.linegraphSVG = svg;
   this.props = {};
-  this.hammer = null;
-  this.groups = {};
-  this.abortedGraphUpdate = false;
-  this.updateSVGheight = false;
-  this.updateSVGheightOnResize = false;
-  this.forceGraphUpdate = true;
-
-  var me = this;
-  this.itemsData = null; // DataSet
-  this.groupsData = null; // DataSet
-
-  // listeners for the DataSet of the items
-  this.itemListeners = {
-    'add': function add(event, params, senderId) {
-      // eslint-disable-line no-unused-vars
-      me._onAdd(params.items);
-    },
-    'update': function update(event, params, senderId) {
-      // eslint-disable-line no-unused-vars
-      me._onUpdate(params.items);
-    },
-    'remove': function remove(event, params, senderId) {
-      // eslint-disable-line no-unused-vars
-      me._onRemove(params.items);
-    }
+  this.DOMelements = { // dynamic elements
+    lines: {},
+    labels: {},
+    title: {}
   };
 
-  // listeners for the DataSet of the groups
-  this.groupListeners = {
-    'add': function add(event, params, senderId) {
-      // eslint-disable-line no-unused-vars
-      me._onAddGroups(params.items);
-    },
-    'update': function update(event, params, senderId) {
-      // eslint-disable-line no-unused-vars
-      me._onUpdateGroups(params.items);
-    },
-    'remove': function remove(event, params, senderId) {
-      // eslint-disable-line no-unused-vars
-      me._onRemoveGroups(params.items);
-    }
-  };
+  this.dom = {};
+  this.scale = undefined;
+  this.range = { start: 0, end: 0 };
 
-  this.items = {}; // object with an Item for every data item
-  this.selection = []; // list with the ids of all selected nodes
-  this.lastStart = this.body.range.start;
-  this.touchParams = {}; // stores properties while dragging
+  this.options = util.extend({}, this.defaultOptions);
+  this.conversionFactor = 1;
 
-  this.svgElements = {};
   this.setOptions(options);
-  this.groupsUsingDefaultStyles = [0];
-  this.body.emitter.on('rangechanged', function () {
-    me.lastStart = me.body.range.start;
-    me.svg.style.left = util.option.asSize(-me.props.width);
+  this.width = Number(('' + this.options.width).replace("px", ""));
+  this.minWidth = this.width;
+  this.height = this.linegraphSVG.getBoundingClientRect().height;
+  this.hidden = false;
 
-    me.forceGraphUpdate = true;
-    //Is this local redraw necessary? (Core also does a change event!)
-    me.redraw.call(me);
-  });
+  this.stepPixels = 25;
+  this.zeroCrossing = -1;
+  this.amountOfSteps = -1;
+
+  this.lineOffset = 0;
+  this.master = true;
+  this.masterAxis = null;
+  this.svgElements = {};
+  this.iconsRemoved = false;
+
+  this.groups = {};
+  this.amountOfGroups = 0;
 
   // create the HTML DOM
   this._create();
+  if (this.scale == undefined) {
+    this._redrawLabels();
+  }
   this.framework = { svg: this.svg, svgElements: this.svgElements, options: this.options, groups: this.groups };
+
+  var me = this;
+  this.body.emitter.on("verticalDrag", function () {
+    me.dom.lineContainer.style.top = me.body.domProps.scrollTop + 'px';
+  });
 }
 
-LineGraph.prototype = new Component();
+DataAxis.prototype = new Component();
+
+DataAxis.prototype.addGroup = function (label, graphOptions) {
+  if (!this.groups.hasOwnProperty(label)) {
+    this.groups[label] = graphOptions;
+  }
+  this.amountOfGroups += 1;
+};
+
+DataAxis.prototype.updateGroup = function (label, graphOptions) {
+  if (!this.groups.hasOwnProperty(label)) {
+    this.amountOfGroups += 1;
+  }
+  this.groups[label] = graphOptions;
+};
+
+DataAxis.prototype.removeGroup = function (label) {
+  if (this.groups.hasOwnProperty(label)) {
+    delete this.groups[label];
+    this.amountOfGroups -= 1;
+  }
+};
+
+DataAxis.prototype.setOptions = function (options) {
+  if (options) {
+    var redraw = false;
+    if (this.options.orientation != options.orientation && options.orientation !== undefined) {
+      redraw = true;
+    }
+    var fields = ['orientation', 'showMinorLabels', 'showMajorLabels', 'icons', 'majorLinesOffset', 'minorLinesOffset', 'labelOffsetX', 'labelOffsetY', 'iconWidth', 'width', 'visible', 'left', 'right', 'alignZeros'];
+    util.selectiveDeepExtend(fields, this.options, options);
+
+    this.minWidth = Number(('' + this.options.width).replace("px", ""));
+    if (redraw === true && this.dom.frame) {
+      this.hide();
+      this.show();
+    }
+  }
+};
 
 /**
- * Create the HTML DOM for the ItemSet
+ * Create the HTML DOM for the DataAxis
  */
-LineGraph.prototype._create = function () {
-  var frame = document.createElement('div');
-  frame.className = 'timeline-line-graph';
-  this.dom.frame = frame;
+DataAxis.prototype._create = function () {
+  this.dom.frame = document.createElement('div');
+  this.dom.frame.style.width = this.options.width;
+  this.dom.frame.style.height = this.height;
+
+  this.dom.lineContainer = document.createElement('div');
+  this.dom.lineContainer.style.width = '100%';
+  this.dom.lineContainer.style.height = this.height;
+  this.dom.lineContainer.style.position = 'relative';
+  this.dom.lineContainer.style.visibility = 'visible';
+  this.dom.lineContainer.style.display = 'block';
 
   // create svg element for graph drawing.
-  this.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  this.svg.style.position = 'relative';
-  this.svg.style.height = ('' + this.options.graphHeight).replace('px', '') + 'px';
-  this.svg.style.display = 'block';
-  frame.appendChild(this.svg);
-
-  // data axis
-  this.options.dataAxis.orientation = 'left';
-  this.yAxisLeft = new DataAxis(this.body, this.options.dataAxis, this.svg, this.options.groups);
-
-  this.options.dataAxis.orientation = 'right';
-  this.yAxisRight = new DataAxis(this.body, this.options.dataAxis, this.svg, this.options.groups);
-  delete this.options.dataAxis.orientation;
-
-  // legends
-  this.legendLeft = new Legend(this.body, this.options.legend, 'left', this.options.groups);
-  this.legendRight = new Legend(this.body, this.options.legend, 'right', this.options.groups);
-
-  this.show();
+  this.svg = document.createElementNS('http://www.w3.org/2000/svg', "svg");
+  this.svg.style.position = "absolute";
+  this.svg.style.top = '0px';
+  this.svg.style.height = '100%';
+  this.svg.style.width = '100%';
+  this.svg.style.display = "block";
+  this.dom.frame.appendChild(this.svg);
 };
 
-/**
- * set the options of the LineGraph. the mergeOptions is used for subObjects that have an enabled element.
- * @param {object} options
- */
-LineGraph.prototype.setOptions = function (options) {
-  if (options) {
-    var fields = ['sampling', 'defaultGroup', 'stack', 'height', 'graphHeight', 'yAxisOrientation', 'style', 'barChart', 'dataAxis', 'sort', 'groups'];
-    if (options.graphHeight === undefined && options.height !== undefined) {
-      this.updateSVGheight = true;
-      this.updateSVGheightOnResize = true;
-    } else if (this.body.domProps.centerContainer.height !== undefined && options.graphHeight !== undefined) {
-      if (parseInt((options.graphHeight + '').replace("px", '')) < this.body.domProps.centerContainer.height) {
-        this.updateSVGheight = true;
-      }
-    }
-    util.selectiveDeepExtend(fields, this.options, options);
-    util.mergeOptions(this.options, options, 'interpolation');
-    util.mergeOptions(this.options, options, 'drawPoints');
-    util.mergeOptions(this.options, options, 'shaded');
-    util.mergeOptions(this.options, options, 'legend');
+DataAxis.prototype._redrawGroupIcons = function () {
+  DOMutil.prepareElements(this.svgElements);
 
-    if (options.interpolation) {
-      if ((0, _typeof3['default'])(options.interpolation) == 'object') {
-        if (options.interpolation.parametrization) {
-          if (options.interpolation.parametrization == 'uniform') {
-            this.options.interpolation.alpha = 0;
-          } else if (options.interpolation.parametrization == 'chordal') {
-            this.options.interpolation.alpha = 1.0;
-          } else {
-            this.options.interpolation.parametrization = 'centripetal';
-            this.options.interpolation.alpha = 0.5;
-          }
-        }
-      }
-    }
+  var x;
+  var iconWidth = this.options.iconWidth;
+  var iconHeight = 15;
+  var iconOffset = 4;
+  var y = iconOffset + 0.5 * iconHeight;
 
-    if (this.yAxisLeft) {
-      if (options.dataAxis !== undefined) {
-        this.yAxisLeft.setOptions(this.options.dataAxis);
-        this.yAxisRight.setOptions(this.options.dataAxis);
-      }
-    }
+  if (this.options.orientation === 'left') {
+    x = iconOffset;
+  } else {
+    x = this.width - iconWidth - iconOffset;
+  }
 
-    if (this.legendLeft) {
-      if (options.legend !== undefined) {
-        this.legendLeft.setOptions(this.options.legend);
-        this.legendRight.setOptions(this.options.legend);
-      }
-    }
+  var groupArray = (0, _keys2['default'])(this.groups);
+  groupArray.sort(function (a, b) {
+    return a < b ? -1 : 1;
+  });
 
-    if (this.groups.hasOwnProperty(UNGROUPED)) {
-      this.groups[UNGROUPED].setOptions(options);
+  for (var i = 0; i < groupArray.length; i++) {
+    var groupId = groupArray[i];
+    if (this.groups[groupId].visible === true && (this.linegraphOptions.visibility[groupId] === undefined || this.linegraphOptions.visibility[groupId] === true)) {
+      this.groups[groupId].getLegend(iconWidth, iconHeight, this.framework, x, y);
+      y += iconHeight + iconOffset;
     }
   }
 
-  // this is used to redraw the graph if the visibility of the groups is changed.
-  if (this.dom.frame) {
-    //not on initial run?
-    this.forceGraphUpdate = true;
-    this.body.emitter.emit("_change", { queue: true });
+  DOMutil.cleanupElements(this.svgElements);
+  this.iconsRemoved = false;
+};
+
+DataAxis.prototype._cleanupIcons = function () {
+  if (this.iconsRemoved === false) {
+    DOMutil.prepareElements(this.svgElements);
+    DOMutil.cleanupElements(this.svgElements);
+    this.iconsRemoved = true;
   }
 };
 
 /**
- * Hide the component from the DOM
+ * Create the HTML DOM for the DataAxis
  */
-LineGraph.prototype.hide = function () {
-  // remove the frame containing the items
+DataAxis.prototype.show = function () {
+  this.hidden = false;
+  if (!this.dom.frame.parentNode) {
+    if (this.options.orientation === 'left') {
+      this.body.dom.left.appendChild(this.dom.frame);
+    } else {
+      this.body.dom.right.appendChild(this.dom.frame);
+    }
+  }
+
+  if (!this.dom.lineContainer.parentNode) {
+    this.body.dom.backgroundHorizontal.appendChild(this.dom.lineContainer);
+  }
+  this.dom.lineContainer.style.display = 'block';
+};
+
+/**
+ * Create the HTML DOM for the DataAxis
+ */
+DataAxis.prototype.hide = function () {
+  this.hidden = true;
   if (this.dom.frame.parentNode) {
     this.dom.frame.parentNode.removeChild(this.dom.frame);
   }
+
+  this.dom.lineContainer.style.display = 'none';
 };
 
 /**
- * Show the component in the DOM (when not already visible).
+ * Set a range (start and end)
+ * @param {number} start
+ * @param {number} end
  */
-LineGraph.prototype.show = function () {
-  // show frame containing the items
-  if (!this.dom.frame.parentNode) {
-    this.body.dom.center.appendChild(this.dom.frame);
-  }
+DataAxis.prototype.setRange = function (start, end) {
+  this.range.start = start;
+  this.range.end = end;
 };
 
 /**
- * Set items
- * @param {timeline.DataSet | null} items
- */
-LineGraph.prototype.setItems = function (items) {
-  var me = this,
-      ids,
-      oldItemsData = this.itemsData;
-
-  // replace the dataset
-  if (!items) {
-    this.itemsData = null;
-  } else if (items instanceof DataSet || items instanceof DataView) {
-    this.itemsData = items;
-  } else {
-    throw new TypeError('Data must be an instance of DataSet or DataView');
-  }
-
-  if (oldItemsData) {
-    // unsubscribe from old dataset
-    util.forEach(this.itemListeners, function (callback, event) {
-      oldItemsData.off(event, callback);
-    });
-
-    // remove all drawn items
-    ids = oldItemsData.getIds();
-    this._onRemove(ids);
-  }
-
-  if (this.itemsData) {
-    // subscribe to new dataset
-    var id = this.id;
-    util.forEach(this.itemListeners, function (callback, event) {
-      me.itemsData.on(event, callback, id);
-    });
-
-    // add all new items
-    ids = this.itemsData.getIds();
-    this._onAdd(ids);
-  }
-};
-
-/**
- * Set groups
- * @param {timeline.DataSet} groups
- */
-LineGraph.prototype.setGroups = function (groups) {
-  var me = this;
-  var ids;
-
-  // unsubscribe from current dataset
-  if (this.groupsData) {
-    util.forEach(this.groupListeners, function (callback, event) {
-      me.groupsData.off(event, callback);
-    });
-
-    // remove all drawn groups
-    ids = this.groupsData.getIds();
-    this.groupsData = null;
-    for (var i = 0; i < ids.length; i++) {
-      this._removeGroup(ids[i]);
-    }
-  }
-
-  // replace the dataset
-  if (!groups) {
-    this.groupsData = null;
-  } else if (groups instanceof DataSet || groups instanceof DataView) {
-    this.groupsData = groups;
-  } else {
-    throw new TypeError('Data must be an instance of DataSet or DataView');
-  }
-
-  if (this.groupsData) {
-    // subscribe to new dataset
-    var id = this.id;
-    util.forEach(this.groupListeners, function (callback, event) {
-      me.groupsData.on(event, callback, id);
-    });
-
-    // draw all ms
-    ids = this.groupsData.getIds();
-    this._onAddGroups(ids);
-  }
-};
-
-LineGraph.prototype._onUpdate = function (ids) {
-  this._updateAllGroupData(ids);
-};
-LineGraph.prototype._onAdd = function (ids) {
-  this._onUpdate(ids);
-};
-LineGraph.prototype._onRemove = function (ids) {
-  this._updateAllGroupData(ids, undefined, true);
-};
-LineGraph.prototype._onUpdateGroups = function (groupIds) {
-  this._updateAllGroupData(null, groupIds);
-};
-LineGraph.prototype._onAddGroups = function (groupIds) {
-  this._onUpdateGroups(groupIds);
-};
-
-/**
- * this cleans the group out off the legends and the dataaxis, updates the ungrouped and updates the graph
- * @param {Array} groupIds
- * @private
- */
-LineGraph.prototype._onRemoveGroups = function (groupIds) {
-  for (var i = 0; i < groupIds.length; i++) {
-    this._removeGroup(groupIds[i]);
-  }
-  this.forceGraphUpdate = true;
-  this.body.emitter.emit("_change", { queue: true });
-};
-
-/**
- * this cleans the group out off the legends and the dataaxis
- * @param {timeline.GraphGroup.id} groupId
- * @private
- */
-LineGraph.prototype._removeGroup = function (groupId) {
-  if (this.groups.hasOwnProperty(groupId)) {
-    if (this.groups[groupId].options.yAxisOrientation == 'right') {
-      this.yAxisRight.removeGroup(groupId);
-      this.legendRight.removeGroup(groupId);
-      this.legendRight.redraw();
-    } else {
-      this.yAxisLeft.removeGroup(groupId);
-      this.legendLeft.removeGroup(groupId);
-      this.legendLeft.redraw();
-    }
-    delete this.groups[groupId];
-  }
-};
-
-/**
- * update a group object with the group dataset entree
- *
- * @param {timeline.GraphGroup} group
- * @param {timeline.GraphGroup.id} groupId
- * @private
- */
-LineGraph.prototype._updateGroup = function (group, groupId) {
-  if (!this.groups.hasOwnProperty(groupId)) {
-    this.groups[groupId] = new GraphGroup(group, groupId, this.options, this.groupsUsingDefaultStyles);
-    if (this.groups[groupId].options.yAxisOrientation == 'right') {
-      this.yAxisRight.addGroup(groupId, this.groups[groupId]);
-      this.legendRight.addGroup(groupId, this.groups[groupId]);
-    } else {
-      this.yAxisLeft.addGroup(groupId, this.groups[groupId]);
-      this.legendLeft.addGroup(groupId, this.groups[groupId]);
-    }
-  } else {
-    this.groups[groupId].update(group);
-    if (this.groups[groupId].options.yAxisOrientation == 'right') {
-      this.yAxisRight.updateGroup(groupId, this.groups[groupId]);
-      this.legendRight.updateGroup(groupId, this.groups[groupId]);
-      //If yAxisOrientation changed, clean out the group from the other axis.
-      this.yAxisLeft.removeGroup(groupId);
-      this.legendLeft.removeGroup(groupId);
-    } else {
-      this.yAxisLeft.updateGroup(groupId, this.groups[groupId]);
-      this.legendLeft.updateGroup(groupId, this.groups[groupId]);
-      //If yAxisOrientation changed, clean out the group from the other axis.
-      this.yAxisRight.removeGroup(groupId);
-      this.legendRight.removeGroup(groupId);
-    }
-  }
-  this.legendLeft.redraw();
-  this.legendRight.redraw();
-};
-
-/**
- * this updates all groups, it is used when there is an update the the itemset.
- *
- * @param  {Array} ids
- * @param  {Array} groupIds
- * @private
- */
-LineGraph.prototype._updateAllGroupData = function (ids, groupIds) {
-  var removedItems = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  if (this.itemsData != null) {
-    var groupsContent = {};
-    var items = this.itemsData.get();
-    var fieldId = this.itemsData._fieldId;
-    var idMap = {};
-    if (ids) {
-      ids.map(function (id) {
-        idMap[id] = id;
-      });
-    }
-
-    //pre-Determine array sizes, for more efficient memory claim
-    var groupCounts = {};
-    for (var i = 0; i < items.length; i++) {
-      var item = items[i];
-      var groupId = item.group;
-      if (groupId === null || groupId === undefined) {
-        groupId = UNGROUPED;
-      }
-      groupCounts.hasOwnProperty(groupId) ? groupCounts[groupId]++ : groupCounts[groupId] = 1;
-    }
-
-    //Pre-load arrays from existing groups if items are not changed (not in ids)
-    var existingItemsMap = {};
-    if (!groupIds && ids && removedItems !== true) {
-      for (groupId in this.groups) {
-        if (this.groups.hasOwnProperty(groupId)) {
-          group = this.groups[groupId];
-          var existing_items = group.getItems();
-
-          groupsContent[groupId] = existing_items.filter(function (item) {
-            existingItemsMap[item[fieldId]] = item[fieldId];
-            return item[fieldId] !== idMap[item[fieldId]];
-          });
-          var newLength = groupCounts[groupId];
-          groupCounts[groupId] -= groupsContent[groupId].length;
-          if (groupsContent[groupId].length < newLength) {
-            groupsContent[groupId][newLength - 1] = {};
-          }
-        }
-      }
-    }
-
-    //Now insert data into the arrays.
-    for (i = 0; i < items.length; i++) {
-      item = items[i];
-      groupId = item.group;
-      if (groupId === null || groupId === undefined) {
-        groupId = UNGROUPED;
-      }
-      if (!groupIds && ids && item[fieldId] !== idMap[item[fieldId]] && existingItemsMap.hasOwnProperty(item[fieldId])) {
-        continue;
-      }
-      if (!groupsContent.hasOwnProperty(groupId)) {
-        groupsContent[groupId] = new Array(groupCounts[groupId]);
-      }
-      //Copy data (because of unmodifiable DataView input.
-      var extended = util.bridgeObject(item);
-      extended.x = util.convert(item.x, 'Date');
-      extended.end = util.convert(item.end, 'Date');
-      extended.orginalY = item.y; //real Y
-      extended.y = Number(item.y);
-      extended[fieldId] = item[fieldId];
-
-      var index = groupsContent[groupId].length - groupCounts[groupId]--;
-      groupsContent[groupId][index] = extended;
-    }
-
-    //Make sure all groups are present, to allow removal of old groups
-    for (groupId in this.groups) {
-      if (this.groups.hasOwnProperty(groupId)) {
-        if (!groupsContent.hasOwnProperty(groupId)) {
-          groupsContent[groupId] = new Array(0);
-        }
-      }
-    }
-
-    //Update legendas, style and axis
-    for (groupId in groupsContent) {
-      if (groupsContent.hasOwnProperty(groupId)) {
-        if (groupsContent[groupId].length == 0) {
-          if (this.groups.hasOwnProperty(groupId)) {
-            this._removeGroup(groupId);
-          }
-        } else {
-          var group = undefined;
-          if (this.groupsData != undefined) {
-            group = this.groupsData.get(groupId);
-          }
-          if (group == undefined) {
-            group = { id: groupId, content: this.options.defaultGroup + groupId };
-          }
-          this._updateGroup(group, groupId);
-          this.groups[groupId].setItems(groupsContent[groupId]);
-        }
-      }
-    }
-    this.forceGraphUpdate = true;
-    this.body.emitter.emit("_change", { queue: true });
-  }
-};
-
-/**
- * Redraw the component, mandatory function
+ * Repaint the component
  * @return {boolean} Returns true if the component is resized
  */
-LineGraph.prototype.redraw = function () {
+DataAxis.prototype.redraw = function () {
   var resized = false;
+  var activeGroups = 0;
 
-  // calculate actual size and position
-  this.props.width = this.dom.frame.offsetWidth;
-  this.props.height = this.body.domProps.centerContainer.height - this.body.domProps.border.top - this.body.domProps.border.bottom;
+  // Make sure the line container adheres to the vertical scrolling.
+  this.dom.lineContainer.style.top = this.body.domProps.scrollTop + 'px';
 
-  // check if this component is resized
-  resized = this._isResized() || resized;
-
-  // check whether zoomed (in that case we need to re-stack everything)
-  var visibleInterval = this.body.range.end - this.body.range.start;
-  var zoomed = visibleInterval != this.lastVisibleInterval;
-  this.lastVisibleInterval = visibleInterval;
-
-  // the svg element is three times as big as the width, this allows for fully dragging left and right
-  // without reloading the graph. the controls for this are bound to events in the constructor
-  if (resized == true) {
-    this.svg.style.width = util.option.asSize(3 * this.props.width);
-    this.svg.style.left = util.option.asSize(-this.props.width);
-
-    // if the height of the graph is set as proportional, change the height of the svg
-    if ((this.options.height + '').indexOf("%") != -1 || this.updateSVGheightOnResize == true) {
-      this.updateSVGheight = true;
-    }
-  }
-
-  // update the height of the graph on each redraw of the graph.
-  if (this.updateSVGheight == true) {
-    if (this.options.graphHeight != this.props.height + 'px') {
-      this.options.graphHeight = this.props.height + 'px';
-      this.svg.style.height = this.props.height + 'px';
-    }
-    this.updateSVGheight = false;
-  } else {
-    this.svg.style.height = ('' + this.options.graphHeight).replace('px', '') + 'px';
-  }
-
-  // zoomed is here to ensure that animations are shown correctly.
-  if (resized == true || zoomed == true || this.abortedGraphUpdate == true || this.forceGraphUpdate == true) {
-    resized = this._updateGraph() || resized;
-    this.forceGraphUpdate = false;
-  } else {
-    // move the whole svg while dragging
-    if (this.lastStart != 0) {
-      var offset = this.body.range.start - this.lastStart;
-      var range = this.body.range.end - this.body.range.start;
-      if (this.props.width != 0) {
-        var rangePerPixelInv = this.props.width / range;
-        var xOffset = offset * rangePerPixelInv;
-        this.svg.style.left = -this.props.width - xOffset + 'px';
-      }
-    }
-  }
-  this.legendLeft.redraw();
-  this.legendRight.redraw();
-  return resized;
-};
-
-LineGraph.prototype._getSortedGroupIds = function () {
-  // getting group Ids
-  var grouplist = [];
   for (var groupId in this.groups) {
     if (this.groups.hasOwnProperty(groupId)) {
-      var group = this.groups[groupId];
-      if (group.visible == true && (this.options.groups.visibility[groupId] === undefined || this.options.groups.visibility[groupId] == true)) {
-        grouplist.push({ id: groupId, zIndex: group.options.zIndex });
+      if (this.groups[groupId].visible === true && (this.linegraphOptions.visibility[groupId] === undefined || this.linegraphOptions.visibility[groupId] === true)) {
+        activeGroups++;
       }
     }
   }
-  util.insertSort(grouplist, function (a, b) {
-    var az = a.zIndex;
-    var bz = b.zIndex;
-    if (az === undefined) az = 0;
-    if (bz === undefined) bz = 0;
-    return az == bz ? 0 : az < bz ? -1 : 1;
-  });
-  var groupIds = new Array(grouplist.length);
-  for (var i = 0; i < grouplist.length; i++) {
-    groupIds[i] = grouplist[i].id;
-  }
-  return groupIds;
-};
-
-/**
- * Update and redraw the graph.
- *
- * @returns {boolean}
- * @private
- */
-LineGraph.prototype._updateGraph = function () {
-  // reset the svg elements
-  DOMutil.prepareElements(this.svgElements);
-  if (this.props.width != 0 && this.itemsData != null) {
-    var group, i;
-    var groupRanges = {};
-    var changeCalled = false;
-    // this is the range of the SVG canvas
-    var minDate = this.body.util.toGlobalTime(-this.body.domProps.root.width);
-    var maxDate = this.body.util.toGlobalTime(2 * this.body.domProps.root.width);
-
-    // getting group Ids
-    var groupIds = this._getSortedGroupIds();
-    if (groupIds.length > 0) {
-      var groupsData = {};
-
-      // fill groups data, this only loads the data we require based on the timewindow
-      this._getRelevantData(groupIds, groupsData, minDate, maxDate);
-
-      // apply sampling, if disabled, it will pass through this function.
-      this._applySampling(groupIds, groupsData);
-
-      // we transform the X coordinates to detect collisions
-      for (i = 0; i < groupIds.length; i++) {
-        this._convertXcoordinates(groupsData[groupIds[i]]);
-      }
-
-      // now all needed data has been collected we start the processing.
-      this._getYRanges(groupIds, groupsData, groupRanges);
-
-      // update the Y axis first, we use this data to draw at the correct Y points
-      changeCalled = this._updateYAxis(groupIds, groupRanges);
-
-      //  at changeCalled, abort this update cycle as the graph needs another update with new Width input from the Redraw container.
-      //  Cleanup SVG elements on abort.
-      if (changeCalled == true) {
-        DOMutil.cleanupElements(this.svgElements);
-        this.abortedGraphUpdate = true;
-        return true;
-      }
-      this.abortedGraphUpdate = false;
-
-      // With the yAxis scaled correctly, use this to get the Y values of the points.
-      var below = undefined;
-      for (i = 0; i < groupIds.length; i++) {
-        group = this.groups[groupIds[i]];
-        if (this.options.stack === true && this.options.style === 'line') {
-          if (group.options.excludeFromStacking == undefined || !group.options.excludeFromStacking) {
-            if (below != undefined) {
-              this._stack(groupsData[group.id], groupsData[below.id]);
-              if (group.options.shaded.enabled == true && group.options.shaded.orientation !== "group") {
-                if (group.options.shaded.orientation == "top" && below.options.shaded.orientation !== "group") {
-                  below.options.shaded.orientation = "group";
-                  below.options.shaded.groupId = group.id;
-                } else {
-                  group.options.shaded.orientation = "group";
-                  group.options.shaded.groupId = below.id;
-                }
-              }
-            }
-            below = group;
-          }
-        }
-        this._convertYcoordinates(groupsData[groupIds[i]], group);
-      }
-
-      //Precalculate paths and draw shading if appropriate. This will make sure the shading is always behind any lines.
-      var paths = {};
-      for (i = 0; i < groupIds.length; i++) {
-        group = this.groups[groupIds[i]];
-        if (group.options.style === 'line' && group.options.shaded.enabled == true) {
-          var dataset = groupsData[groupIds[i]];
-          if (dataset == null || dataset.length == 0) {
-            continue;
-          }
-          if (!paths.hasOwnProperty(groupIds[i])) {
-            paths[groupIds[i]] = Lines.calcPath(dataset, group);
-          }
-          if (group.options.shaded.orientation === "group") {
-            var subGroupId = group.options.shaded.groupId;
-            if (groupIds.indexOf(subGroupId) === -1) {
-              console.log(group.id + ": Unknown shading group target given:" + subGroupId);
-              continue;
-            }
-            if (!paths.hasOwnProperty(subGroupId)) {
-              paths[subGroupId] = Lines.calcPath(groupsData[subGroupId], this.groups[subGroupId]);
-            }
-            Lines.drawShading(paths[groupIds[i]], group, paths[subGroupId], this.framework);
-          } else {
-            Lines.drawShading(paths[groupIds[i]], group, undefined, this.framework);
-          }
-        }
-      }
-
-      // draw the groups, calculating paths if still necessary.
-      Bars.draw(groupIds, groupsData, this.framework);
-      for (i = 0; i < groupIds.length; i++) {
-        group = this.groups[groupIds[i]];
-        if (groupsData[groupIds[i]].length > 0) {
-          switch (group.options.style) {
-            case "line":
-              if (!paths.hasOwnProperty(groupIds[i])) {
-                paths[groupIds[i]] = Lines.calcPath(groupsData[groupIds[i]], group);
-              }
-              Lines.draw(paths[groupIds[i]], group, this.framework);
-            // eslint-disable-line no-fallthrough
-            case "point":
-            // eslint-disable-line no-fallthrough
-            case "points":
-              if (group.options.style == "point" || group.options.style == "points" || group.options.drawPoints.enabled == true) {
-                Points.draw(groupsData[groupIds[i]], group, this.framework);
-              }
-              break;
-            case "bar":
-            // bar needs to be drawn enmasse
-            // eslint-disable-line no-fallthrough
-            default:
-            //do nothing...
-          }
-        }
-      }
-    }
-  }
-
-  // cleanup unused svg elements
-  DOMutil.cleanupElements(this.svgElements);
-  return false;
-};
-
-LineGraph.prototype._stack = function (data, subData) {
-  var index, dx, dy, subPrevPoint, subNextPoint;
-  index = 0;
-  // for each data point we look for a matching on in the set below
-  for (var j = 0; j < data.length; j++) {
-    subPrevPoint = undefined;
-    subNextPoint = undefined;
-    // we look for time matches or a before-after point
-    for (var k = index; k < subData.length; k++) {
-      // if times match exactly
-      if (subData[k].x === data[j].x) {
-        subPrevPoint = subData[k];
-        subNextPoint = subData[k];
-        index = k;
-        break;
-      } else if (subData[k].x > data[j].x) {
-        // overshoot
-        subNextPoint = subData[k];
-        if (k == 0) {
-          subPrevPoint = subNextPoint;
-        } else {
-          subPrevPoint = subData[k - 1];
-        }
-        index = k;
-        break;
-      }
-    }
-    // in case the last data point has been used, we assume it stays like this.
-    if (subNextPoint === undefined) {
-      subPrevPoint = subData[subData.length - 1];
-      subNextPoint = subData[subData.length - 1];
-    }
-    // linear interpolation
-    dx = subNextPoint.x - subPrevPoint.x;
-    dy = subNextPoint.y - subPrevPoint.y;
-    if (dx == 0) {
-      data[j].y = data[j].orginalY + subNextPoint.y;
-    } else {
-      data[j].y = data[j].orginalY + dy / dx * (data[j].x - subPrevPoint.x) + subPrevPoint.y; // ax + b where b is data[j].y
-    }
-  }
-};
-
-/**
- * first select and preprocess the data from the datasets.
- * the groups have their preselection of data, we now loop over this data to see
- * what data we need to draw. Sorted data is much faster.
- * more optimization is possible by doing the sampling before and using the binary search
- * to find the end date to determine the increment.
- *
- * @param {array}  groupIds
- * @param {object} groupsData
- * @param {date}   minDate
- * @param {date}   maxDate
- * @private
- */
-LineGraph.prototype._getRelevantData = function (groupIds, groupsData, minDate, maxDate) {
-  var group, i, j, item;
-  if (groupIds.length > 0) {
-    for (i = 0; i < groupIds.length; i++) {
-      group = this.groups[groupIds[i]];
-      var itemsData = group.getItems();
-      // optimization for sorted data
-      if (group.options.sort == true) {
-        var dateComparator = function dateComparator(a, b) {
-          return a.getTime() == b.getTime() ? 0 : a < b ? -1 : 1;
-        };
-        var first = Math.max(0, util.binarySearchValue(itemsData, minDate, 'x', 'before', dateComparator));
-        var last = Math.min(itemsData.length, util.binarySearchValue(itemsData, maxDate, 'x', 'after', dateComparator) + 1);
-        if (last <= 0) {
-          last = itemsData.length;
-        }
-        var dataContainer = new Array(last - first);
-        for (j = first; j < last; j++) {
-          item = group.itemsData[j];
-          dataContainer[j - first] = item;
-        }
-        groupsData[groupIds[i]] = dataContainer;
-      } else {
-        // If unsorted data, all data is relevant, just returning entire structure
-        groupsData[groupIds[i]] = group.itemsData;
-      }
-    }
-  }
-};
-
-/**
- *
- * @param {Array.<timeline.GraphGroup.id>} groupIds
- * @param {timeline.DataSet} groupsData
- * @private
- */
-LineGraph.prototype._applySampling = function (groupIds, groupsData) {
-  var group;
-  if (groupIds.length > 0) {
-    for (var i = 0; i < groupIds.length; i++) {
-      group = this.groups[groupIds[i]];
-      if (group.options.sampling == true) {
-        var dataContainer = groupsData[groupIds[i]];
-        if (dataContainer.length > 0) {
-          var increment = 1;
-          var amountOfPoints = dataContainer.length;
-
-          // the global screen is used because changing the width of the yAxis may affect the increment, resulting in an endless loop
-          // of width changing of the yAxis.
-          //TODO: This assumes sorted data, but that's not guaranteed!
-          var xDistance = this.body.util.toGlobalScreen(dataContainer[dataContainer.length - 1].x) - this.body.util.toGlobalScreen(dataContainer[0].x);
-          var pointsPerPixel = amountOfPoints / xDistance;
-          increment = Math.min(Math.ceil(0.2 * amountOfPoints), Math.max(1, Math.round(pointsPerPixel)));
-
-          var sampledData = new Array(amountOfPoints);
-          for (var j = 0; j < amountOfPoints; j += increment) {
-            var idx = Math.round(j / increment);
-            sampledData[idx] = dataContainer[j];
-          }
-          groupsData[groupIds[i]] = sampledData.splice(0, Math.round(amountOfPoints / increment));
-        }
-      }
-    }
-  }
-};
-
-/**
- *
- * @param {Array.<timeline.GraphGroup.id>} groupIds
- * @param {timeline.DataSet} groupsData
- * @param {object} groupRanges  | this is being filled here
- * @private
- */
-LineGraph.prototype._getYRanges = function (groupIds, groupsData, groupRanges) {
-  var groupData, group, i;
-  var combinedDataLeft = [];
-  var combinedDataRight = [];
-  var options;
-  if (groupIds.length > 0) {
-    for (i = 0; i < groupIds.length; i++) {
-      groupData = groupsData[groupIds[i]];
-      options = this.groups[groupIds[i]].options;
-      if (groupData.length > 0) {
-        group = this.groups[groupIds[i]];
-        // if bar graphs are stacked, their range need to be handled differently and accumulated over all groups.
-        if (options.stack === true && options.style === 'bar') {
-          if (options.yAxisOrientation === 'left') {
-            combinedDataLeft = combinedDataLeft.concat(groupData);
-          } else {
-            combinedDataRight = combinedDataRight.concat(groupData);
-          }
-        } else {
-          groupRanges[groupIds[i]] = group.getYRange(groupData, groupIds[i]);
-        }
-      }
-    }
-
-    // if bar graphs are stacked, their range need to be handled differently and accumulated over all groups.
-    Bars.getStackedYRange(combinedDataLeft, groupRanges, groupIds, '__barStackLeft', 'left');
-    Bars.getStackedYRange(combinedDataRight, groupRanges, groupIds, '__barStackRight', 'right');
-  }
-};
-
-/**
- * this sets the Y ranges for the Y axis. It also determines which of the axis should be shown or hidden.
- * @param {Array.<timeline.GraphGroup.id>} groupIds
- * @param {Object} groupRanges
- * @returns {boolean} resized
- * @private
- */
-LineGraph.prototype._updateYAxis = function (groupIds, groupRanges) {
-  var resized = false;
-  var yAxisLeftUsed = false;
-  var yAxisRightUsed = false;
-  var minLeft = 1e9,
-      minRight = 1e9,
-      maxLeft = -1e9,
-      maxRight = -1e9,
-      minVal,
-      maxVal;
-  // if groups are present
-  if (groupIds.length > 0) {
-    // this is here to make sure that if there are no items in the axis but there are groups, that there is no infinite draw/redraw loop.
-    for (var i = 0; i < groupIds.length; i++) {
-      var group = this.groups[groupIds[i]];
-      if (group && group.options.yAxisOrientation != 'right') {
-        yAxisLeftUsed = true;
-        minLeft = 1e9;
-        maxLeft = -1e9;
-      } else if (group && group.options.yAxisOrientation) {
-        yAxisRightUsed = true;
-        minRight = 1e9;
-        maxRight = -1e9;
-      }
-    }
-
-    // if there are items:
-    for (i = 0; i < groupIds.length; i++) {
-      if (groupRanges.hasOwnProperty(groupIds[i])) {
-        if (groupRanges[groupIds[i]].ignore !== true) {
-          minVal = groupRanges[groupIds[i]].min;
-          maxVal = groupRanges[groupIds[i]].max;
-
-          if (groupRanges[groupIds[i]].yAxisOrientation != 'right') {
-            yAxisLeftUsed = true;
-            minLeft = minLeft > minVal ? minVal : minLeft;
-            maxLeft = maxLeft < maxVal ? maxVal : maxLeft;
-          } else {
-            yAxisRightUsed = true;
-            minRight = minRight > minVal ? minVal : minRight;
-            maxRight = maxRight < maxVal ? maxVal : maxRight;
-          }
-        }
-      }
-    }
-
-    if (yAxisLeftUsed == true) {
-      this.yAxisLeft.setRange(minLeft, maxLeft);
-    }
-    if (yAxisRightUsed == true) {
-      this.yAxisRight.setRange(minRight, maxRight);
-    }
-  }
-  resized = this._toggleAxisVisiblity(yAxisLeftUsed, this.yAxisLeft) || resized;
-  resized = this._toggleAxisVisiblity(yAxisRightUsed, this.yAxisRight) || resized;
-
-  if (yAxisRightUsed == true && yAxisLeftUsed == true) {
-    this.yAxisLeft.drawIcons = true;
-    this.yAxisRight.drawIcons = true;
+  if (this.amountOfGroups === 0 || activeGroups === 0) {
+    this.hide();
   } else {
-    this.yAxisLeft.drawIcons = false;
-    this.yAxisRight.drawIcons = false;
-  }
-  this.yAxisRight.master = !yAxisLeftUsed;
-  this.yAxisRight.masterAxis = this.yAxisLeft;
+    this.show();
+    this.height = Number(this.linegraphSVG.style.height.replace("px", ""));
 
-  if (this.yAxisRight.master == false) {
-    if (yAxisRightUsed == true) {
-      this.yAxisLeft.lineOffset = this.yAxisRight.width;
+    // svg offsetheight did not work in firefox and explorer...
+    this.dom.lineContainer.style.height = this.height + 'px';
+    this.width = this.options.visible === true ? Number(('' + this.options.width).replace("px", "")) : 0;
+
+    var props = this.props;
+    var frame = this.dom.frame;
+
+    // update classname
+    frame.className = 'timeline-data-axis';
+
+    // calculate character width and height
+    this._calculateCharSize();
+
+    var orientation = this.options.orientation;
+    var showMinorLabels = this.options.showMinorLabels;
+    var showMajorLabels = this.options.showMajorLabels;
+
+    // determine the width and height of the elements for the axis
+    props.minorLabelHeight = showMinorLabels ? props.minorCharHeight : 0;
+    props.majorLabelHeight = showMajorLabels ? props.majorCharHeight : 0;
+
+    props.minorLineWidth = this.body.dom.backgroundHorizontal.offsetWidth - this.lineOffset - this.width + 2 * this.options.minorLinesOffset;
+    props.minorLineHeight = 1;
+    props.majorLineWidth = this.body.dom.backgroundHorizontal.offsetWidth - this.lineOffset - this.width + 2 * this.options.majorLinesOffset;
+    props.majorLineHeight = 1;
+
+    //  take frame offline while updating (is almost twice as fast)
+    if (orientation === 'left') {
+      frame.style.top = '0';
+      frame.style.left = '0';
+      frame.style.bottom = '';
+      frame.style.width = this.width + 'px';
+      frame.style.height = this.height + "px";
+      this.props.width = this.body.domProps.left.width;
+      this.props.height = this.body.domProps.left.height;
     } else {
-      this.yAxisLeft.lineOffset = 0;
+      // right
+      frame.style.top = '';
+      frame.style.bottom = '0';
+      frame.style.left = '0';
+      frame.style.width = this.width + 'px';
+      frame.style.height = this.height + "px";
+      this.props.width = this.body.domProps.right.width;
+      this.props.height = this.body.domProps.right.height;
     }
 
-    resized = this.yAxisLeft.redraw() || resized;
-    resized = this.yAxisRight.redraw() || resized;
-  } else {
-    resized = this.yAxisRight.redraw() || resized;
-  }
+    resized = this._redrawLabels();
+    resized = this._isResized() || resized;
 
-  // clean the accumulated lists
-  var tempGroups = ['__barStackLeft', '__barStackRight', '__lineStackLeft', '__lineStackRight'];
-  for (i = 0; i < tempGroups.length; i++) {
-    if (groupIds.indexOf(tempGroups[i]) != -1) {
-      groupIds.splice(groupIds.indexOf(tempGroups[i]), 1);
+    if (this.options.icons === true) {
+      this._redrawGroupIcons();
+    } else {
+      this._cleanupIcons();
     }
-  }
 
+    this._redrawTitle(orientation);
+  }
   return resized;
 };
 
 /**
- * This shows or hides the Y axis if needed. If there is a change, the changed event is emitted by the updateYAxis function
+ * Repaint major and minor text labels and vertical grid lines
  *
- * @param {boolean} axisUsed
- * @param {timeline.DataAxis}  axis
  * @returns {boolean}
  * @private
  */
-LineGraph.prototype._toggleAxisVisiblity = function (axisUsed, axis) {
-  var changed = false;
-  if (axisUsed == false) {
-    if (axis.dom.frame.parentNode && axis.hidden == false) {
-      axis.hide();
-      changed = true;
-    }
+DataAxis.prototype._redrawLabels = function () {
+  var _this = this;
+
+  var resized = false;
+  DOMutil.prepareElements(this.DOMelements.lines);
+  DOMutil.prepareElements(this.DOMelements.labels);
+  var orientation = this.options['orientation'];
+  var customRange = this.options[orientation].range != undefined ? this.options[orientation].range : {};
+
+  //Override range with manual options:
+  var autoScaleEnd = true;
+  if (customRange.max != undefined) {
+    this.range.end = customRange.max;
+    autoScaleEnd = false;
+  }
+  var autoScaleStart = true;
+  if (customRange.min != undefined) {
+    this.range.start = customRange.min;
+    autoScaleStart = false;
+  }
+
+  this.scale = new DataScale(this.range.start, this.range.end, autoScaleStart, autoScaleEnd, this.dom.frame.offsetHeight, this.props.majorCharHeight, this.options.alignZeros, this.options[orientation].format);
+
+  if (this.master === false && this.masterAxis != undefined) {
+    this.scale.followScale(this.masterAxis.scale);
+    this.dom.lineContainer.style.display = 'none';
   } else {
-    if (!axis.dom.frame.parentNode && axis.hidden == true) {
-      axis.show();
-      changed = true;
-    }
+    this.dom.lineContainer.style.display = 'block';
   }
-  return changed;
-};
 
-/**
- * This uses the DataAxis object to generate the correct X coordinate on the SVG window. It uses the
- * util function toScreen to get the x coordinate from the timestamp. It also pre-filters the data and get the minMax ranges for
- * the yAxis.
- *
- * @param {Array.<Object>} datapoints
- * @private
- */
-LineGraph.prototype._convertXcoordinates = function (datapoints) {
-  var toScreen = this.body.util.toScreen;
-  for (var i = 0; i < datapoints.length; i++) {
-    datapoints[i].screen_x = toScreen(datapoints[i].x) + this.props.width;
-    datapoints[i].screen_y = datapoints[i].y; //starting point for range calculations
-    if (datapoints[i].end != undefined) {
-      datapoints[i].screen_end = toScreen(datapoints[i].end) + this.props.width;
+  //Is updated in side-effect of _redrawLabel():
+  this.maxLabelSize = 0;
+
+  var lines = this.scale.getLines();
+  lines.forEach(function (line) {
+    var y = line.y;
+    var isMajor = line.major;
+    if (_this.options['showMinorLabels'] && isMajor === false) {
+      _this._redrawLabel(y - 2, line.val, orientation, 'timeline-y-axis timeline-minor', _this.props.minorCharHeight);
+    }
+    if (isMajor) {
+      if (y >= 0) {
+        _this._redrawLabel(y - 2, line.val, orientation, 'timeline-y-axis timeline-major', _this.props.majorCharHeight);
+      }
+    }
+    if (_this.master === true) {
+      if (isMajor) {
+        _this._redrawLine(y, orientation, 'timeline-grid timeline-horizontal timeline-major', _this.options.majorLinesOffset, _this.props.majorLineWidth);
+      } else {
+        _this._redrawLine(y, orientation, 'timeline-grid timeline-horizontal timeline-minor', _this.options.minorLinesOffset, _this.props.minorLineWidth);
+      }
+    }
+  });
+
+  // Note that title is rotated, so we're using the height, not width!
+  var titleWidth = 0;
+  if (this.options[orientation].title !== undefined && this.options[orientation].title.text !== undefined) {
+    titleWidth = this.props.titleCharHeight;
+  }
+  var offset = this.options.icons === true ? Math.max(this.options.iconWidth, titleWidth) + this.options.labelOffsetX + 15 : titleWidth + this.options.labelOffsetX + 15;
+
+  // this will resize the yAxis to accommodate the labels.
+  if (this.maxLabelSize > this.width - offset && this.options.visible === true) {
+    this.width = this.maxLabelSize + offset;
+    this.options.width = this.width + "px";
+    DOMutil.cleanupElements(this.DOMelements.lines);
+    DOMutil.cleanupElements(this.DOMelements.labels);
+    this.redraw();
+    resized = true;
+  }
+  // this will resize the yAxis if it is too big for the labels.
+  else if (this.maxLabelSize < this.width - offset && this.options.visible === true && this.width > this.minWidth) {
+      this.width = Math.max(this.minWidth, this.maxLabelSize + offset);
+      this.options.width = this.width + "px";
+      DOMutil.cleanupElements(this.DOMelements.lines);
+      DOMutil.cleanupElements(this.DOMelements.labels);
+      this.redraw();
+      resized = true;
     } else {
-      datapoints[i].screen_end = undefined;
+      DOMutil.cleanupElements(this.DOMelements.lines);
+      DOMutil.cleanupElements(this.DOMelements.labels);
+      resized = false;
     }
+
+  return resized;
+};
+
+DataAxis.prototype.convertValue = function (value) {
+  return this.scale.convertValue(value);
+};
+
+DataAxis.prototype.screenToValue = function (x) {
+  return this.scale.screenToValue(x);
+};
+
+/**
+ * Create a label for the axis at position x
+ *
+ * @param {number} y
+ * @param {string} text
+ * @param {'top'|'right'|'bottom'|'left'} orientation
+ * @param {string} className
+ * @param {number} characterHeight
+ * @private
+ */
+DataAxis.prototype._redrawLabel = function (y, text, orientation, className, characterHeight) {
+  // reuse redundant label
+  var label = DOMutil.getDOMElement('div', this.DOMelements.labels, this.dom.frame); //this.dom.redundant.labels.shift();
+  label.className = className;
+  label.innerHTML = text;
+  if (orientation === 'left') {
+    label.style.left = '-' + this.options.labelOffsetX + 'px';
+    label.style.textAlign = "right";
+  } else {
+    label.style.right = '-' + this.options.labelOffsetX + 'px';
+    label.style.textAlign = "left";
+  }
+
+  label.style.top = y - 0.5 * characterHeight + this.options.labelOffsetY + 'px';
+
+  text += '';
+
+  var largestWidth = Math.max(this.props.majorCharWidth, this.props.minorCharWidth);
+  if (this.maxLabelSize < text.length * largestWidth) {
+    this.maxLabelSize = text.length * largestWidth;
   }
 };
 
 /**
- * This uses the DataAxis object to generate the correct X coordinate on the SVG window. It uses the
- * util function toScreen to get the x coordinate from the timestamp. It also pre-filters the data and get the minMax ranges for
- * the yAxis.
- *
- * @param {Array.<Object>} datapoints
- * @param {timeline.GraphGroup} group
- * @private
+ * Create a minor line for the axis at position y
+ * @param {number} y
+ * @param {'top'|'right'|'bottom'|'left'} orientation
+ * @param {string} className
+ * @param {number} offset
+ * @param {number} width
  */
-LineGraph.prototype._convertYcoordinates = function (datapoints, group) {
-  var axis = this.yAxisLeft;
-  var svgHeight = Number(this.svg.style.height.replace('px', ''));
-  if (group.options.yAxisOrientation == 'right') {
-    axis = this.yAxisRight;
+DataAxis.prototype._redrawLine = function (y, orientation, className, offset, width) {
+  if (this.master === true) {
+    var line = DOMutil.getDOMElement('div', this.DOMelements.lines, this.dom.lineContainer); //this.dom.redundant.lines.shift();
+    line.className = className;
+    line.innerHTML = '';
+
+    if (orientation === 'left') {
+      line.style.left = this.width - offset + 'px';
+    } else {
+      line.style.right = this.width - offset + 'px';
+    }
+
+    line.style.width = width + 'px';
+    line.style.top = y + 'px';
   }
-  for (var i = 0; i < datapoints.length; i++) {
-    datapoints[i].screen_y = Math.round(axis.convertValue(datapoints[i].y));
-  }
-  group.setZeroPosition(Math.min(svgHeight, axis.convertValue(0)));
 };
 
-module.exports = LineGraph;
+/**
+ * Create a title for the axis
+ * @private
+ * @param {'top'|'right'|'bottom'|'left'} orientation
+ */
+DataAxis.prototype._redrawTitle = function (orientation) {
+  DOMutil.prepareElements(this.DOMelements.title);
+
+  // Check if the title is defined for this axes
+  if (this.options[orientation].title !== undefined && this.options[orientation].title.text !== undefined) {
+    var title = DOMutil.getDOMElement('div', this.DOMelements.title, this.dom.frame);
+    title.className = 'timeline-y-axis timeline-title timeline-' + orientation;
+    title.innerHTML = this.options[orientation].title.text;
+
+    // Add style - if provided
+    if (this.options[orientation].title.style !== undefined) {
+      util.addCssText(title, this.options[orientation].title.style);
+    }
+
+    if (orientation === 'left') {
+      title.style.left = this.props.titleCharHeight + 'px';
+    } else {
+      title.style.right = this.props.titleCharHeight + 'px';
+    }
+
+    title.style.width = this.height + 'px';
+  }
+
+  // we need to clean up in case we did not use all elements.
+  DOMutil.cleanupElements(this.DOMelements.title);
+};
+
+/**
+ * Determine the size of text on the axis (both major and minor axis).
+ * The size is calculated only once and then cached in this.props.
+ * @private
+ */
+DataAxis.prototype._calculateCharSize = function () {
+  // determine the char width and height on the minor axis
+  if (!('minorCharHeight' in this.props)) {
+    var textMinor = document.createTextNode('0');
+    var measureCharMinor = document.createElement('div');
+    measureCharMinor.className = 'timeline-y-axis timeline-minor timeline-measure';
+    measureCharMinor.appendChild(textMinor);
+    this.dom.frame.appendChild(measureCharMinor);
+
+    this.props.minorCharHeight = measureCharMinor.clientHeight;
+    this.props.minorCharWidth = measureCharMinor.clientWidth;
+
+    this.dom.frame.removeChild(measureCharMinor);
+  }
+
+  if (!('majorCharHeight' in this.props)) {
+    var textMajor = document.createTextNode('0');
+    var measureCharMajor = document.createElement('div');
+    measureCharMajor.className = 'timeline-y-axis timeline-major timeline-measure';
+    measureCharMajor.appendChild(textMajor);
+    this.dom.frame.appendChild(measureCharMajor);
+
+    this.props.majorCharHeight = measureCharMajor.clientHeight;
+    this.props.majorCharWidth = measureCharMajor.clientWidth;
+
+    this.dom.frame.removeChild(measureCharMajor);
+  }
+
+  if (!('titleCharHeight' in this.props)) {
+    var textTitle = document.createTextNode('0');
+    var measureCharTitle = document.createElement('div');
+    measureCharTitle.className = 'timeline-y-axis timeline-title timeline-measure';
+    measureCharTitle.appendChild(textTitle);
+    this.dom.frame.appendChild(measureCharTitle);
+
+    this.props.titleCharHeight = measureCharTitle.clientHeight;
+    this.props.titleCharWidth = measureCharTitle.clientWidth;
+
+    this.dom.frame.removeChild(measureCharTitle);
+  }
+};
+
+module.exports = DataAxis;
 
 /***/ })
 /******/ ]);
