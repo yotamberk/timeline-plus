@@ -15847,6 +15847,8 @@ DataAxis.prototype._create = function () {
   this.dom.lineContainer.style.width = '100%';
   this.dom.lineContainer.style.height = this.height;
   this.dom.lineContainer.style.position = 'relative';
+  this.dom.lineContainer.style.visibility = 'visible';
+  this.dom.lineContainer.style.display = 'block';
 
   // create svg element for graph drawing.
   this.svg = document.createElementNS('http://www.w3.org/2000/svg', "svg");
@@ -15914,6 +15916,7 @@ DataAxis.prototype.show = function () {
   if (!this.dom.lineContainer.parentNode) {
     this.body.dom.backgroundHorizontal.appendChild(this.dom.lineContainer);
   }
+  this.dom.lineContainer.style.display = 'block';
 };
 
 /**
@@ -15925,9 +15928,7 @@ DataAxis.prototype.hide = function () {
     this.dom.frame.parentNode.removeChild(this.dom.frame);
   }
 
-  if (this.dom.lineContainer.parentNode) {
-    this.dom.lineContainer.parentNode.removeChild(this.dom.lineContainer);
-  }
+  this.dom.lineContainer.style.display = 'none';
 };
 
 /**
@@ -16055,6 +16056,9 @@ DataAxis.prototype._redrawLabels = function () {
 
   if (this.master === false && this.masterAxis != undefined) {
     this.scale.followScale(this.masterAxis.scale);
+    this.dom.lineContainer.style.display = 'none';
+  } else {
+    this.dom.lineContainer.style.display = 'block';
   }
 
   //Is updated in side-effect of _redrawLabel():
