@@ -31,11 +31,8 @@ exports.timeline = {
     CustomTime: require('./lib/timeline/component/CustomTime'),
     DataAxis: require('./lib/timeline/component/DataAxis'),
     DataScale: require('./lib/timeline/component/DataScale'),
-    GraphGroup: require('./lib/timeline/component/GraphGroup'),
     Group: require('./lib/timeline/component/Group'),
     ItemSet: require('./lib/timeline/component/ItemSet'),
-    Legend: require('./lib/timeline/component/Legend'),
-    LineGraph: require('./lib/timeline/component/LineGraph'),
     TimeAxis: require('./lib/timeline/component/TimeAxis')
   }
 };
