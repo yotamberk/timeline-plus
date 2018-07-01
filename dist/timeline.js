@@ -1,26 +1,10 @@
 /**
- * timeline.js
- * https://github.com/almende/vis
- *
- * A dynamic, browser-based visualization library.
+ * timeline plus
+ * https://yotamberk.github.io/timeline-plus
  *
  * @version 1.0.0
- * @date    2018-04-06
+ * @date    2018-07-01
  *
- * @license
- * Copyright (C) 2011-2017 Almende B.V, http://almende.com
- *
- * timeline.js is dual licensed under both
- *
- * * The Apache 2.0 License
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * and
- *
- * * The MIT License
- *   http://opensource.org/licenses/MIT
- *
- * timeline.js may be distributed under either license.
  */
 
 "use strict";
@@ -12695,27 +12679,42 @@ ItemSet.prototype._orderGroups = function () {
  * @private
  */
 ItemSet.prototype._orderNestedGroups = function (groupIds) {
-  var newGroupIdsOrder = [];
+  var _this = this;
 
-  groupIds.forEach(function (groupId) {
-    var groupData = this.groupsData.get(groupId);
-    if (!groupData.nestedInGroup) {
-      newGroupIdsOrder.push(groupId);
-    }
-    if (groupData.nestedGroups) {
-      var nestedGroups = this.groupsData.get({
-        filter: function filter(nestedGroup) {
-          return nestedGroup.nestedInGroup == groupId;
-        },
-        order: this.options.groupOrder
-      });
-      var nestedGroupIds = nestedGroups.map(function (nestedGroup) {
-        return nestedGroup.id;
-      });
-      newGroupIdsOrder = newGroupIdsOrder.concat(nestedGroupIds);
-    }
-  }, this);
-  return newGroupIdsOrder;
+  /**
+   * Recursively order nested groups
+   *
+   * @param {ItemSet} t
+   * @param {Array.<number>} groupIds
+   * @returns {Array.<number>}
+   * @private
+   */
+  function getOrderedNestedGroups(t, groupIds) {
+    var result = [];
+    groupIds.forEach(function (groupId) {
+      result.push(groupId);
+      var groupData = t.groupsData.get(groupId);
+      if (groupData.nestedGroups) {
+        var nestedGroupIds = t.groupsData.get({
+          filter: function filter(nestedGroup) {
+            return nestedGroup.nestedInGroup == groupId;
+          },
+          order: t.options.groupOrder
+        }).map(function (nestedGroup) {
+          return nestedGroup.id;
+        });
+        result = result.concat(getOrderedNestedGroups(t, nestedGroupIds));
+      }
+    });
+
+    return result;
+  }
+
+  var topGroupIds = groupIds.filter(function (groupId) {
+    return !_this.groupsData.get(groupId).nestedInGroup;
+  });
+
+  return getOrderedNestedGroups(this, topGroupIds);
 };
 
 /**
@@ -15863,6 +15862,8 @@ DataAxis.prototype._create = function () {
   this.dom.lineContainer.style.width = '100%';
   this.dom.lineContainer.style.height = this.height;
   this.dom.lineContainer.style.position = 'relative';
+  this.dom.lineContainer.style.visibility = 'visible';
+  this.dom.lineContainer.style.display = 'block';
 
   // create svg element for graph drawing.
   this.svg = document.createElementNS('http://www.w3.org/2000/svg', "svg");
@@ -15930,6 +15931,7 @@ DataAxis.prototype.show = function () {
   if (!this.dom.lineContainer.parentNode) {
     this.body.dom.backgroundHorizontal.appendChild(this.dom.lineContainer);
   }
+  this.dom.lineContainer.style.display = 'block';
 };
 
 /**
@@ -15941,9 +15943,7 @@ DataAxis.prototype.hide = function () {
     this.dom.frame.parentNode.removeChild(this.dom.frame);
   }
 
-  if (this.dom.lineContainer.parentNode) {
-    this.dom.lineContainer.parentNode.removeChild(this.dom.lineContainer);
-  }
+  this.dom.lineContainer.style.display = 'none';
 };
 
 /**
@@ -16071,6 +16071,9 @@ DataAxis.prototype._redrawLabels = function () {
 
   if (this.master === false && this.masterAxis != undefined) {
     this.scale.followScale(this.masterAxis.scale);
+    this.dom.lineContainer.style.display = 'none';
+  } else {
+    this.dom.lineContainer.style.display = 'block';
   }
 
   //Is updated in side-effect of _redrawLabel():
