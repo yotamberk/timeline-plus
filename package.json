@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yotamberk/timeline.git"
+    "url": "git+https://github.com/yotamberk/timeline-plus.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yotamberk/timeline/issues"
+    "url": "https://github.com/yotamberk/timeline-plus/issues"
   },
-  "homepage": "https://github.com/yotamberk/timeline#readme",
+  "homepage": "https://github.com/yotamberk/timeline-plus#readme",
   "scripts": {
     "build": "gulp",
     "lint": "gulp lint",
