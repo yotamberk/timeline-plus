@@ -12679,27 +12679,42 @@ ItemSet.prototype._orderGroups = function () {
  * @private
  */
 ItemSet.prototype._orderNestedGroups = function (groupIds) {
-  var newGroupIdsOrder = [];
+  var _this = this;
 
-  groupIds.forEach(function (groupId) {
-    var groupData = this.groupsData.get(groupId);
-    if (!groupData.nestedInGroup) {
-      newGroupIdsOrder.push(groupId);
-    }
-    if (groupData.nestedGroups) {
-      var nestedGroups = this.groupsData.get({
-        filter: function filter(nestedGroup) {
-          return nestedGroup.nestedInGroup == groupId;
-        },
-        order: this.options.groupOrder
-      });
-      var nestedGroupIds = nestedGroups.map(function (nestedGroup) {
-        return nestedGroup.id;
-      });
-      newGroupIdsOrder = newGroupIdsOrder.concat(nestedGroupIds);
-    }
-  }, this);
-  return newGroupIdsOrder;
+  /**
+   * Recursively order nested groups
+   *
+   * @param {ItemSet} t
+   * @param {Array.<number>} groupIds
+   * @returns {Array.<number>}
+   * @private
+   */
+  function getOrderedNestedGroups(t, groupIds) {
+    var result = [];
+    groupIds.forEach(function (groupId) {
+      result.push(groupId);
+      var groupData = t.groupsData.get(groupId);
+      if (groupData.nestedGroups) {
+        var nestedGroupIds = t.groupsData.get({
+          filter: function filter(nestedGroup) {
+            return nestedGroup.nestedInGroup == groupId;
+          },
+          order: t.options.groupOrder
+        }).map(function (nestedGroup) {
+          return nestedGroup.id;
+        });
+        result = result.concat(getOrderedNestedGroups(t, nestedGroupIds));
+      }
+    });
+
+    return result;
+  }
+
+  var topGroupIds = groupIds.filter(function (groupId) {
+    return !_this.groupsData.get(groupId).nestedInGroup;
+  });
+
+  return getOrderedNestedGroups(this, topGroupIds);
 };
 
 /**
