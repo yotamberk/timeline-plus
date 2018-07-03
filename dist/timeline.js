@@ -3,7 +3,7 @@
  * https://yotamberk.github.io/timeline-plus
  *
  * @version 1.0.1
- * @date    2018-07-01
+ * @date    2018-07-03
  *
  */
 
@@ -144,7 +144,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.easingFunctions = exports.option = undefined;
 
-var _create = __webpack_require__(27);
+var _create = __webpack_require__(32);
 
 var _create2 = _interopRequireDefault(_create);
 
@@ -1878,7 +1878,7 @@ var _setPrototypeOf = __webpack_require__(127);
 
 var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
 
-var _create = __webpack_require__(27);
+var _create = __webpack_require__(32);
 
 var _create2 = _interopRequireDefault(_create);
 
@@ -1968,7 +1968,7 @@ module.exports = { "default": __webpack_require__(92), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 var store = __webpack_require__(39)('wks');
-var uid = __webpack_require__(30);
+var uid = __webpack_require__(29);
 var Symbol = __webpack_require__(9).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
@@ -2241,7 +2241,7 @@ module.exports = $export;
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(12);
-var createDesc = __webpack_require__(28);
+var createDesc = __webpack_require__(27);
 module.exports = __webpack_require__(13) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
@@ -3475,12 +3475,6 @@ exports['default'] = Item;
 
 /***/ }),
 /* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(83), __esModule: true };
-
-/***/ }),
-/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = function (bitmap, value) {
@@ -3494,7 +3488,7 @@ module.exports = function (bitmap, value) {
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
@@ -3507,7 +3501,7 @@ module.exports = Object.keys || function keys(O) {
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports) {
 
 var id = 0;
@@ -3518,14 +3512,14 @@ module.exports = function (key) {
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = {};
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4575,6 +4569,12 @@ var DataSet = function () {
 exports['default'] = DataSet;
 
 /***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(83), __esModule: true };
+
+/***/ }),
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4678,7 +4678,7 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var shared = __webpack_require__(39)('keys');
-var uid = __webpack_require__(30);
+var uid = __webpack_require__(29);
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
@@ -4793,7 +4793,7 @@ var _util = __webpack_require__(2);
 
 var util = _interopRequireWildcard(_util);
 
-var _DataSet = __webpack_require__(32);
+var _DataSet = __webpack_require__(31);
 
 var _DataSet2 = _interopRequireDefault(_DataSet);
 
@@ -8161,10 +8161,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _create = __webpack_require__(27);
-
-var _create2 = _interopRequireDefault(_create);
-
 var _getPrototypeOf = __webpack_require__(4);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8193,9 +8189,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 /**
  * @constructor BackgroundGroup
- * @param {number | string} groupId
- * @param {Object} data
- * @param {ItemSet} itemSet
  * @extends Group
  */
 var BackgroundGroup = function (_Group) {
@@ -8209,9 +8202,9 @@ var BackgroundGroup = function (_Group) {
   function BackgroundGroup(groupId, data, itemSet) {
     (0, _classCallCheck3['default'])(this, BackgroundGroup);
 
-    var _this = (0, _possibleConstructorReturn3['default'])(this, (BackgroundGroup.__proto__ || (0, _getPrototypeOf2['default'])(BackgroundGroup)).call(this, groupId, data, itemSet));
+    // Group.call(this, groupId, data, itemSet);
 
-    _Group3['default'].call(_this, groupId, data, itemSet);
+    var _this = (0, _possibleConstructorReturn3['default'])(this, (BackgroundGroup.__proto__ || (0, _getPrototypeOf2['default'])(BackgroundGroup)).call(this, groupId, data, itemSet));
 
     _this.width = 0;
     _this.height = 0;
@@ -8266,8 +8259,6 @@ var BackgroundGroup = function (_Group) {
   }]);
   return BackgroundGroup;
 }(_Group3['default']);
-
-BackgroundGroup.prototype = (0, _create2['default'])(_Group3['default'].prototype);
 
 exports['default'] = BackgroundGroup;
 
@@ -8825,7 +8816,7 @@ module.exports = function (KEY, exec) {
 __webpack_require__(95);
 var global = __webpack_require__(9);
 var hide = __webpack_require__(18);
-var Iterators = __webpack_require__(31);
+var Iterators = __webpack_require__(30);
 var TO_STRING_TAG = __webpack_require__(11)('toStringTag');
 
 var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
@@ -8853,7 +8844,7 @@ var LIBRARY = __webpack_require__(42);
 var $export = __webpack_require__(17);
 var redefine = __webpack_require__(61);
 var hide = __webpack_require__(18);
-var Iterators = __webpack_require__(31);
+var Iterators = __webpack_require__(30);
 var $iterCreate = __webpack_require__(98);
 var setToStringTag = __webpack_require__(43);
 var getPrototypeOf = __webpack_require__(62);
@@ -8994,7 +8985,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var pIE = __webpack_require__(46);
-var createDesc = __webpack_require__(28);
+var createDesc = __webpack_require__(27);
 var toIObject = __webpack_require__(21);
 var toPrimitive = __webpack_require__(33);
 var has = __webpack_require__(14);
@@ -12891,7 +12882,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _create2 = __webpack_require__(27);
+var _create2 = __webpack_require__(32);
 
 var _create3 = _interopRequireDefault(_create2);
 
@@ -12931,7 +12922,7 @@ var _util = __webpack_require__(2);
 
 var util = _interopRequireWildcard(_util);
 
-var _DataSet = __webpack_require__(32);
+var _DataSet = __webpack_require__(31);
 
 var _DataSet2 = _interopRequireDefault(_DataSet);
 
@@ -17270,7 +17261,7 @@ var util = exports.util = __webpack_require__(2);
 var DOMutil = exports.DOMutil = __webpack_require__(67);
 
 // data
-var DataSet = exports.DataSet = __webpack_require__(32)['default'];
+var DataSet = exports.DataSet = __webpack_require__(31)['default'];
 
 var DataView = exports.DataView = __webpack_require__(47)['default'];
 var Queue = exports.Queue = __webpack_require__(68)['default'];
@@ -17348,7 +17339,7 @@ module.exports = function (it) {
 
 var dP = __webpack_require__(12);
 var anObject = __webpack_require__(19);
-var getKeys = __webpack_require__(29);
+var getKeys = __webpack_require__(28);
 
 module.exports = __webpack_require__(13) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
@@ -17449,7 +17440,7 @@ module.exports = __webpack_require__(3).Object.keys;
 
 // 19.1.2.14 Object.keys(O)
 var toObject = __webpack_require__(41);
-var $keys = __webpack_require__(29);
+var $keys = __webpack_require__(28);
 
 __webpack_require__(58)('keys', function () {
   return function keys(it) {
@@ -17475,7 +17466,7 @@ module.exports = __webpack_require__(100);
 
 var addToUnscopables = __webpack_require__(96);
 var step = __webpack_require__(97);
-var Iterators = __webpack_require__(31);
+var Iterators = __webpack_require__(30);
 var toIObject = __webpack_require__(21);
 
 // 22.1.3.4 Array.prototype.entries()
@@ -17531,7 +17522,7 @@ module.exports = function (done, value) {
 "use strict";
 
 var create = __webpack_require__(34);
-var descriptor = __webpack_require__(28);
+var descriptor = __webpack_require__(27);
 var setToStringTag = __webpack_require__(43);
 var IteratorPrototype = {};
 
@@ -17586,7 +17577,7 @@ module.exports = __webpack_require__(3).getIterator = function (it) {
 
 var classof = __webpack_require__(102);
 var ITERATOR = __webpack_require__(11)('iterator');
-var Iterators = __webpack_require__(31);
+var Iterators = __webpack_require__(30);
 module.exports = __webpack_require__(3).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR]
     || it['@@iterator']
@@ -17671,7 +17662,7 @@ var META = __webpack_require__(108).KEY;
 var $fails = __webpack_require__(23);
 var shared = __webpack_require__(39);
 var setToStringTag = __webpack_require__(43);
-var uid = __webpack_require__(30);
+var uid = __webpack_require__(29);
 var wks = __webpack_require__(11);
 var wksExt = __webpack_require__(44);
 var wksDefine = __webpack_require__(45);
@@ -17681,12 +17672,12 @@ var anObject = __webpack_require__(19);
 var isObject = __webpack_require__(20);
 var toIObject = __webpack_require__(21);
 var toPrimitive = __webpack_require__(33);
-var createDesc = __webpack_require__(28);
+var createDesc = __webpack_require__(27);
 var _create = __webpack_require__(34);
 var gOPNExt = __webpack_require__(111);
 var $GOPD = __webpack_require__(66);
 var $DP = __webpack_require__(12);
-var $keys = __webpack_require__(29);
+var $keys = __webpack_require__(28);
 var gOPD = $GOPD.f;
 var dP = $DP.f;
 var gOPN = gOPNExt.f;
@@ -17900,7 +17891,7 @@ setToStringTag(global.JSON, 'JSON', true);
 /* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var META = __webpack_require__(30)('meta');
+var META = __webpack_require__(29)('meta');
 var isObject = __webpack_require__(20);
 var has = __webpack_require__(14);
 var setDesc = __webpack_require__(12).f;
@@ -17960,7 +17951,7 @@ var meta = module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(29);
+var getKeys = __webpack_require__(28);
 var gOPS = __webpack_require__(64);
 var pIE = __webpack_require__(46);
 module.exports = function (it) {
@@ -22911,7 +22902,7 @@ var _util = __webpack_require__(2);
 
 var util = _interopRequireWildcard(_util);
 
-var _DataSet = __webpack_require__(32);
+var _DataSet = __webpack_require__(31);
 
 var _DataSet2 = _interopRequireDefault(_DataSet);
 
