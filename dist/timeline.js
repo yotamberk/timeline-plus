@@ -2,8 +2,8 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 1.0.1
- * @date    2018-07-03
+ * @version 2.0.0
+ * @date    2018-07-16
  *
  */
 
@@ -7111,12 +7111,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 /**
- * @param {number | string} groupId
- * @param {Object} data
- * @param {ItemSet} itemSet
  * @constructor Group
  */
 var Group = function () {
+  /**
+  * @param {number | string} groupId
+  * @param {Object} data
+  * @param {ItemSet} itemSet
+  * @constructor Group
+  */
   function Group(groupId, data, itemSet) {
     (0, _classCallCheck3['default'])(this, Group);
 
@@ -7385,6 +7388,8 @@ var Group = function () {
           }
         }
         return true;
+      } else {
+        return false;
       }
     }
   }, {
@@ -7580,7 +7585,7 @@ var Group = function () {
       var height = void 0;
 
       var queue = [function () {
-        forceRestack = _this2._didMarkerHeightChange.bind(_this2);
+        forceRestack = _this2._didMarkerHeightChange.call(_this2) || forceRestack;
       },
 
       // recalculate the height of the subgroups
@@ -8642,7 +8647,7 @@ var RangeItem = function (_Item) {
             this.dom.content.style.right = contentStartPosition + 'px';
           } else {
             this.dom.content.style.left = contentStartPosition + 'px';
-            this.dom.content.style.width = 'calc(100% - ' + contentStartPosition + 'px)';
+            // this.dom.content.style.width = `calc(100% - ${contentStartPosition}px)`;
           }
       }
     }
