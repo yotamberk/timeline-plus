@@ -2,8 +2,8 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 1.0.1
- * @date    2018-07-03
+ * @version 2.0.0
+ * @date    2018-07-18
  *
  */
 
@@ -9724,9 +9724,10 @@ var Range = function (_Component) {
 
         var interval = me.end - me.start;
         var t = util.convert(new Date(), 'Date').valueOf();
+        var rollingModeOffset = me.options.rollingMode && me.options.rollingMode.offset || 0.5;
 
-        var start = t - interval * me.options.rollingMode.offset;
-        var end = t + interval * (1 - me.options.rollingMode.offset);
+        var start = t - interval * rollingModeOffset;
+        var end = t + interval * (1 - rollingModeOffset);
 
         var options = {
           animation: false
@@ -10253,7 +10254,8 @@ var Range = function (_Component) {
         // calculate center, the date to zoom around
         var pointerDate = void 0;
         if (this.rolling) {
-          pointerDate = this.start + (this.end - this.start) * this.options.rollingMode.offset;
+          var rollingModeOffset = this.options.rollingMode && this.options.rollingMode.offset || 0.5;
+          pointerDate = this.start + (this.end - this.start) * rollingModeOffset;
         } else {
           var pointer = this.getPointer({ x: event.clientX, y: event.clientY }, this.body.dom.center);
           pointerDate = this._pointerToDate(pointer);
@@ -22989,18 +22991,12 @@ var Timeline = function (_Core) {
 
     var me = _this;
     _this.defaultOptions = {
-      start: null,
-      end: null,
       autoResize: true,
       orientation: {
         axis: 'bottom', // axis orientation: 'bottom', 'top', or 'both'
         item: 'bottom' // not relevant
       },
-      moment: _moment2['default'],
-      width: null,
-      height: null,
-      maxHeight: null,
-      minHeight: null
+      moment: _moment2['default']
     };
     _this.options = util.deepExtend({}, _this.defaultOptions);
 
@@ -23019,10 +23015,20 @@ var Timeline = function (_Core) {
       _this.options.rtl = options.rtl;
     }
 
-    _this.options.rollingMode = options && options.rollingMode;
-    _this.options.onInitialDrawComplete = options && options.onInitialDrawComplete;
-    _this.options.onTimeout = options && options.onTimeout;
-    _this.options.loadingScreenTemplate = options && options.loadingScreenTemplate;
+    if (options) {
+      if (options.rollingMode) {
+        _this.options.rollingMode = options.rollingMode;
+      }
+      if (options.onInitialDrawComplete) {
+        _this.options.onInitialDrawComplete = options.onInitialDrawComplete;
+      }
+      if (options.onTimeout) {
+        _this.options.onTimeout = options.onTimeout;
+      }
+      if (options.loadingScreenTemplate) {
+        _this.options.loadingScreenTemplate = options.loadingScreenTemplate;
+      }
+    }
 
     // Prepare loading screen
     var loadingScreenFragment = document.createElement('div');
