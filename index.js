@@ -41,7 +41,7 @@ export var timeline = {
 };
 
 // bundled external libraries
-export var moment = require('./lib/module/moment');
+export var moment = require('./lib/module/moment').default;
 
 export var Hammer = require('./lib/module/hammer');
 export var keycharm = require('keycharm');
