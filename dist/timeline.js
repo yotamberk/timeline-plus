@@ -17300,7 +17300,7 @@ var timeline = exports.timeline = {
 };
 
 // bundled external libraries
-var moment = exports.moment = __webpack_require__(8);
+var moment = exports.moment = __webpack_require__(8)['default'];
 
 var Hammer = exports.Hammer = __webpack_require__(16);
 var keycharm = exports.keycharm = __webpack_require__(73);
