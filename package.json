@@ -16,12 +16,14 @@
   "bugs": {
     "url": "https://github.com/yotamberk/timeline-plus/issues"
   },
-  "homepage": "https://github.com/yotamberk/timeline-plus#readme",
+  "homepage": "http://yotamberk.github.io/timeline-plus",
   "scripts": {
     "build": "gulp",
     "lint": "gulp lint",
     "watch": "gulp watch",
-    "watch-dev": "gulp watch --bundle"
+    "watch-dev": "gulp watch --bundle",
+    "predeploy": "npm run build --prefix ./docs",
+    "deploy": "gh-pages -d ./docs/build"
   },
   "dependencies": {
     "emitter-component": "^1.1.1",
