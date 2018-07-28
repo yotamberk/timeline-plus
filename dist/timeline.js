@@ -2,8 +2,8 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 2.1.7
- * @date    2018-09-18
+ * @version 2.1.8
+ * @date    2018-09-25
  *
  */
 
@@ -7521,7 +7521,7 @@ var Group = function () {
               var customOrderedItems = _this.orderedItems.byStart.slice().sort(function (a, b) {
                 return me.itemSet.options.order(a.data, b.data);
               });
-              _this.shouldBailStackItems = stack.stack(customOrderedItems, margin, true, _this._shouldBailItemsRedraw.bind(_this));
+              _this.shouldBailStackItems = stack.stack(customOrderedItems, !!_this.itemSet.options.order, margin, true, _this._shouldBailItemsRedraw.bind(_this));
             }
 
             _this.visibleItems = _this._updateItemsInRange(_this.orderedItems, _this.visibleItems, range);
@@ -7539,7 +7539,7 @@ var Group = function () {
               stack.stackSubgroupsWithInnerStack(visibleSubgroups, margin, this.subgroups);
             } else {
               // TODO: ugly way to access options...
-              this.shouldBailStackItems = stack.stack(this.visibleItems, margin, true, this._shouldBailItemsRedraw.bind(this));
+              this.shouldBailStackItems = stack.stack(this.visibleItems, !!this.itemSet.options.order, margin, true, this._shouldBailItemsRedraw.bind(this));
             }
           } else {
             // no stacking
@@ -15627,6 +15627,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.orderByStart = orderByStart;
 exports.orderByEnd = orderByEnd;
+exports.orderByEndAndWidth = orderByEndAndWidth;
 exports.stack = stack;
 exports.substack = substack;
 exports.nostack = nostack;
@@ -15662,6 +15663,20 @@ function orderByEnd(items) {
 }
 
 /**
+ * Order items by their end date. If they have no end date, their start date + their width in time units
+ * is used.
+ * @param {Item[]} items
+ */
+function orderByEndAndWidth(items) {
+  items.sort(function (a, b) {
+    var aTime = 'end' in a.data ? a.data.end : new Date(a.data.start.getTime() + timeline.range.getMillisecondsPerPixel() * a.width);
+    var bTime = 'end' in b.data ? b.data.end : new Date(b.data.start.getTime() + timeline.range.getMillisecondsPerPixel() * b.width);
+
+    return aTime - bTime;
+  });
+}
+
+/**
  * Adjust vertical positions of the items such that they don't overlap each
  * other.
  * @param {Item[]} items
@@ -15675,7 +15690,7 @@ function orderByEnd(items) {
  *            bailing function
  * @return {boolean} shouldBail
  */
-function stack(items, margin, force, shouldBailItemsRedrawFunction) {
+function _oldStack(items, margin, force, shouldBailItemsRedrawFunction) {
   if (force) {
     // reset top position of all items
     for (var i = 0; i < items.length; i++) {
@@ -15717,6 +15732,82 @@ function stack(items, margin, force, shouldBailItemsRedrawFunction) {
       } while (collidingItem);
     }
   }
+  return shouldBail;
+}
+
+/**
+ * Adjust vertical positions of the items such that they don't overlap each
+ * other.
+ * @param {Item[]} items
+ *            All visible items
+ * @param {boolean} isOrdered
+ *            If true, items are pre-ordered and old stacking algorithm will be used.
+ *            otherwise, the new stacking algorithm will be used.
+ * @param {{item: {horizontal: number, vertical: number}, axis: number}} margin
+ *            Margins between items and between items and the axis.
+ * @param {boolean} [force=false]
+ *            If true, all items will be repositioned. If false (default), only
+ *            items having a top===null will be re-stacked
+ * @param {function} shouldBailItemsRedrawFunction
+ *            bailing function
+ * @return {boolean} shouldBail
+ */
+function stack(items, isOrdered, margin, force, shouldBailItemsRedrawFunction) {
+
+  //_oldStack algorithm is used when it's required to maintain the order of the items.
+  //In case _oldStack function is called, time complexity will be O(n^2) instead of O(n*log(n)).
+  if (isOrdered) {
+    return _oldStack(items, margin, force, shouldBailItemsRedrawFunction);
+  }
+
+  if (force) {
+    // reset top position of all items
+    for (var i = 0; i < items.length; i++) {
+      items[i].top = null;
+    }
+  }
+
+  orderByEndAndWidth(items);
+
+  var shouldBail = false;
+  var collisionQueue = [];
+
+  // calculate new, non-overlapping positions
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+
+    if (item && item.stack) {
+
+      // initialize top position
+      if (item.top == null) {
+        item.top = margin.axis;
+      }
+
+      shouldBail = shouldBailItemsRedrawFunction() || false;
+
+      if (shouldBail) {
+        return true;
+      }
+
+      var firstItemToCollide = collisionQueue[0];
+      var lastItem = collisionQueue[collisionQueue.length - 1];
+
+      if (!item.stack) {
+        item.top = margin.axis;
+      } else if (item && item !== firstItemToCollide && item.stack && firstItemToCollide && firstItemToCollide.top !== null) {
+        // If the item collides with the first item in the collisionQueue - which is the item that has the earliest end date, increase item top.
+        // else, set top as the top of the first item in the collisionQueue.
+        if (!collision(firstItemToCollide, item, margin.item, item.options.rtl)) {
+          item.top = firstItemToCollide.top;
+          collisionQueue.shift();
+        } else if (lastItem && lastItem.top) {
+          item.top = lastItem.top + lastItem.height + margin.item.vertical;
+        }
+      }
+      collisionQueue.push(item);
+    }
+  }
+
   return shouldBail;
 }
 
@@ -15928,6 +16019,9 @@ function collision(a, b, margin, rtl) {
 function collisionByTimes(a, b) {
   return a.start <= b.start && a.end >= b.start && a.top < b.top + b.height && a.top + a.height > b.top || b.start <= a.start && b.end >= a.start && b.top < a.top + a.height && b.top + b.height > a.top;
 }
+
+// WEBPACK FOOTER //
+// ./lib/timeline/Stack.js
 
 /***/ }),
 /* 78 */
