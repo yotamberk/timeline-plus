@@ -463,9 +463,17 @@ class App extends Component {
               </td>
             </tr>
             <tr>
+              <td>order</td>
+              <td>number</td>
+              <td>no</td>
+              <td>Order of the group in the list.
+                By default, groups are ordered by first-come, first-show.
+              </td>
+            </tr>
+            <tr>
               <td>subgroupOrder</td>
               <td>String or Function</td>
-              <td>none</td>
+              <td>no</td>
               <td>Order the subgroups by a field name or custom sort function.
                 By default, groups are ordered by first-come, first-show.
               </td>
@@ -473,7 +481,7 @@ class App extends Component {
             <tr>
               <td>subgroupStack</td>
               <td>Object or Boolean</td>
-              <td>none</td>
+              <td>no</td>
               <td>Enables stacking within individual subgroups. Example: <code>{`{'subgroup0': true, 'subgroup1': false, 'subgroup2': true}`}</code> 
                   For each subgroup where stacking is enabled, items will be stacked on top of each other within that subgroup such that they do no overlap.
                   If set to <code>{`true`}</code> all subgroups will be stacked.
@@ -483,7 +491,7 @@ class App extends Component {
             <tr>
               <td>title</td>
               <td>String</td>
-              <td>none</td>
+              <td>no</td>
               <td>A title for the group, displayed when holding the mouse on the groups label.
                 The title can only contain plain text.
               </td>
