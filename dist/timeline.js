@@ -2,7 +2,7 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 2.1.1
+ * @version 2.1.2
  * @date    2018-09-11
  *
  */
@@ -23476,7 +23476,7 @@ var Timeline = function (_Core) {
 
         // calculate the new middle and interval for the window
         var middle = (start + end) / 2;
-        var interval = Math.max(this.range.end - this.range.start, (end - start) * 1.1);
+        var interval = (end - start) * 1.1;
 
         var animation = options && options.animation !== undefined ? options.animation : true;
 
@@ -23765,8 +23765,8 @@ function getItemVerticalScroll(timeline, item) {
     return false;
   }
 
-  var leftHeight = timeline.props.leftContainer.height;
-  var contentHeight = timeline.props.left.height;
+  var itemsetHeight = timeline.options.rtl ? timeline.props.rightContainer.height : timeline.props.leftContainer.height;
+  var contentHeight = timeline.props.center.height;
 
   var group = item.parent;
   var offset = group.top;
@@ -23786,16 +23786,16 @@ function getItemVerticalScroll(timeline, item) {
   var height = item.height;
 
   if (targetOffset < currentScrollHeight) {
-    if (offset + leftHeight <= offset + itemTop() + height) {
+    if (offset + itemsetHeight <= offset + itemTop() + height) {
       offset += itemTop() - timeline.itemSet.options.margin.item.vertical;
     }
-  } else if (targetOffset + height > currentScrollHeight + leftHeight) {
-    offset += itemTop() + height - leftHeight + timeline.itemSet.options.margin.item.vertical;
+  } else if (targetOffset + height > currentScrollHeight + itemsetHeight) {
+    offset += itemTop() + height - itemsetHeight + timeline.itemSet.options.margin.item.vertical;
   } else {
     shouldScroll = false;
   }
 
-  offset = Math.min(offset, contentHeight - leftHeight);
+  offset = Math.min(offset, contentHeight - itemsetHeight);
 
   return { shouldScroll: shouldScroll, scrollOffset: offset, itemTop: targetOffset };
 }
