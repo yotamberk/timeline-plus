@@ -3,7 +3,7 @@
  * https://yotamberk.github.io/timeline-plus
  *
  * @version 2.1.1
- * @date    2018-07-22
+ * @date    2018-09-11
  *
  */
 
@@ -6834,7 +6834,7 @@ var CustomTime = function (_Component) {
     value: function setOptions(options) {
       if (options) {
         // copy all options that we know
-        util.selectiveExtend(['moment', 'locale', 'locales', 'id'], this.options, options);
+        util.selectiveExtend(['moment', 'locale', 'locales', 'id', 'title'], this.options, options);
       }
     }
 
@@ -13424,7 +13424,7 @@ var ItemSet = function (_Component) {
         var addCallback = function addCallback(name) {
           var fn = options[name];
           if (fn) {
-            if (!(fn instanceof Function)) {
+            if (!(typeof fn === 'function')) {
               throw new Error('option ' + name + ' must be a function ' + name + '(item, callback)');
             }
             _this3.options[name] = fn;
