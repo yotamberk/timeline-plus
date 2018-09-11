@@ -3071,15 +3071,15 @@ var Item = function () {
         var dragCenter = document.createElement('div');
         dragCenter.className = 'timeline-drag-center';
         dragCenter.dragCenterItem = this;
-        var hammer = new _hammer2['default'](dragCenter);
+        this.hammerDragCenter = new _hammer2['default'](dragCenter);
 
-        hammer.on('tap', function (event) {
+        this.hammerDragCenter.on('tap', function (event) {
           me.parent.itemSet.body.emitter.emit('click', {
             event: event,
             item: me.id
           });
         });
-        hammer.on('doubletap', function (event) {
+        this.hammerDragCenter.on('doubletap', function (event) {
           event.stopPropagation();
           me.parent.itemSet._onUpdateItem(me);
           me.parent.itemSet.body.emitter.emit('doubleClick', {
@@ -3105,6 +3105,11 @@ var Item = function () {
           this.dom.dragCenter.parentNode.removeChild(this.dom.dragCenter);
         }
         this.dom.dragCenter = null;
+
+        if (this.hammerDragCenter) {
+          this.hammerDragCenter.destroy();
+          this.hammerDragCenter = null;
+        }
       }
     }
 
@@ -3133,7 +3138,7 @@ var Item = function () {
         deleteButton.title = 'Delete this item';
 
         // TODO: be able to destroy the delete button
-        new _hammer2['default'](deleteButton).on('tap', function (event) {
+        this.hammerDeleteButton = new _hammer2['default'](deleteButton).on('tap', function (event) {
           event.stopPropagation();
           me.parent.removeFromDataSet(me);
         });
@@ -3146,6 +3151,11 @@ var Item = function () {
           this.dom.deleteButton.parentNode.removeChild(this.dom.deleteButton);
         }
         this.dom.deleteButton = null;
+
+        if (this.hammerDeleteButton) {
+          this.hammerDeleteButton.destroy();
+          this.hammerDeleteButton = null;
+        }
       }
     }
 
@@ -13548,7 +13558,7 @@ var ItemSet = function (_Component) {
       for (i = 0, ii = this.selection.length; i < ii; i++) {
         id = this.selection[i];
         item = this.items[id];
-        if (item) item.unselect();
+        if (item && ids.indexOf(id) < 0) item.unselect();
       }
 
       // select items
