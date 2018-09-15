@@ -10860,8 +10860,11 @@ var Core = function () {
           }
         }
 
-        // prevent scrolling when zoomKey defined and activated
+        // Prevent scrolling when zooming (no zoom key, or pressing zoom key)
         if (this.options.zoomKey && event[this.options.zoomKey]) return;
+
+        // Don't preventDefault if you can't scroll
+        if (!this.options.verticalScroll && !this.options.horizontalScroll) return;
 
         // Prevent default actions caused by mouse wheel
         // (else the page and timeline both scroll)
