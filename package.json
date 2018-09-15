@@ -1,6 +1,6 @@
 {
   "name": "timeline-plus",
-  "version": "2.1.3",
+  "version": "2.1.5",
   "description": "",
   "main": "./dist/timeline.js",
   "directories": {
