@@ -50,46 +50,47 @@ class App extends Component {
             More examples can be found in the <a href="#More_Examples">timeline examples</a>.
           </p>
 
-        <pre className="prettyprint lang-html">&{`lt;!DOCTYPE HTML&gt;
-        &lt;html&gt;
-        &lt;head&gt;
-          &lt;title&gt;Timeline | Basic demo&lt;/title&gt;
+<pre className="prettyprint lang-html">
+{`<!DOCTYPE HTML>
+  <html>
+  <head>
+    <title>Timeline | Basic demo</title>
 
-          &lt;style type="text/css"&gt;
-            body, html {
-              font-family: sans-serif;
-            }
-          &lt;/style&gt;
+    <style type="text/css">
+      body, html {
+        font-family: sans-serif;
+      }
+    </style>
 
-          &lt;script src="./dist/timeline.js"&gt;&lt;/script&gt;
-          &lt;link href="./dist/timeline.css" rel="stylesheet" type="text/css" /&gt;
-        &lt;/head&gt;
-        &lt;body&gt;
-        &lt;div id="timeline"&gt;&lt;/div&gt;
+    <script src="./dist/timeline.js"></script>
+    <link href="./dist/timeline.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+  <div id="timeline"></div>
 
-        &lt;script type="text/javascript"&gt;
-          // DOM element where the Timeline will be attached
-          var container = document.getElementById('timeline');
+  <script type="text/javascript">
+    // DOM element where the Timeline will be attached
+    var container = document.getElementById('timeline');
 
-          // Create a DataSet (allows two way data-binding)
-          var items = new timeline.DataSet([
-            {id: 1, content: 'item 1', start: '2013-04-20'},
-            {id: 2, content: 'item 2', start: '2013-04-14'},
-            {id: 3, content: 'item 3', start: '2013-04-18'},
-            {id: 4, content: 'item 4', start: '2013-04-16', end: '2013-04-19'},
-            {id: 5, content: 'item 5', start: '2013-04-25'},
-            {id: 6, content: 'item 6', start: '2013-04-27'}
-          ]);
+    // Create a DataSet (allows two way data-binding)
+    var items = new timeline.DataSet([
+      {id: 1, content: 'item 1', start: '2013-04-20'},
+      {id: 2, content: 'item 2', start: '2013-04-14'},
+      {id: 3, content: 'item 3', start: '2013-04-18'},
+      {id: 4, content: 'item 4', start: '2013-04-16', end: '2013-04-19'},
+      {id: 5, content: 'item 5', start: '2013-04-25'},
+      {id: 6, content: 'item 6', start: '2013-04-27'}
+    ]);
 
-          // Configuration for the Timeline
-          var options = {};
+    // Configuration for the Timeline
+    var options = {};
 
-          // Create a Timeline
-          var timeline = new timeline.Timeline(container, items, options);
-        &lt;/script&gt;
-        &lt;/body&gt;
-        &lt;/html&gt;
-        `}</pre>
+    // Create a Timeline
+    var timeline = new timeline.Timeline(container, items, options);
+  </script>
+  </body>
+</html>`}
+</pre>
 
           {
           //   <div className="contentWrapper">
@@ -172,10 +173,10 @@ class App extends Component {
           <h2 id="Loading">Loading</h2>
          
 
-        <pre className="prettyprint lang-html">{`
-        &lt;script src="vis/dist/timeline.js"&gt;&lt;/script&gt;
-        &lt;link href="vis/dist/timeline.css" rel="stylesheet" type="text/css" /&gt;
-        `}</pre>
+        <pre className="prettyprint lang-html">
+{`<script src="vis/dist/timeline.js"></script>
+<link href="vis/dist/timeline.css" rel="stylesheet" type="text/css" />`}
+        </pre>
 
           The constructor of the Timeline is <code>{`timeline.Timeline`}</code>
           <pre className="prettyprint lang-js">{`var timeline = new timeline.Timeline(container, items, options);`}</pre>
@@ -226,17 +227,17 @@ class App extends Component {
             A DataSet is constructed as:
           </p>
 
-          <pre className="prettyprint lang-js">{`
-          var items = new timeline.DataSet([
-            {
-              start: new Date(2010, 7, 15),
-              end: new Date(2010, 8, 2),  // end is optional
-              content: 'Trajectory A'
-              // Optional: fields 'id', 'type', 'group', 'className', 'style'
-            }
-            // more items...
-          ]);
-          `}</pre>
+          <pre className="prettyprint lang-js">
+{`var items = new timeline.DataSet([
+  {
+    start: new Date(2010, 7, 15),
+    end: new Date(2010, 8, 2),  // end is optional
+    content: 'Trajectory A'
+    // Optional: fields 'id', 'type', 'group', 'className', 'style'
+  }
+  // more items...
+]);`}
+          </pre>
 
           <p>
             The item properties are defined as:
@@ -257,12 +258,13 @@ class App extends Component {
               <td>This field is optional. A className can be used to give items
                 an individual css style. For example, when an item has className
                 'red', one can define a css style like:
-                <pre className="prettyprint lang-css">{`
-                  .timeline-item.red {
-                    color: white;
-                    background-color: red;
-                    border-color: darkred;
-                }`}</pre>
+                <pre className="prettyprint lang-css">
+{`.timeline-item.red {
+    color: white;
+    background-color: red;
+    border-color: darkred;
+}`}
+                </pre>
                 More details on how to style items can be found in the section
                 <a href="#Styles">Styles</a>.
               </td>
@@ -399,16 +401,16 @@ class App extends Component {
             A table with groups can be created like:
           </p>
 
-        <pre className="prettyprint lang-js">{`
-          var groups = [
-            {
-              id: 1,
-              content: 'Group 1'
-              // Optional: a field 'className', 'style', 'order', [properties]
-            }
-            // more groups...
-          ]);
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var groups = [
+    {
+      id: 1,
+      content: 'Group 1'
+      // Optional: a field 'className', 'style', 'order', [properties]
+    }
+    // more groups...
+  ]);`}
+        </pre>
 
 
           <p>
@@ -532,15 +534,15 @@ class App extends Component {
             Options are defined as a JSON object. All options are optional.
           </p>
 
-        <pre className="prettyprint lang-js">{`
-          var options = {
-            width: '100%',
-            height: '30px',
-            margin: {
-              item: 20
-            }
-          };
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var options = {
+    width: '100%',
+    height: '30px',
+    margin: {
+      item: 20
+    }
+  };`}
+        </pre>
 
           <p>
             The following options are available.
@@ -591,10 +593,10 @@ class App extends Component {
               <td>When true, a configurator is loaded where all configuration options of the Timeline can be changed live.
 
                 The displayed options can be filtered by providing a filter function. This function is invoked with two arguments: the current <code>{`option`}</code> and the <code>{`path`}</code> (an Array) of the option within the options object. The option will be displayed when the filter function returns true. For example to only display format options:
-                <pre className="prettyprint lang-js">{`
-                  function (option, path) {
-                    return option === 'format' || path.indexOf('format') !== -1;
-                  }`}
+                <pre className="prettyprint lang-js">
+{`function (option, path) {
+  return option === 'format' || path.indexOf('format') !== -1;
+}`}
                 </pre>
               </td>
             </tr>
@@ -661,40 +663,44 @@ class App extends Component {
               <td>none</td>
               <td>
                 Apply custom date formatting of the labels on the time axis. The default value of <code>{`format`}</code> is:
-              <pre className="prettyprint lang-js">{`{
-                minorLabels: {
-                  millisecond:'SSS',
-                  second:     's',
-                  minute:     'HH:mm',
-                  hour:       'HH:mm',
-                  weekday:    'ddd D',
-                  day:        'D',
-                  week:       'w',
-                  month:      'MMM',
-                  year:       'YYYY'
-                },
-                majorLabels: {
-                  millisecond:'HH:mm:ss',
-                  second:     'D MMMM HH:mm',
-                  minute:     'ddd D MMMM',
-                  hour:       'ddd D MMMM',
-                  weekday:    'MMMM YYYY',
-                  day:        'MMMM YYYY',
-                  week:       'MMMM YYYY',
-                  month:      'YYYY',
-                  year:       ''
-                }
-              }`}</pre>
+              <pre className="prettyprint lang-js">
+{`{
+  minorLabels: {
+    millisecond:'SSS',
+    second:     's',
+    minute:     'HH:mm',
+    hour:       'HH:mm',
+    weekday:    'ddd D',
+    day:        'D',
+    week:       'w',
+    month:      'MMM',
+    year:       'YYYY'
+  },
+  majorLabels: {
+    millisecond:'HH:mm:ss',
+    second:     'D MMMM HH:mm',
+    minute:     'ddd D MMMM',
+    hour:       'ddd D MMMM',
+    weekday:    'MMMM YYYY',
+    day:        'MMMM YYYY',
+    week:       'MMMM YYYY',
+    month:      'YYYY',
+    year:       ''
+  }
+}`}
+              </pre>
 
                 For values which not provided in the customized <code>{`options.format`}</code>, the default values will be used.
                 All available formatting syntax is described in the <a href="http://momentjs.com/docs/#/displaying/format/">docs of moment.js</a>.
                 <br/>
                 You can also use a function format for each label. The function accepts as arguments the date, scale and step in that order, and expects to return a string for the label.
 
-                <pre className="prettyprint lang-js">{`function format({
-                  minorLabels: Function(date: Date, scale: Number, step: Number),
-                  majorLabels: Function(date: Date, scale: Number, step: Number)
-                }`}</pre>
+                <pre className="prettyprint lang-js">
+{`function format({
+  minorLabels: Function(date: Date, scale: Number, step: Number),
+  majorLabels: Function(date: Date, scale: Number, step: Number)
+}`}
+                </pre>
               </td>
             </tr>
 
@@ -1219,9 +1225,11 @@ class App extends Component {
               <td>String</td>
               <td>none</td>
               <td>Set a fixed scale for the time axis of the Timeline. Choose from <code>{`'millisecond'`}</code>, <code>{`'second'`}</code>, <code>{`'minute'`}</code>, <code>{`'hour'`}</code>, <code>{`'weekday'`}</code>, <code>{`'week'`}</code>, <code>{`'day'`}</code>, <code>{`'month'`}</code>, <code>{`'year'`}</code>. Example usage:
-              <pre className="prettyprint lang-js">{`var options = {
-              timeAxis: {scale: 'minute', step: 5}
-              }`}</pre>
+              <pre className="prettyprint lang-js">
+{`var options = {
+  timeAxis: {scale: 'minute', step: 5}
+}`}
+              </pre>
                 <p>Note: The 'week' scale only works properly when <a href="#Localization">locales</a> are enabled.</p>
               </td>
             </tr>
@@ -1423,11 +1431,12 @@ class App extends Component {
                   <li><code>{`event`}</code> (Object): the original click event.</li>
                 </ul>
                 Example usage:
-                <pre className="prettyprint lang-js">{`
-        document.getElementById('myTimeline').onclick = function (event) {
-          var props = timeline.getEventProperties(event)
-          console.log(props);
-        }`}</pre>
+                <pre className="prettyprint lang-js">
+{`document.getElementById('myTimeline').onclick = function (event) {
+  var props = timeline.getEventProperties(event)
+  console.log(props);
+}`}
+                </pre>
               </td>
             </tr>
 
@@ -1628,30 +1637,29 @@ class App extends Component {
             Here an example on how to listen for a <code>{`select`}</code> event.
           </p>
 
-        <pre className="prettyprint lang-js">{`
-        timeline.on('select', function (properties) {
-          alert('selected items: ' + properties.items);
-        });
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`timeline.on('select', function (properties) {
+  alert('selected items: ' + properties.items);
+});`}
+        </pre>
 
           <p>
             A listener can be removed via the function <code>{`off`}</code>:
           </p>
 
-        <pre className="prettyprint lang-js">{`
-        function onSelect (properties) {
-          alert('selected items: ' + properties.items);
-        }
+        <pre className="prettyprint lang-js">
+{`function onSelect (properties) {
+  alert('selected items: ' + properties.items);
+}
 
-        // add event listener
-        timeline.on('select', onSelect);
+// add event listener
+timeline.on('select', onSelect);
 
-        // do stuff...
+// do stuff...
 
-        // remove event listener
-        timeline.off('select', onSelect);
-        `}</pre>
-
+// remove event listener
+timeline.off('select', onSelect);`}
+        </pre>
 
           <p>
             The following events are available.
@@ -1686,11 +1694,12 @@ class App extends Component {
                 Passes a properties object as returned by the method <a href="#getEventProperties"><code>{`Timeline.getEventProperties(event)`}</code></a>.
               </td>
               <td>Fired when right-clicked inside the Timeline. Note that in order to prevent the context menu from showing up, default behavior of the event must be stopped:
-        <pre className="prettyprint lang-js">{`timeline.on('contextmenu', function (props) {
-          alert('Right click!');
-          props.event.preventDefault();
-        });
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`timeline.on('contextmenu', function (props) {
+  alert('Right click!');
+  props.event.preventDefault();
+});`}
+        </pre>
               </td>
             </tr>
 
@@ -1876,32 +1885,34 @@ class App extends Component {
 
           <p>Option <code>{`editable`}</code> accepts a boolean or an object. When <code>{`editable`}</code> is a boolean, all manipulation actions will be either enabled or disabled. When <code>{`editable`}</code> is an object, one can enable individual manipulation actions:</p>
 
-        <pre className="prettyprint lang-js">{` //enable or disable all manipulation actions
-        var options = {
-          editable: true       // true or false
-        };
+        <pre className="prettyprint lang-js">
+{` //enable or disable all manipulation actions
+var options = {
+  editable: true       // true or false
+};
 
-        // enable or disable individual manipulation actions
-        var options = {
-          editable: {
-            add: true,         // add new items by double tapping
-            updateTime: true,  // drag items horizontally
-            updateGroup: true, // drag items from one group to another
-            remove: true,       // delete an item by tapping the delete button top right
-            overrideItems: false  // allow these options to override item.editable
-          }
-        };`}</pre>
+// enable or disable individual manipulation actions
+var options = {
+  editable: {
+    add: true,         // add new items by double tapping
+    updateTime: true,  // drag items horizontally
+    updateGroup: true, // drag items from one group to another
+    remove: true,       // delete an item by tapping the delete button top right
+    overrideItems: false  // allow these options to override item.editable
+  }
+};`}
+        </pre>
 
           <p>
             Editing can be enabled/disabled for specific items. Setting the property <code>{`editable`}</code> to <code>{`true`}</code> or <code>{`false`}</code> on a data item will override the timeline option except when <code>{`timeline.editable.overrideItems`}</code> is set to <code>{`true`}</code>.
           </p>
 
-        <pre className="prettyprint lang-js">{`
-        var items = new timeline.DataSet([
-          {id: 1, content: 'read-only item', start: '2013-04-20', editable: false},
-          {id: 2, content: 'editable item', start: '2013-04-14'}
-        ]);
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var items = new timeline.DataSet([
+  {id: 1, content: 'read-only item', start: '2013-04-20', editable: false},
+  {id: 2, content: 'editable item', start: '2013-04-14'}
+]);`}
+        </pre>
 
           <p>
             Individual manipulation actions (<code>{`updateTime`}</code>, <code>{`updateGroup`}</code> and <code>{`remove`}</code>) can also be set on individual items. If any of the item-level
@@ -1938,18 +1949,19 @@ class App extends Component {
             Example code:
           </p>
 
-        <pre className="prettyprint lang-js">{`var options = {
-          onUpdate: function (item, callback) {
-            item.content = prompt('Edit items text:', item.content);
-            if (item.content != null) {
-              callback(item); // send back adjusted item
-            }
-            else {
-              callback(null); // cancel updating the item
-            }
-          }
-        };
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var options = {
+  onUpdate: function (item, callback) {
+    item.content = prompt('Edit items text:', item.content);
+    if (item.content != null) {
+      callback(item); // send back adjusted item
+    }
+    else {
+      callback(null); // cancel updating the item
+    }
+  }
+};`}
+        </pre>
 
           A full example is available here: <a href="../examples/editing/editingItemsCallbacks.html">editingItemsCallbacks.html</a>.
 
@@ -1960,83 +1972,86 @@ class App extends Component {
             Timeline supports templates to format item contents. Any template engine (such as <a href="http://handlebarsjs.com/">handlebars</a> or <a href="http://mustache.github.io/">mustache</a>) can be used, and one can also manually build HTML. In the options, one can provide a template handler. This handler is a function accepting an item's data as the first argument, the item element as the second argument and the edited data as the third argument, and outputs formatted HTML:
           </p>
 
-        <pre className="prettyprint lang-js">{`var options = {
-          template: function (item, element, data) {
-            var html = ... // generate HTML markup for this item
-            return html;
-          }
-        };
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var options = {
+  template: function (item, element, data) {
+    var html = ... // generate HTML markup for this item
+    return html;
+  }
+};`}
+        </pre>
 
           <h3>Create HTML manually</h3>
 
           The HTML for an item can be created manually:
 
-        <pre className="prettyprint lang-js">{`var options = {
-          template: function (item, element, data) {
-            return '&lt;h1&gt;' + item.header + data.moving?' '+ data.start:'' + '&lt;/h1&gt;&lt;p&gt;' + item.description + '&lt;/p&gt;';
-          },
-          onMoving: function (item, callback) {
-            item.moving = true;
-          }
-        };
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var options = {
+  template: function (item, element, data) {
+    return '<h1>' + item.header + data.moving?' '+ data.start:'' + '</h1><p>' + item.description + '</p>';
+  },
+  onMoving: function (item, callback) {
+    item.moving = true;
+  }
+};`}
+        </pre>
 
           <h3>Using a template engine</h3>
 
           Using <a href="http://handlebarsjs.com/">handlebars</a>, one can write the template in HTML:
 
-        <pre className="prettyprint lang-html">{`
-        &lt;script id="item-template" type="text/x-handlebars-template"&gt;
-          &lt;h1&gt;{{header}}&lt;/h1&gt;
-          &lt;p&gt;{{description}}&lt;/p&gt;
-        &lt;/script&gt;
-        `}</pre>
+        <pre className="prettyprint lang-html">
+{`<script id="item-template" type="text/x-handlebars-template">
+  <h1>{{header}}</h1>
+  <p>{{description}}</p>
+</script> `}
+        </pre>
 
           Compile the template:
 
-        <pre className="prettyprint lang-js">{`
-        var source = document.getElementById('item-template').innerHTML;
-        var template = Handlebars.compile(source);
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var source = document.getElementById('item-template').innerHTML;
+var template = Handlebars.compile(source);`}
+        </pre>
 
           And then specify the template in the Timeline options
 
-        <pre className="prettyprint lang-js">{`var options = {
-          template: template
-        };
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var options = {
+  template: template
+};`}
+        </pre>
 
         <h3>React templates</h3>
 
         You can use a React component for the templates by rendering them to the templates' element directly:
 
-        <pre className="prettyprint lang-js">{`
-          template: function (item, element, data) {
-            return ReactDOM.render(&lt;b&gt;{item.content}&lt;/b&gt;, element);
-          },
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`template: function (item, element, data) {
+  return ReactDOM.render(<b>{item.content}</b>, element);
+}`}
+        </pre>
 
 
           <h3>Multiple templates</h3>
 
           In order to support multiple templates, the template handler can be extended to switch between different templates, depending on a specific item property:
 
-        <pre className="prettyprint lang-js">{`
-        var templates = {
-          template1: Handlebars.compile(...),
-          template2: Handlebars.compile(...),
-          template2: Handlebars.compile(...),
-          ...
-        };
+        <pre className="prettyprint lang-js">
+{`var templates = {
+  template1: Handlebars.compile(...),
+  template2: Handlebars.compile(...),
+  template2: Handlebars.compile(...),
+  ...
+};
 
-        var options = {
-          template: function (item, element, data) {
-            var template = templates[item.template];  // choose the right template
-            return template(item);                    // execute the template
-          }
-        };
-        `}</pre>
+var options = {
+  template: function (item, element, data) {
+    var template = templates[item.template];  // choose the right template
+    return template(item);                    // execute the template
+  }
+};`}
+        </pre>
 
           Now the items can be extended with a property <code>{`template`}</code>, specifying which template to use for the item.
 
@@ -2050,28 +2065,31 @@ class App extends Component {
             To set a locale for the Timeline, specify the option <code>{`locale`}</code>:
           </p>
 
-        <pre className="prettyprint lang-js">{`var options = {
-          locale: 'nl'
-        };
-        `}</pre>
+        <pre className="prettyprint lang-js">
+{`var options = {
+  locale: 'nl'
+};`}
+        </pre>
 
           <h3>Create a new locale</h3>
 
           To load a locale (that is not supported by default) into the Timeline, one can add a new locale to the option <code>{`locales`}</code>:
 
-        <pre className="prettyprint lang-js">{`var options = {
-          locales: {
-            // create a new locale (text strings should be replaced with localized strings)
-            mylocale: {
-              current: 'current',
-              time: 'time',
-            }
-          },
+        <pre className="prettyprint lang-js">
+{`var options = {
+  locales: {
+    // create a new locale (text strings should be replaced with localized strings)
+    mylocale: {
+      current: 'current',
+      time: 'time',
+    }
+  },
 
-          // use the new locale
-          locale: 'mylocale'
-        };
-        `}</pre>
+  // use the new locale
+  locale: 'mylocale'
+};
+`}
+        </pre>
 
           <h3 id="available-locales">Available locales</h3>
 
@@ -2129,21 +2147,21 @@ class App extends Component {
             Examples:
           </p>
 
-        <pre className="prettyprint lang-js">{` 
-        //display in UTC
-        var options = {
-          moment: function(date) {
-            return timeline.moment(date).utc();
-          }
-        };
+        <pre className="prettyprint lang-js">
+{`//display in UTC
+var options = {
+  moment: function(date) {
+    return timeline.moment(date).utc();
+  }
+};
 
-        // display in UTC +08:00
-        var options = {
-          moment: function(date) {
-            return timeline.moment(date).utcOffset('+08:00');
-          }
-        };
-        `}</pre>
+// display in UTC +08:00
+var options = {
+  moment: function(date) {
+    return timeline.moment(date).utcOffset('+08:00');
+  }
+};`}
+        </pre>
 
 
 
@@ -2156,13 +2174,14 @@ class App extends Component {
 
           <p>For example, to change the border and background color of all items, include the
             following code inside the head of your html code or in a separate stylesheet.</p>
-        <pre className="prettyprint lang-html">&{`lt;style&gt;
-          .timeline-item {
-            border-color: orange;
-            background-color: yellow;
-          }
-        &lt;/style&gt;
-        `}</pre>
+        <pre className="prettyprint lang-html">
+{`<style>
+  .timeline-item {
+    border-color: orange;
+    background-color: yellow;
+  }
+</style>`}
+        </pre>
 
           <h3 id="Grid_Backgrounds">Grid Backgrounds</h3>
           <p>
@@ -2214,23 +2233,24 @@ class App extends Component {
 
           <p>Examples:</p>
 
-          <pre className="prettyprint lang-html">&{`lt;style&gt;
-          /* alternating column backgrounds */
-          .timeline-time-axis .grid.timeline-odd {
-            background: #f5f5f5;
-          }
+          <pre className="prettyprint lang-html">
+{`<style>
+  /* alternating column backgrounds */
+  .timeline-time-axis .grid.timeline-odd {
+    background: #f5f5f5;
+  }
 
-          /* gray background in weekends, white text color */
-          .timeline-time-axis .timeline-grid.timeline-saturday,
-          .timeline-time-axis .timeline-grid.timeline-sunday {
-            background: gray;
-          }
-          .timeline-time-axis .timeline-text.timeline-saturday,
-          .timeline-time-axis .timeline-text.timeline-sunday {
-            color: white;
-          }
-        &lt;/style&gt;
-        `}</pre>
+  /* gray background in weekends, white text color */
+  .timeline-time-axis .timeline-grid.timeline-saturday,
+  .timeline-time-axis .timeline-grid.timeline-sunday {
+    background: gray;
+  }
+  .timeline-time-axis .timeline-text.timeline-saturday,
+  .timeline-time-axis .timeline-text.timeline-sunday {
+    color: white;
+  }
+</style>`}
+          </pre>
 
         <h3 id="Performance_Tips">Performance  Tips</h3>
         <p>Defining a timeline with many items and/or groups might affect initial loading time and general performance.
