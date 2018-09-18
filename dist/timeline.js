@@ -2,8 +2,8 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 2.1.1
- * @date    2018-09-11
+ * @version 2.1.7
+ * @date    2018-09-18
  *
  */
 
@@ -3259,7 +3259,7 @@ var Item = function () {
 
       if (this.options.visibleFrameTemplate) {
         visibleFrameTemplateFunction = this.options.visibleFrameTemplate.bind(this);
-        itemVisibleFrameContent = visibleFrameTemplateFunction(itemData, frameElement);
+        itemVisibleFrameContent = visibleFrameTemplateFunction(itemData, itemVisibleFrameContentElement);
       } else {
         itemVisibleFrameContent = '';
       }
@@ -7326,12 +7326,16 @@ var Group = function () {
         util.removeClassName(this.dom.label, 'timeline-nesting-group');
       }
 
-      if (data && data.nestedInGroup) {
-        util.addClassName(this.dom.label, 'timeline-nested-group');
+      if (data && (data.treeLevel || data.nestedInGroup)) {
+        var indent = 15 * (data.treeLevel || 2);
+        if (!data.nestedGroups) {
+          indent = indent + 15;
+        }
+        util.addClassName(this.dom.label, 'vis-nested-group');
         if (this.itemSet.options && this.itemSet.options.rtl) {
-          this.dom.inner.style.paddingRight = '30px';
+          this.dom.inner.style.paddingRight = indent + 'px';
         } else {
-          this.dom.inner.style.paddingLeft = '30px';
+          this.dom.inner.style.paddingLeft = indent + 'px';
         }
       }
 
@@ -14879,14 +14883,31 @@ var ItemSet = function (_Component) {
 
       var groupsData = this.groupsData.getDataSet();
 
-      var nestingGroup = groupsData.get(group.groupId);
-      if (nestingGroup.showNested == undefined) {
-        nestingGroup.showNested = true;
-      }
-      nestingGroup.showNested = !nestingGroup.showNested;
+      group.showNested = !group.showNested;
 
-      var nestedGroups = groupsData.get(group.nestedGroups).map(function (nestedGroup) {
-        nestedGroup.visible = nestingGroup.showNested;
+      var nestingGroup = groupsData.get(group.groupId);
+      nestingGroup.showNested = group.showNested;
+
+      var fullNestedGroups = group.nestedGroups;
+      var nextLevel = fullNestedGroups;
+      while (nextLevel.length > 0) {
+        var current = nextLevel;
+        nextLevel = [];
+        for (var i = 0; i < current.length; i++) {
+          var node = groupsData.get(current[i]);
+          if (node.nestedGroups) {
+            nextLevel = nextLevel.concat(node.nestedGroups);
+          }
+        }
+        if (nextLevel.length > 0) {
+          fullNestedGroups = fullNestedGroups.concat(nextLevel);
+        }
+      }
+      var nestedGroups = groupsData.get(fullNestedGroups).map(function (nestedGroup) {
+        if (nestedGroup.visible == undefined) {
+          nestedGroup.visible = true;
+        }
+        nestedGroup.visible = !!nestingGroup.showNested;
         return nestedGroup;
       });
 
