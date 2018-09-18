@@ -2,8 +2,8 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 2.1.1
- * @date    2018-09-11
+ * @version 2.1.6
+ * @date    2018-09-15
  *
  */
 
@@ -3259,7 +3259,7 @@ var Item = function () {
 
       if (this.options.visibleFrameTemplate) {
         visibleFrameTemplateFunction = this.options.visibleFrameTemplate.bind(this);
-        itemVisibleFrameContent = visibleFrameTemplateFunction(itemData, frameElement);
+        itemVisibleFrameContent = visibleFrameTemplateFunction(itemData, itemVisibleFrameContentElement);
       } else {
         itemVisibleFrameContent = '';
       }
