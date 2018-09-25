@@ -2,8 +2,8 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 2.1.7
- * @date    2018-09-18
+ * @version 2.1.8
+ * @date    2018-09-25
  *
  */
 
@@ -16020,7 +16020,7 @@ var BoxItem = function (_Item) {
     value: function isVisible(range) {
       // determine visibility
       var isVisible = void 0;
-      var align = this.options.align;
+      var align = this.data.align || this.options.align;
       var widthInMs = this.width * range.getMillisecondsPerPixel();
 
       if (align == 'right') {
