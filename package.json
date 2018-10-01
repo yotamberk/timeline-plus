@@ -1,6 +1,6 @@
 {
   "name": "timeline-plus",
-  "version": "2.1.6",
+  "version": "2.1.9",
   "description": "",
   "main": "./dist/timeline.js",
   "directories": {
@@ -22,6 +22,7 @@
     "lint": "gulp lint",
     "watch": "gulp watch",
     "watch-dev": "gulp watch --bundle",
+    "prepublishOnly": "npm run build",
     "predeploy": "npm run build --prefix ./docs",
     "deploy": "gh-pages -d ./docs/build"
   },
