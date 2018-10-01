@@ -21,10 +21,9 @@ const Home = () => (
     <Iframe url={`${process.env.PUBLIC_URL}/examples/basicUsage.html`}
         width="100%"
         height="450px"
-        id="myId"
-        className="myClassname"
         display="initial"
         position="relative"
+        allowFullScreen
       />
   </div>
 )

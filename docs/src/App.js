@@ -136,7 +136,17 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/getting-started/installation" component={Installation} />
             <Route exact path="/getting-started/usage" component={Usage} />
-            </main>
+            <Route exact path="/items" component={Usage} />
+            <Route exact path="/groups" component={Usage} />
+            <Route exact path="/options" component={Usage} />
+            <Route exact path="/methods" component={Usage} />
+            <Route exact path="/events" component={Usage} />
+            <Route exact path="/templates" component={Usage} />
+            <Route exact path="/localization" component={Usage} />
+            <Route exact path="/examples" component={Usage} />
+            <Route exact path="/styles" component={Usage} />
+
+          </main>
         </div>
       </Router>
     );
