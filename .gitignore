@@ -1,4 +1,8 @@
 # timeline.js files
+docs/public/examples
+docs/public/dist
+dist
+
 
 # npm files
 node_modules
