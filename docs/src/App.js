@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -22,7 +22,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 440,
+    height: '100%',
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -75,9 +75,11 @@ class App extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar}>
-          <Typography variant="title" color="inherit" noWrap>
-            Timeline-plus
-          </Typography>
+          <Link to='/'>
+            <Typography variant="title" color="inherit" noWrap>
+              Timeline-plus
+            </Typography>
+          </Link>
         </div>
         <NavMenu />
       </div>

@@ -14,7 +14,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing.unit * 6,
   },
 });
 
@@ -32,22 +32,22 @@ class NavMenu extends React.Component {
 
     return (
       <div className={classes.root}>
-        <List component="nav" disablePadding>
+        <List component='nav' disablePadding>
           <ListItem button onClick={() => this.changeOpenSection('gettingStarted')}>
             <ListItemText primary='Getting started' />
           </ListItem>
-          <Collapse in={this.state.openSection==='gettingStarted'} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <Link to="/getting-started/installation">
+          <Collapse in={this.state.openSection==='gettingStarted'} timeout='auto' unmountOnExit>
+            <List component='div' disablePadding>
+              <Link to='/getting-started/installation'>
                 <ListItem button className={classes.nested}>
-                  <ListItemText inset primary="installation" />
+                  <ListItemText primary='installation' />
                 </ListItem>
               </Link>
             </List>
-            <List component="div" disablePadding>
-              <Link to="/getting-started/usage">
+            <List component='div' disablePadding>
+              <Link to='/getting-started/usage'>
                 <ListItem button className={classes.nested}>
-                  <ListItemText inset primary="usage" />
+                  <ListItemText primary='usage' />
                 </ListItem>
               </Link>
             </List>
