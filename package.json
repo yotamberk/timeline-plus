@@ -7,6 +7,14 @@
     "doc": "docs",
     "example": "examples"
   },
+  "files": [
+    "dist/timeline.js",
+    "dist/timeline.css",
+    "dist/timeline.min.js",
+    "dist/timeline.min.css",
+    "dist/timeline.js.map",
+    "dist/timeline.map"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yotamberk/timeline-plus.git"

@@ -25,7 +25,6 @@ import LocalizationPage from './LocalizationPage'
 import ExamplesPage from './ExamplesPage'
 import StylesPage from './StylesPage'
 
-
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -56,6 +55,20 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  logoLink: {
+    display: 'inline',
+  },
+  logoImg: {
+    position: 'relative',
+    right: '8px',
+    bottom: '3px',
+    width: '30px',
+  },
+  logoTitle: {
+    display: 'inline-block',
+    position: 'relative',
+    top: '6px',
+  },
   drawerPaper: {
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
@@ -85,9 +98,12 @@ class App extends React.Component {
       <div>
         <div className={classes.toolbar}>
           <Link to='/'>
-            <Typography variant="title" color="inherit" noWrap>
-              Timeline-plus
-            </Typography>
+            <div className={classes.logoLink}>
+              <img src={process.env.PUBLIC_URL + '/logo2.png'} alt='logo' className={classes.logoImg}/>
+              <Typography variant="title" color="inherit" noWrap className={classes.logoTitle}>
+                Timeline-plus
+              </Typography>
+            </div>
           </Link>
         </div>
         <NavMenu />
