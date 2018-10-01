@@ -1,6 +1,6 @@
 {
   "name": "timeline-plus",
-  "version": "2.2.1",
+  "version": "2.1.9",
   "description": "",
   "main": "./dist/timeline.js",
   "directories": {
@@ -8,12 +8,12 @@
     "example": "examples"
   },
   "files": [
-    "./dist/timeline.js",
-    "./dist/timeline.css",
-    "./dist/timeline.min.js",
-    "./dist/timeline.min.css",
-    "./dist/timeline.js.map",
-    "./dist/timeline.map"
+    "dist/timeline.js",
+    "dist/timeline.css",
+    "dist/timeline.min.js",
+    "dist/timeline.min.css",
+    "dist/timeline.js.map",
+    "dist/timeline.map"
   ],
   "repository": {
     "type": "git",
