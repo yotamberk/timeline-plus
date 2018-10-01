@@ -12,9 +12,18 @@ import Hidden from '@material-ui/core/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import NavMenu from './NavMenu'
-import Home from './Home'
-import Usage from './Usage'
-import Installation from './Installation'
+import HomePage from './HomePage'
+import UsagePage from './UsagePage'
+import InstallationPage from './InstallationPage'
+import ItemsPage from './ItemsPage'
+import GroupsPage from './GroupsPage'
+import OptionsPage from './OptionsPage'
+import MethodsPage from './MethodsPage'
+import EventsPage from './EventsPage'
+import TemplatesPage from './TemplatesPage'
+import LocalizationPage from './LocalizationPage'
+import ExamplesPage from './ExamplesPage'
+import StylesPage from './StylesPage'
 
 
 const drawerWidth = 240;
@@ -133,18 +142,18 @@ class App extends React.Component {
           <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <Route exact path="/" component={Home} />
-            <Route exact path="/getting-started/installation" component={Installation} />
-            <Route exact path="/getting-started/usage" component={Usage} />
-            <Route exact path="/items" component={Usage} />
-            <Route exact path="/groups" component={Usage} />
-            <Route exact path="/options" component={Usage} />
-            <Route exact path="/methods" component={Usage} />
-            <Route exact path="/events" component={Usage} />
-            <Route exact path="/templates" component={Usage} />
-            <Route exact path="/localization" component={Usage} />
-            <Route exact path="/examples" component={Usage} />
-            <Route exact path="/styles" component={Usage} />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/getting-started/installation" component={InstallationPage} />
+            <Route exact path="/getting-started/usage" component={UsagePage} />
+            <Route exact path="/items" component={ItemsPage} />
+            <Route exact path="/groups" component={GroupsPage} />
+            <Route exact path="/options" component={OptionsPage} />
+            <Route exact path="/methods" component={MethodsPage} />
+            <Route exact path="/events" component={EventsPage} />
+            <Route exact path="/templates" component={TemplatesPage} />
+            <Route exact path="/localization" component={LocalizationPage} />
+            <Route exact path="/examples" component={ExamplesPage} />
+            <Route exact path="/styles" component={StylesPage} />
 
           </main>
         </div>
