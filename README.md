@@ -12,6 +12,14 @@ I intend to add features and fixes that are to my concern for my own projects. I
 Install via npm:
 
     $ npm install timeline-plus
+    
+Or include the files via unpkg: 
+
+[https://unpkg.com/timeline-plus/dist/timeline.js](https://unpkg.com/timeline-plus/dist/timeline.js). 
+
+and
+
+[https://unpkg.com/timeline-plus/dist/timeline.css](https://unpkg.com/timeline-plus/dist/timeline.css).
 
 Or download the library from the github project:
 [https://github.com/yotamberk/timeline.git](https://github.com/yotamberk/timeline.git).
