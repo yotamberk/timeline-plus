@@ -2,8 +2,8 @@
  * timeline plus
  * https://yotamberk.github.io/timeline-plus
  *
- * @version 2.1.8
- * @date    2018-09-25
+ * @version 2.2.2
+ * @date    2018-10-03
  *
  */
 
@@ -10870,18 +10870,21 @@ var Core = function () {
         // Don't preventDefault if you can't scroll
         if (!this.options.verticalScroll && !this.options.horizontalScroll) return;
 
-        // Prevent default actions caused by mouse wheel
-        // (else the page and timeline both scroll)
-        event.preventDefault();
-
         if (this.options.verticalScroll && Math.abs(deltaY) >= Math.abs(deltaX)) {
           var current = this.props.scrollTop;
           var adjusted = current + deltaY;
 
           if (this.isActive()) {
-            this._setScrollTop(adjusted);
-            this._redraw();
-            this.emit('scroll', event);
+            var newScrollTop = this._setScrollTop(adjusted);
+
+            if (newScrollTop !== current) {
+              this._redraw();
+              this.emit('scroll', event);
+
+              // Prevent default actions caused by mouse wheel
+              // (else the page and timeline both scroll)
+              event.preventDefault();
+            }
           }
         } else if (this.options.horizontalScroll) {
           var delta = Math.abs(deltaX) >= Math.abs(deltaY) ? deltaX : deltaY;
@@ -10898,6 +10901,8 @@ var Core = function () {
             event: event
           };
           this.range.setRange(newStart, newEnd, options);
+
+          event.preventDefault();
         }
       }
 
@@ -15754,8 +15759,8 @@ function _oldStack(items, margin, force, shouldBailItemsRedrawFunction) {
  */
 function stack(items, isOrdered, margin, force, shouldBailItemsRedrawFunction) {
 
-  //_oldStack algorithm is used when it's required to maintain the order of the items.
-  //In case _oldStack function is called, time complexity will be O(n^2) instead of O(n*log(n)).
+  // _oldStack algorithm is used when it's required to maintain the order of the items.
+  // In case _oldStack function is called, time complexity will be O(n^2) instead of O(n*log(n)).
   if (isOrdered) {
     return _oldStack(items, margin, force, shouldBailItemsRedrawFunction);
   }
@@ -16114,7 +16119,7 @@ var BoxItem = function (_Item) {
     value: function isVisible(range) {
       // determine visibility
       var isVisible = void 0;
-      var align = this.options.align;
+      var align = this.data.align || this.options.align;
       var widthInMs = this.width * range.getMillisecondsPerPixel();
 
       if (align == 'right') {
