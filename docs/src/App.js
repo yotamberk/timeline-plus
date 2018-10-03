@@ -67,7 +67,7 @@ const styles = theme => ({
   logoTitle: {
     display: 'inline-block',
     position: 'relative',
-    top: '6px',
+    bottom: '6px',
   },
   drawerPaper: {
     width: drawerWidth,

@@ -21,6 +21,7 @@ and
 
 [https://unpkg.com/timeline-plus/dist/timeline.css](https://unpkg.com/timeline-plus/dist/timeline.css).
 
+
 Or download the library from the github project:
 [https://github.com/yotamberk/timeline.git](https://github.com/yotamberk/timeline.git).
 
