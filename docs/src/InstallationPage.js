@@ -21,8 +21,8 @@ const Installation = () => (
       <pre class="prettyprint">
         <code class="language-html">
 {
-`<script src="vis/dist/timeline.js"></script>
-<link href="vis/dist/timeline.css" rel="stylesheet" type="text/css" />`
+`<script src="https://unpkg.com/timeline-plus/dist/timeline.js"></script>
+<link href="https://unpkg.com/timeline-plus/dist/timeline.css" rel="stylesheet" type="text/css" />`
 }
         </code>
     </pre>
