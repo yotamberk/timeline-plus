@@ -54,63 +54,63 @@ class NavMenu extends React.Component {
           </Collapse>
         </List>
         <List component='nav' disablePadding>
-          <Link to='items'>
+          <Link to='/items'>
             <ListItem button>
               <ListItemText primary='items' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='groups'>
+          <Link to='/groups'>
             <ListItem button>
               <ListItemText primary='groups' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='options'>
+          <Link to='/options'>
             <ListItem button>
               <ListItemText primary='options' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='methods'>
+          <Link to='/methods'>
             <ListItem button>
               <ListItemText primary='methods' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='events'>
+          <Link to='/events'>
             <ListItem button>
               <ListItemText primary='events' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='templates'>
+          <Link to='/templates'>
             <ListItem button>
               <ListItemText primary='templates' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='localization'>
+          <Link to='/localization'>
             <ListItem button>
               <ListItemText primary='localization' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='examples'>
+          <Link to='/examples'>
             <ListItem button>
               <ListItemText primary='examples' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='styles'>
+          <Link to='/styles'>
             <ListItem button>
               <ListItemText primary='styles' />
             </ListItem>

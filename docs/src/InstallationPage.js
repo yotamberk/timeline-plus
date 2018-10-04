@@ -19,7 +19,7 @@ const Installation = () => (
     </Typography>
 
       <pre class="prettyprint">
-        <code class="language-html">
+        <code class="lang-html">
 {
 `<script src="https://unpkg.com/timeline-plus/dist/timeline.js"></script>
 <link href="https://unpkg.com/timeline-plus/dist/timeline.css" rel="stylesheet" type="text/css" />`
