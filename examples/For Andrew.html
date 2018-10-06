@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Timeline | Basic demo</title>
+
+  <script src="../dist/timeline.js"></script>
+  <link href="../dist/timeline.min.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+
+    .item-popup {
+        display: none;
+        position: absolute;
+        bottom: 50px;
+    }
+
+    .item-popup-inner {
+        border: 1px solid black;
+        background-color: white;
+        border-radius: 3px;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .timeline-range .timeline-item-overflow {
+        overflow: visible;
+    }
+
+    .vis-item-shown-content {
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .timeline-range .vis-item-shown-content {
+        /* max-width: calc(100% + 150px);
+        margin-right: -240px;
+        padding: 0; */
+    }
+
+    .timeline-box .vis-item-shown-content {
+        max-width: 150px;
+        padding: 0;
+    }
+
+    .timeline-color {
+        padding: 10px;
+        display: inline-block;
+    }
+
+    .timeline-color-key {
+        vertical-align: top;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+    }
+
+    .timeline-color-text {
+        vertical-align: top;
+        display: inline-block;
+        margin-left: 5px;
+        white-space: nowrap;
+    }
+
+  </style>
+
+  <script src="./timeline.js"></script>
+</head>
+<body>
+<div id="visualization"></div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js'></script>
+
+<script id="item-template" type="text/x-handlebars-template">
+    <div class="item-popup" >
+        <div class="item-popup-inner" >
+            <b>Record {{current_id}}</b><br>
+            <ul class="list-unstyled">
+                {{#each values}}
+                    <li>{{name}}: {{{value}}}</li>
+                {{/each}}
+            </ul>
+            <a class = "moreinfo" data-record-id="{{current_id}}">Read more...</a>
+        </div>
+    </div>
+    <div class="vis-item-shown-content">
+        {{content}}
+    </div>
+</script>
+
+<script type="text/javascript">
+
+    var container = document.getElementById('visualization');
+
+    var items = [
+    {
+        "group":"1",
+        "start":1537142400000,
+        "values": [
+            {"value":"17","name":"Date short"},
+            {"value":"Director","name":"Title of event"}
+        ],
+        "current_id":"2127",
+        "column":"671",
+        "content":"17 - Director",
+        "end":1537228800000,
+        "style":"background-color: #1C75BC",
+        "id":"2127+671+1"
+    },
+    {
+        "end":1537660800000,
+        "content":"Q3 - Director",
+        "column":"671",
+        "current_id":"2120",
+        "values":[
+            {"value":"Q3","name":"Date short"},
+            {"value":"Director","name":"Title of event"}
+        ],
+        "start":1537574400000,
+        "group":"1",
+        "id":"2120+671+1",
+        "style":"background-color: #FFDD00"
+    },
+  
+    {
+        "end":1529798400000,
+        "content":"20-23 - 7NH",
+        "column":"671",
+        "current_id":"2126",
+        "values":[
+            {"value":"20-23","name":"Date short"},
+            {"name":"Title of event","value":"7NH"}
+        ],
+        "group":"1",
+        "start":1529452800000,
+        "id":"2126+671+1",
+        "style":"background-color: #1C75BC"
+    },
+    {
+        "id":"2128+671+1",
+        "content":"6 - Book Signing (TBC)",
+        "end":1528934400000,
+        "column":"671",
+        "current_id":"2128",
+        "values":[
+            {"value":"6","name":"Date short"},
+            {"name":"Title of event","value":"Book Signing (TBC)"}
+        ],
+        "start":1528675200000,
+        "group":"1"
+    },
+    ];
+
+    var template = Handlebars.compile(document.getElementById('item-template').innerHTML);
+    var options = { template: template };
+    var tl = new timeline.Timeline(container, items, options);
+
+    tl.on('click', function(e) {
+        if (!e.item) {
+            $('.item-popup').hide();
+        }
+        else {
+            var target = $( e.event.target );
+            if (target.hasClass('moreinfo')) {
+                var record_id = target.data('record-id');
+                var m = $("#readmore_modal");
+                m.find('.modal-body').text('Loading...');
+                m.find('.modal-body').load('/record_body/' + record_id);
+                m.modal();
+            } else {
+                target.closest('.timeline-item').find('.item-popup').toggle();
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
+
+

@@ -14,13 +14,13 @@ class MethodsPage extends React.Component {
 
     return (
       <div className={classes.root}>
-      <h2 id="Methods">Methods</h2>
-      <p>
-        The Timeline supports the following methods.
-      </p>
+        <h2 id="Methods">Methods</h2>
+        <p>
+          The Timeline supports the following methods.
+        </p>
 
-      <table className="methods">
-      <tbody>
+        <table className="methods">
+          <tbody>
         <tr>
           <th>Method</th>
           <th>Return&nbsp;Type</th>

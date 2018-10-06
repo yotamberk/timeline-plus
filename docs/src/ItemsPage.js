@@ -30,13 +30,13 @@ class ItemsPage extends React.Component {
 
       <pre className="prettyprint lang-js">
 {`var items = new timeline.DataSet([
-{
-start: new Date(2010, 7, 15),
-end: new Date(2010, 8, 2),  // end is optional
-content: 'Trajectory A'
-// Optional: fields 'id', 'type', 'group', 'className', 'style'
-}
-// more items...
+  {
+    start: new Date(2010, 7, 15),
+    end: new Date(2010, 8, 2),  // end is optional
+    content: 'Trajectory A'
+    // Optional: fields 'id', 'type', 'group', 'className', 'style'
+  }
+  // more items...
 ]);`}
       </pre>
 
@@ -159,25 +159,25 @@ border-color: darkred;
             Setting this to <code>{`false`}</code> will cause the creation of full-size DIVs.
           </td>
         </tr>
-        <tr className='toggle collapsible' onclick="toggleTable('itemOptionTable', 'itemEditable', this);">
-          <td><span parent="itemEditable" className="right-caret"></span> editable</td>
+        <tr>
+          <td><span parent="itemEditable"></span> editable</td>
           <td>Boolean or Object</td>
           <td>no</td>
           <td>Override the editable option of the timeline for a specific item (assuming <code>{`timeline.editable.overrideItems`}</code> is false).</td>
         </tr>
-        <tr parent="itemEditable" className="hidden">
+        <tr parent="itemEditable">
           <td className="indent">editable.remove</td>
           <td>boolean</td>
           <td>no</td>
           <td>If true, item can be deleted by first selecting it, and then clicking the delete button on the top right of the item. See section <a href="#Editing_Items">Editing Items</a> for a detailed explanation.</td>
         </tr>
-        <tr parent="itemEditable" className="hidden">
+        <tr parent="itemEditable">
           <td className="indent">editable.updateGroup</td>
           <td>boolean</td>
           <td>no</td>
           <td>If true, item can be dragged from one group to another. Only applicable when the Timeline has groups. See section <a href="#Editing_Items">Editing Items</a> for a detailed explanation.</td>
         </tr>
-        <tr parent="itemEditable" className="hidden">
+        <tr parent="itemEditable">
           <td className="indent">editable.updateTime</td>
           <td>boolean</td>
           <td>no</td>

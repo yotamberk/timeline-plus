@@ -26,10 +26,10 @@ class StylesPage extends React.Component {
     
           <pre className="prettyprint lang-html">
 {`<style>
-.timeline-item {
-border-color: orange;
-background-color: yellow;
-}
+  .timeline-item {
+    border-color: orange;
+    background-color: yellow;
+  }
 </style>`}
           </pre>
 
@@ -84,20 +84,20 @@ background-color: yellow;
 
           <pre className="prettyprint lang-html">
 {`<style>
-/* alternating column backgrounds */
-.timeline-time-axis .grid.timeline-odd {
-background: #f5f5f5;
-}
+  /* alternating column backgrounds */
+  .timeline-time-axis .grid.timeline-odd {
+    background: #f5f5f5;
+  }
 
-/* gray background in weekends, white text color */
-.timeline-time-axis .timeline-grid.timeline-saturday,
-.timeline-time-axis .timeline-grid.timeline-sunday {
-background: gray;
-}
-.timeline-time-axis .timeline-text.timeline-saturday,
-.timeline-time-axis .timeline-text.timeline-sunday {
-color: white;
-}
+  /* gray background in weekends, white text color */
+  .timeline-time-axis .timeline-grid.timeline-saturday,
+  .timeline-time-axis .timeline-grid.timeline-sunday {
+    background: gray;
+  }
+  .timeline-time-axis .timeline-text.timeline-saturday,
+  .timeline-time-axis .timeline-text.timeline-sunday {
+    color: white;
+  }
 </style>`}
           </pre>
 

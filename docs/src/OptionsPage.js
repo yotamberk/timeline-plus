@@ -23,11 +23,11 @@ class OptionsPage extends React.Component {
 
     <pre className="prettyprint lang-js">
 {`var options = {
-width: '100%',
-height: '30px',
-margin: {
-  item: 20
-}
+  width: '100%',
+  height: '30px',
+  margin: {
+    item: 20
+  }
 };`}
     </pre>
 
@@ -82,7 +82,7 @@ margin: {
             The displayed options can be filtered by providing a filter function. This function is invoked with two arguments: the current <code>{`option`}</code> and the <code>{`path`}</code> (an Array) of the option within the options object. The option will be displayed when the filter function returns true. For example to only display format options:
             <pre className="prettyprint lang-js">
 {`function (option, path) {
-return option === 'format' || path.indexOf('format') !== -1;
+  return option === 'format' || path.indexOf('format') !== -1;
 }`}
             </pre>
           </td>
@@ -96,39 +96,39 @@ return option === 'format' || path.indexOf('format') !== -1;
             If value is <code>{`'all'`}</code> then each field defined on the timeline item will become a <code>{`data-`}</code> attribute.</td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','editable', this);">
-          <td><span parent="editable" className="right-caret"></span> editable</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="editable"></span> editable</td>
           <td>boolean or Object</td>
           <td><code>{`false`}</code></td>
           <td>If true, the items in the timeline can be manipulated. Only applicable when option <code>{`selectable`}</code> is <code>{`true`}</code>. See also the callbacks <code>{`onAdd`}</code>, <code>{`onUpdate`}</code>, <code>{`onMove`}</code>, and <code>{`onRemove`}</code>. When <code>{`editable`}</code> is an object, one can enable or disable individual manipulation actions.
             See section <a href="#Editing_Items">Editing Items</a> for a detailed explanation.
           </td>
         </tr>
-        <tr parent="editable" className="hidden">
+        <tr parent="editable">
           <td className="indent">editable.add</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, new items can be created by double tapping an empty space in the Timeline. See section <a href="#Editing_Items">Editing Items</a> for a detailed explanation.</td>
         </tr>
-        <tr parent="editable" className="hidden">
+        <tr parent="editable">
           <td className="indent">editable.remove</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, items can be deleted by first selecting them, and then clicking the delete button on the top right of the item. See section <a href="#Editing_Items">Editing Items</a> for a detailed explanation.</td>
         </tr>
-        <tr parent="editable" className="hidden">
+        <tr parent="editable">
           <td className="indent">editable.updateGroup</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, items can be dragged from one group to another. Only applicable when the Timeline has groups. See section <a href="#Editing_Items">Editing Items</a> for a detailed explanation.</td>
         </tr>
-        <tr parent="editable" className="hidden">
+        <tr parent="editable">
           <td className="indent">editable.updateTime</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, items can be dragged to another moment in time. See section <a href="#Editing_Items">Editing Items</a> for a detailed explanation.</td>
         </tr>
-        <tr parent="editable" className="hidden">
+        <tr parent="editable">
           <td className="indent">editable.overrideItems</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
@@ -152,28 +152,28 @@ return option === 'format' || path.indexOf('format') !== -1;
             Apply custom date formatting of the labels on the time axis. The default value of <code>{`format`}</code> is:
           <pre className="prettyprint lang-js">
 {`{
-minorLabels: {
-millisecond:'SSS',
-second:     's',
-minute:     'HH:mm',
-hour:       'HH:mm',
-weekday:    'ddd D',
-day:        'D',
-week:       'w',
-month:      'MMM',
-year:       'YYYY'
-},
-majorLabels: {
-millisecond:'HH:mm:ss',
-second:     'D MMMM HH:mm',
-minute:     'ddd D MMMM',
-hour:       'ddd D MMMM',
-weekday:    'MMMM YYYY',
-day:        'MMMM YYYY',
-week:       'MMMM YYYY',
-month:      'YYYY',
-year:       ''
-}
+  minorLabels: {
+    millisecond:'SSS',
+    second:     's',
+    minute:     'HH:mm',
+    hour:       'HH:mm',
+    weekday:    'ddd D',
+    day:        'D',
+    week:       'w',
+    month:      'MMM',
+    year:       'YYYY'
+  },
+  majorLabels: {
+    millisecond:'HH:mm:ss',
+    second:     'D MMMM HH:mm',
+    minute:     'ddd D MMMM',
+    hour:       'ddd D MMMM',
+    weekday:    'MMMM YYYY',
+    day:        'MMMM YYYY',
+    week:       'MMMM YYYY',
+    month:      'YYYY',
+    year:       ''
+  }
 }`}
           </pre>
 
@@ -184,34 +184,34 @@ year:       ''
 
             <pre className="prettyprint lang-js">
 {`function format({
-minorLabels: Function(date: Date, scale: Number, step: Number),
-majorLabels: Function(date: Date, scale: Number, step: Number)
+  minorLabels: Function(date: Date, scale: Number, step: Number),
+  majorLabels: Function(date: Date, scale: Number, step: Number)
 }`}
             </pre>
           </td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','groupEditable', this);">
-          <td><span parent="groupEditable" className="right-caret"></span> groupEditable</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="groupEditable"></span> groupEditable</td>
           <td>boolean or Object</td>
           <td><code>{`false`}</code></td>
           <td>If true, the groups in the timeline can be manipulated. See also the callbacks <code>{`onAddGroup`}</code>, <code>{`onMoveGroup`}</code>, and <code>{`onRemoveGroup`}</code>. When <code>{`groupEditable`}</code> is an object, one can enable or disable individual manipulation actions.
             The editing of groups follows the same principles as for items, see section <a href="#Editing_Items">Editing Items</a> for a detailed explanation.
           </td>
         </tr>
-        <tr parent="groupEditable" className="hidden">
+        <tr parent="groupEditable">
           <td className="indent">groupEditable.add</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, new groups can be created in the Timeline. For now adding new groups is done by the user.</td>
         </tr>
-        <tr parent="groupEditable" className="hidden">
+        <tr parent="groupEditable">
           <td className="indent">groupEditable.remove</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, groups can be deleted. For now removing groups is done by the user.</td>
         </tr>
-        <tr parent="groupEditable" className="hidden">
+        <tr parent="groupEditable">
           <td className="indent">groupEditable.order</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
@@ -286,19 +286,19 @@ majorLabels: Function(date: Date, scale: Number, step: Number)
           </td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','itemsAlwaysDraggable', this);">
-          <td><span parent="itemsAlwaysDraggable" className="right-caret"></span> itemsAlwaysDraggable</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="itemsAlwaysDraggable"></span> itemsAlwaysDraggable</td>
           <td>boolean or Object</td>
           <td>Object</td>
           <td>When a boolean, applies the value only to <code>{`itemsAlwaysDraggable.item`}</code>.</td>
         </tr>
-        <tr parent="itemsAlwaysDraggable" className="hidden">
+        <tr parent="itemsAlwaysDraggable">
           <td className="indent">itemsAlwaysDraggable.item</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, all items in the Timeline are draggable without being selected. If false, only the selected item(s) are draggable.</td>
         </tr>
-        <tr parent="itemsAlwaysDraggable" className="hidden">
+        <tr parent="itemsAlwaysDraggable">
           <td className="indent">itemsAlwaysDraggable.range</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
@@ -333,31 +333,31 @@ majorLabels: Function(date: Date, scale: Number, step: Number)
           <td>A constructor for creating a moment.js Date. Allows for applying a custom time zone. See section <a href="#Time_zone">Time zone</a> for more information.</td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','margin', this);">
-          <td><span parent="margin" className="right-caret"></span> margin</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="margin"></span> margin</td>
           <td>number or Object</td>
           <td>Object</td>
           <td>When a number, applies the margin to <code>{`margin.axis`}</code>, <code>{`margin.item.horizontal`}</code>, and <code>{`margin.item.vertical`}</code>.</td>
         </tr>
-        <tr parent="margin" className="hidden">
+        <tr parent="margin">
           <td className="indent">margin.axis</td>
           <td>number</td>
           <td><code>{`20`}</code></td>
           <td>The minimal margin in pixels between items and the time axis.</td>
         </tr>
-        <tr parent="margin" className="hidden">
+        <tr parent="margin">
           <td className="indent">margin.item</td>
           <td>number</td>
           <td><code>{`10`}</code></td>
           <td>The minimal margin in pixels between items in both horizontal and vertical direction.</td>
         </tr>
-        <tr parent="margin" className="hidden">
+        <tr parent="margin">
           <td className="indent2">margin.item.horizontal</td>
           <td>number</td>
           <td><code>{`10`}</code></td>
           <td>The minimal horizontal margin in pixels between items.</td>
         </tr>
-        <tr parent="margin" className="hidden">
+        <tr parent="margin">
           <td className="indent2">margin.item.vertical</td>
           <td>number</td>
           <td><code>{`10`}</code></td>
@@ -508,13 +508,13 @@ majorLabels: Function(date: Date, scale: Number, step: Number)
           </td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','onTimeout', this);">
-          <td><span parent="onTimeout" className="right-caret"></span> onTimeout</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="onTimeout"></span> onTimeout</td>
           <td>Object</td>
           <td><code>{`Object`}</code></td>
           <td>Specify timeline bailing options when a specified timeout is reached.</td>
         </tr>
-        <tr parent="onTimeout" className="hidden">
+        <tr parent="onTimeout">
           <td className="indent">onTimeout.timeoutMs</td>
           <td>number</td>
           <td>none</td>
@@ -522,7 +522,7 @@ majorLabels: Function(date: Date, scale: Number, step: Number)
             The callback will not be called if the timeline gets drawn completely before the timeoutMs limit.</td>
         </tr>
 
-        <tr parent="onTimeout" className="hidden">
+        <tr parent="onTimeout">
           <td className="indent">onTimeout.callback</td>
           <td>function</td>
           <td>none</td>
@@ -553,39 +553,39 @@ majorLabels: Function(date: Date, scale: Number, step: Number)
           </td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','orientation', this);">
-          <td><span parent="orientation" className="right-caret"></span> orientation</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="orientation"></span> orientation</td>
           <td>String or Object</td>
           <td><code>{`'bottom'`}</code></td>
           <td>Orientation of the timelines axis and items. When orientation is a string, the value is applied to both items and axis. Can be 'top', 'bottom' (default), 'both', or 'none'.</td>
         </tr>
-        <tr parent="orientation" className="hidden">
+        <tr parent="orientation">
           <td className="indent">orientation.axis</td>
           <td>String</td>
           <td><code>{`'bottom'`}</code></td>
           <td>Orientation of the timeline axis: 'top', 'bottom' (default), 'both', or 'none'. If orientation is 'bottom', the time axis is drawn at the bottom. When 'top', the axis is drawn on top. When 'both', two axes are drawn, both on top and at the bottom. In case of 'none', no axis is drawn at all.</td>
         </tr>
-        <tr parent="orientation" className="hidden">
+        <tr parent="orientation">
           <td className="indent">orientation.item</td>
           <td>String</td>
           <td><code>{`'bottom'`}</code></td>
           <td>Orientation of the timeline items: 'top' or 'bottom' (default). Determines whether items are aligned to the top or bottom of the Timeline.</td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','rollingMode', this);">
-          <td><span parent="rollingMode" className="right-caret"></span> rollingMode</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="rollingMode"></span> rollingMode</td>
           <td>Object</td>
           <td><code>{`Object`}</code></td>
           <td>Specify how the timeline implements rolling mode.</td>
         </tr>
-        <tr parent="rollingMode" className="hidden">
+        <tr parent="rollingMode">
           <td className="indent">rollingMode.follow</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, the timeline will initial in a rolling mode - the current time will always be centered. I the user drags the timeline, the timeline will go out of rolling mode and a toggle button will appear. Clicking that button will go back to rolling mode. Zooming in rolling mode will zoom in to the center without consideration of the mouse position.</td>
         </tr>
 
-        <tr parent="rollingMode" className="hidden">
+        <tr parent="rollingMode">
           <td className="indent">rollingMode.offset</td>
           <td>Number</td>
           <td><code>{`'0.5'`}</code></td>
@@ -701,27 +701,27 @@ majorLabels: Function(date: Date, scale: Number, step: Number)
           <td>This option is <b>DEPRECATED</b> and no longer supported. It will be removed in the next MAJOR release.</td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','timeAxis', this);">
-          <td><span parent="timeAxis" className="right-caret"></span> timeAxis</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="timeAxis"></span> timeAxis</td>
           <td>Object</td>
           <td><code>{`Object`}</code></td>
           <td>Specify a fixed scale and step size for the time axis.</td>
         </tr>
-        <tr parent="timeAxis" className="hidden">
+        <tr parent="timeAxis">
           <td className="indent">timeAxis.scale</td>
           <td>String</td>
           <td>none</td>
           <td>Set a fixed scale for the time axis of the Timeline. Choose from <code>{`'millisecond'`}</code>, <code>{`'second'`}</code>, <code>{`'minute'`}</code>, <code>{`'hour'`}</code>, <code>{`'weekday'`}</code>, <code>{`'week'`}</code>, <code>{`'day'`}</code>, <code>{`'month'`}</code>, <code>{`'year'`}</code>. Example usage:
           <pre className="prettyprint lang-js">
 {`var options = {
-timeAxis: {scale: 'minute', step: 5}
+  timeAxis: {scale: 'minute', step: 5}
 }`}
           </pre>
             <p>Note: The 'week' scale only works properly when <a href="#Localization">locales</a> are enabled.</p>
           </td>
         </tr>
 
-        <tr parent="timeAxis" className="hidden">
+        <tr parent="timeAxis">
           <td className="indent">timeAxis.step</td>
           <td>number</td>
           <td><code>{`1`}</code></td>
@@ -738,20 +738,20 @@ timeAxis: {scale: 'minute', step: 5}
           </td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','tooltip', this);">
-          <td><span parent="tooltip" className="right-caret"></span> tooltip</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="tooltip"></span> tooltip</td>
           <td>Object</td>
           <td><code>{`Object`}</code></td>
           <td>Specify how the tooltip is positioned.</td>
         </tr>
-        <tr parent="tooltip" className="hidden">
+        <tr parent="tooltip">
           <td className="indent">tooltip.followMouse</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, tooltips will follow the mouse as they move around in the item.</td>
         </tr>
 
-        <tr parent="tooltip" className="hidden">
+        <tr parent="tooltip">
           <td className="indent">tooltip.overflowMethod</td>
           <td>String</td>
           <td><code>{`'flip'`}</code></td>
@@ -763,13 +763,13 @@ timeAxis: {scale: 'minute', step: 5}
           </td>
         </tr>
 
-        <tr className='toggle collapsible' onclick="toggleTable('optionTable','tooltipOnItemUpdateTime', this);">
-          <td><span parent="tooltipOnItemUpdateTime" className="right-caret"></span> tooltipOnItemUpdateTime</td>
+        <tr className='toggle collapsible'>
+          <td><span parent="tooltipOnItemUpdateTime"></span> tooltipOnItemUpdateTime</td>
           <td>Object/Boolean</td>
           <td><code>{`false`}</code></td>
           <td>Show a tooltip on updating an item's time. Note: <code>{`editable.updateTime`}</code> must be <code>{`true`}</code></td>
         </tr>
-        <tr parent="tooltipOnItemUpdateTime" className="hidden">
+        <tr parent="tooltipOnItemUpdateTime">
           <td className="indent">template</td>
           <td>Function</td>
           <td>none</td>
