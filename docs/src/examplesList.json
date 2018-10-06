@@ -1,0 +1,95 @@
+[
+  {
+    "directory": "dataHandling",
+    "files":  [ 
+      "dataSerialization",
+      "loadExternalData"
+    ]
+  },
+  {
+    "directory": "editing",
+    "files":  [ 
+      "customSnappingOfItems",
+      "editingItems",
+      "editingItemsCallbacks",
+      "individualEditableItems",
+      "itemsAlwaysDraggable",
+      "overrideEditingItems",
+      "tooltipOnItemChange",
+      "updateDataOnEvent"
+    ]
+  },
+  {
+    "directory": "items",
+    "files":  [ 
+      "backgroundAreas",
+      "backgroundAreasWithGroups",
+      "expectedVsActualTimesItems",
+      "htmlContents",
+      "itemOrdering",
+      "pointItems",
+      "rangeOverflowItem",
+      "tooltip",
+      "visibleFrameTemplateContent"
+    ]
+  },
+  {
+    "directory": "groups",
+    "files": [
+      "groups",
+      "groupsEditable",
+      "groupsOrdering",
+      "nestedGroups",
+      "nestedThreeLevels",
+      "subgroups",
+      "verticalItemsHide",
+      "visibleGroups"
+    ]
+  },
+  {
+    "directory": "interation",
+    "files": [ 
+      "animateWindow",
+      "clickToUse",
+      "eventListeners",
+      "limitMoveAndZoom",
+      "navigationMenu",
+      "rollingMode",
+      "setSelection"
+    ]
+  },
+  {
+    "directory": "other",
+    "files": [
+      "customTimeBars",
+      "customTimeBarsTooltip",
+      "dataAttributes",
+      "dataAttributesAll",
+      "drag&drop",
+      "functionLabelFormats",
+      "groupsPerformance",
+      "horizontalScroll",
+      "loadingScreen",
+      "localization",
+      "onTimeout",
+      "performance",
+      "rtl",
+      "stressPerformance",
+      "timezone",
+      "usingReact15AndLess",
+      "usingReact16",
+      "verticalScroll"
+    ]
+  },
+  {
+    "directory": "styling",
+    "files": [
+      "axisOrientation",
+      "customCss",
+      "gridStyling",
+      "itemClassNames",
+      "itemTemplates",
+      "weekStyling"
+    ]
+  }
+]

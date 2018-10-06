@@ -56,7 +56,9 @@ const styles = theme => ({
     alignItems: 'center',
   },
   logoLink: {
-    display: 'inline',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   logoImg: {
     position: 'relative',
@@ -76,9 +78,13 @@ const styles = theme => ({
     },
   },
   content: {
+    position: 'relative',
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
+    backgroundColor: theme.palette.background.default,
+    overflowY: 'scroll',
+    display: 'flex',
+    flexDirection: 'column',
   },
 });
 
