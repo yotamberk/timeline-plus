@@ -13,23 +13,26 @@ import BackIcon from '@material-ui/icons/ArrowBack';
 import ExamplesList from './examplesList.json'
 
 
-const styles = theme => {
-  console.log(theme)
-  return ({
+const styles = theme => ({
   root: {
-    height: '100%',
+    flex: '1',
     width: '100%',
   },
   backButton: {
     top: theme.mixins.toolbar.minHeight,
-    left: '0',
+    right: '5px',
     position: 'absolute',
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit + 2,
+    zIndex: '1111',
   },
   extendedIcon: {
     marginRight: theme.spacing.unit,
   },
-})};
+  iframe: {
+    height: `100%`,
+    width: '100%',
+  }
+});
 
 class ExamplesPage extends React.Component {
   state = {
@@ -56,7 +59,7 @@ class ExamplesPage extends React.Component {
               ExamplesList.map((exampleDirectory) => {
                 return (
                   <div key={exampleDirectory.directory} className='examples-directory'>
-                    <Typography variant="title" className={classes.title}>
+                    <Typography variant='title' className={classes.title}>
                       {exampleDirectory.directory}
                     </Typography>
                     <List dense>
@@ -82,17 +85,22 @@ class ExamplesPage extends React.Component {
         {
           this.state.chosenExample &&
           [
-            <Button key='back-btn' variant="extendedFab" aria-label="Delete" className={classes.backButton} onClick={this.handleClose}>
+            <Button key='back-btn' 
+              color='secondary'
+              variant='extendedFab'
+              aria-label='Back' 
+              className={classes.backButton} 
+              onClick={this.handleClose}
+            >
               <BackIcon className={classes.extendedIcon} />
               Back
             </Button>,
             <Iframe
               key='iframe-container'
+              className={classes.iframe}
               url={`${process.env.PUBLIC_URL}/examples/${this.state.chosenExample.directory}/${this.state.chosenExample.file}.html`}
-              width="100%"
-              height="100%"
-              display="initial"
-              position="relative"
+              display='initial'
+              position='relative'
               allowFullScreen
             />
           ]

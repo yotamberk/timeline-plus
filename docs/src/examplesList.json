@@ -3,7 +3,7 @@
     "directory": "dataHandling",
     "files":  [ 
       "dataSerialization",
-      "dataExternalData"
+      "loadExternalData"
     ]
   },
   {
