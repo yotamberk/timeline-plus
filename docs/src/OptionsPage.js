@@ -694,13 +694,6 @@ class OptionsPage extends React.Component {
           This would be used as an additional way to add content that is constant in size with the visible frame of the item and does not get visibly hidden with the item's internal container: <code>{`timeline-item-overflow`}</code> which is <code>{`overflow:hidden`}</code>.</td>
         </tr>
 
-        <tr className='deprecated'>
-          <td>throttleRedraw</td>
-          <td>number</td>
-          <td><code>{`0`}</code></td>
-          <td>This option is <b>DEPRECATED</b> and no longer supported. It will be removed in the next MAJOR release.</td>
-        </tr>
-
         <tr className='toggle collapsible'>
           <td><span parent="timeAxis"></span> timeAxis</td>
           <td>Object</td>
