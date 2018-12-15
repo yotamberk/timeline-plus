@@ -795,6 +795,16 @@ class OptionsPage extends React.Component {
         </tr>
 
         <tr>
+          <td>zoomFriction</td>
+          <td>number</td>
+          <td><code>5</code></td>
+          <td>
+            Specifies how strong the zooming is for each scroll tick. Higher zooming friction will slow
+            zooming speed.
+          </td>
+        </tr>
+
+        <tr>
           <td>zoomKey</td>
           <td>String</td>
           <td><code>{`''`}</code></td>
