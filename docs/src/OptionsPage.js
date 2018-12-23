@@ -572,6 +572,15 @@ class OptionsPage extends React.Component {
           <td>Orientation of the timeline items: 'top' or 'bottom' (default). Determines whether items are aligned to the top or bottom of the Timeline.</td>
         </tr>
 
+    <tr>
+    <td>preferZoom</td>
+    <td>boolean</td>
+    <td><code>{`false`}</code></td>
+    <td>
+    If true, scrolling vertically on timeline center panel will be prevented, and zoom action will be preferred, without need of <code>zoomKey</code>.
+  </td>
+    </tr>
+
         <tr className='toggle collapsible'>
           <td><span parent="rollingMode"></span> rollingMode</td>
           <td>Object</td>
