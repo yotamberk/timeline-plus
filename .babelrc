@@ -1,8 +1,8 @@
 {
-  "presets": ["env", "@babel/polyfill"],
+  "presets": ["@babel/env", "@babel/polyfill"],
   "plugins": [
     "transform-es3-property-literals",
     "transform-es3-member-expression-literals",
-    "transform-runtime"
+    "@babel/plugin-transform-runtime"
   ]
 }
