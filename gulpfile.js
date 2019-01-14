@@ -59,7 +59,7 @@ var webpackModule = {
 };
 
 var webpackConfig = {
-  entry: ENTRY,
+  entry: ["@babel/polyfill", ENTRY],
   output: {
     library: 'timeline',
     libraryTarget: 'umd',
@@ -71,7 +71,7 @@ var webpackConfig = {
   plugins: [ bannerPlugin ],
   cache: true,
 
-  // generate details sourcempas of webpack modules
+  // generate details sourcemaps of webpack modules
   devtool: 'source-map'
 
   //debug: true,
@@ -167,10 +167,8 @@ else {
 }
 
 // The watch task (to automatically rebuild when the source code changes)
-gulp.task('watch', gulp.series(...watchTasks, function () {
-  gulp.watch('index.js');
-  gulp.watch('lib/**/*');
-
+gulp.task('watch', gulp.series(...watchTasks, function() {
+  gulp.watch(['index.js', 'lib/**/*']);
 }));
 
 
