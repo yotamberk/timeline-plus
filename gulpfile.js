@@ -19,6 +19,7 @@ var TIMELINE_MAP      = 'timeline.map';
 var TIMELINE_MIN_JS   = 'timeline.min.js';
 var TIMELINE_CSS      = 'timeline.css';
 var TIMELINE_MIN_CSS  = 'timeline.min.css';
+var TIMELINE_D_TS     = 'timeline.d.ts';
 
 /**
  * Generate banner with today's date and correct version
@@ -149,6 +150,12 @@ gulp.task('minify', ['bundle-js'], function (cb) {
   cb();
 });
 
+gulp.task('typings', function (cb) {
+  return gulp.src('./index.d.ts')
+      .pipe(rename(TIMELINE_D_TS))
+      .pipe(gulp.dest(DIST));
+});
+
 gulp.task('bundle', ['bundle-js', 'bundle-css']);
 
 // read command line arguments --bundle and --minify
@@ -209,4 +216,4 @@ gulp.task('docs', function(cb) {
 });
 
 // The default task (called when you run `gulp`)
-gulp.task('default', ['clean', 'bundle', 'minify']);
+gulp.task('default', ['clean', 'bundle', 'minify', 'typings']);

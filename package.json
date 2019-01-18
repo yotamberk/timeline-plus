@@ -3,6 +3,7 @@
   "version": "2.3.1",
   "description": "",
   "main": "./dist/timeline.js",
+  "types": "./dist/timeline.d.ts",
   "directories": {
     "doc": "docs",
     "example": "examples"
@@ -13,7 +14,8 @@
     "dist/timeline.min.js",
     "dist/timeline.min.css",
     "dist/timeline.js.map",
-    "dist/timeline.map"
+    "dist/timeline.map",
+    "dist/timeline.d.ts"
   ],
   "repository": {
     "type": "git",
