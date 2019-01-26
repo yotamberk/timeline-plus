@@ -222,7 +222,12 @@ class OptionsPage extends React.Component {
           <td>groupHeightMode</td>
           <td>String</td>
           <td>'auto'</td>
-          <td>Specifies how the height of a group is calculated. Choose from 'auto' and 'fixed'. If it is set to 'auto' the height will be calculated based on the visible items. While if it is set to 'fixed' the group will keep the same height even if there are no visible items in the window.</td>
+          <td>
+            Specifies how the height of a group is calculated. Choose from 'auto','fixed', and 'fitItems'. <br />
+            If it is set to 'auto' the height will be calculated based on a group label and visible items.<br />
+            If it is set to 'fitItems' the height will be calculated based on the visible items only.<br />
+            While if it is set to 'fixed' the group will keep the same height even if there are no visible items in the window.
+          </td>
         </tr>
 
         <tr>
@@ -833,6 +838,16 @@ class OptionsPage extends React.Component {
           <td>
             Specifies whether the Timeline can be zoomed by pinching or scrolling in the window.
             Only applicable when option <code>{`moveable`}</code> is set <code>{`true`}</code>.
+          </td>
+        </tr>
+
+        <tr>
+          <td>zoomFriction</td>
+          <td>number</td>
+          <td><code>5</code></td>
+          <td>
+            Specifies how strong the zooming is for each scroll tick. Higher zooming friction will slow
+            zooming speed.
           </td>
         </tr>
 
