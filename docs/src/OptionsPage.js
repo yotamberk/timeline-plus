@@ -222,7 +222,12 @@ class OptionsPage extends React.Component {
           <td>groupHeightMode</td>
           <td>String</td>
           <td>'auto'</td>
-          <td>Specifies how the height of a group is calculated. Choose from 'auto' and 'fixed'. If it is set to 'auto' the height will be calculated based on the visible items. While if it is set to 'fixed' the group will keep the same height even if there are no visible items in the window.</td>
+          <td>
+            Specifies how the height of a group is calculated. Choose from 'auto','fixed', and 'fitItems'. <br />
+            If it is set to 'auto' the height will be calculated based on a group label and visible items.<br />
+            If it is set to 'fitItems' the height will be calculated based on the visible items only.<br />
+            While if it is set to 'fixed' the group will keep the same height even if there are no visible items in the window.
+          </td>
         </tr>
 
         <tr>
@@ -659,6 +664,39 @@ class OptionsPage extends React.Component {
           <td>boolean</td>
           <td><code>{`true`}</code></td>
           <td>If true (default), subgroups will be stacked on top of each other such that they do not overlap.</td>
+        </tr>
+
+        <tr className='toggle collapsible'>
+          <td><span parent="cluster"></span> cluster</td>
+          <td>Object or boolean</td>
+          <td><code>{`false`}</code></td>
+          <td>If true, overlapped items will be grouped to clusters, zooming will change that grouping. Use this option when a huge amount of items should be rendered.
+          </td>
+        </tr>
+        <tr parent="cluster">
+          <td className="indent">cluster.maxItems</td>
+          <td>number or null</td>
+          <td><code>{`1`}</code></td>
+          <td>Overlapped items will be not grouped until the number of items is within maxItems. The default value of <code>{`maxItems`}</code> is <code>{`1`}</code>, it means that each two overlapped items will be clustered.</td>
+        </tr>
+        <tr parent="cluster">
+          <td className="indent">cluster.titleTemplate</td>
+          <td>string or null</td>
+          <td><code>{`none`}</code></td>
+          <td>Cluster item tooltip</td>
+        </tr>
+        <tr parent="cluster">
+          <td className="indent">cluster.clusterCriteria</td>
+          <td>function or null</td>
+          <td><code>{`() => true`}</code></td>
+          <td>If specified, determines whether overlapped items should go to the same cluster. The signature of the clusterCriteria function is:
+            <pre className="prettyprint lang-js">{`function clusterCriteria(firstItem: Object, secondItem: Object) : boolean`}.</pre></td>
+        </tr>
+        <tr parent="cluster">
+          <td className="indent">cluster.showStipes</td>
+          <td>boolean</td>
+          <td><code>{`false`}</code></td>
+          <td>If true, line from cluster to time axis is displayed when content overflows.</td>
         </tr>
 
         <tr>

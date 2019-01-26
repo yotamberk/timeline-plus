@@ -1,6 +1,6 @@
 {
   "name": "timeline-plus",
-  "version": "2.2.3",
+  "version": "2.3.1",
   "description": "",
   "main": "./dist/timeline.js",
   "directories": {
@@ -35,6 +35,7 @@
     "deploy": "gh-pages -d ./docs/build"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "emitter-component": "^1.1.1",
     "hammerjs": "^2.0.8",
     "keycharm": "^0.2.0",
@@ -65,7 +66,7 @@
     "jsdom": "11.3.0",
     "jsdom-global": "^3.0.2",
     "merge-stream": "^1.0.1",
-    "mocha": "^3.4.2",
+    "mocha": "^5.2.0",
     "nyc": "^11.2.1",
     "rimraf": "^2.6.1",
     "uglify-js": "^2.8.29",
