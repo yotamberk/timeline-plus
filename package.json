@@ -28,8 +28,8 @@
   "scripts": {
     "build": "gulp",
     "lint": "gulp lint",
-    "watch": "gulp watch",
-    "watch-dev": "gulp watch --bundle",
+    "watch": "gulp watch --minify",
+    "watch-dev": "gulp watch",
     "prepublishOnly": "npm run build",
     "predeploy": "npm run build --prefix ./docs",
     "deploy": "gh-pages -d ./docs/build"
