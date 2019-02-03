@@ -1,24 +1,24 @@
-var fs = require('fs');
-var gulp = require('gulp');
-var eslint = require('gulp-eslint');
-var gutil = require('gulp-util');
-var concat = require('gulp-concat');
-var cleanCSS = require('gulp-clean-css');
-var rename = require("gulp-rename");
-var webpack = require('webpack');
-var uglify = require('uglify-js');
-var rimraf = require('rimraf');
-var argv = require('yargs').argv;
-var child_exec = require('child_process').exec;
+const fs = require('fs');
+const eslint = require('gulp-eslint');
+const gutil = require('gulp-util');
+const concat = require('gulp-concat');
+const cleanCSS = require('gulp-clean-css');
+const rename = require("gulp-rename");
+const webpack = require('webpack');
+const uglify = require('uglify-js');
+const rimraf = require('rimraf');
+const argv = require('yargs').argv;
+const { parallel, series, watch, src, dest } = require('gulp');
 
-var ENTRY             = './index.js';
-var HEADER            = './lib/header.js';
-var DIST              = __dirname + '/dist';
-var TIMELINE_JS       = 'timeline.js';
-var TIMELINE_MAP      = 'timeline.map';
-var TIMELINE_MIN_JS   = 'timeline.min.js';
-var TIMELINE_CSS      = 'timeline.css';
-var TIMELINE_MIN_CSS  = 'timeline.min.css';
+
+const ENTRY             = './index.js';
+const HEADER            = './lib/header.js';
+const DIST              = __dirname + '/dist';
+const TIMELINE_JS       = 'timeline.js';
+const TIMELINE_MAP      = 'timeline.map';
+const TIMELINE_MIN_JS   = 'timeline.min.js';
+const TIMELINE_CSS      = 'timeline.css';
+const TIMELINE_MIN_CSS  = 'timeline.min.css';
 
 /**
  * Generate banner with today's date and correct version
@@ -26,22 +26,21 @@ var TIMELINE_MIN_CSS  = 'timeline.min.css';
  * @returns {string} banner text
  */
 function createBanner() {
-  var today = gutil.date(new Date(), 'yyyy-mm-dd'); // today, formatted as yyyy-mm-dd
-  var version = require('./package.json').version;
+  const today = gutil.date(new Date(), 'yyyy-mm-dd'); // today, formatted as yyyy-mm-dd
+  const version = require('./package.json').version;
 
   return String(fs.readFileSync(HEADER))
       .replace('@@date', today)
       .replace('@@version', version);
 }
 
-
-var bannerPlugin = new webpack.BannerPlugin({
+const bannerPlugin = new webpack.BannerPlugin({
   banner: createBanner(),
   entryOnly: true,
   raw: true
 });
 
-var webpackModule = {
+const webpackModule = {
   loaders: [
     {
       test: /\.js$/,
@@ -58,7 +57,7 @@ var webpackModule = {
   wrappedContextRegExp: /$^/
 };
 
-var webpackConfig = {
+const webpackConfig = {
   entry: ["@babel/polyfill", ENTRY],
   output: {
     library: 'timeline',
@@ -78,7 +77,7 @@ var webpackConfig = {
   //bail: true
 };
 
-var uglifyConfig = {
+const uglifyConfig = {
   outSourceMap: TIMELINE_MAP,
   output: {
     comments: /@license/
@@ -86,7 +85,7 @@ var uglifyConfig = {
 };
 
 // create a single instance of the compiler to allow caching
-var compiler = webpack(webpackConfig);
+const compiler = webpack(webpackConfig);
 
 /**
  * Callback for handling errors for a compiler run
@@ -112,101 +111,75 @@ function handleCompilerCallback (err, stats) {
 }
 
 // clean the dist/img directory
-gulp.task('clean', function (cb) {
+function clean(cb) {
   rimraf(DIST + '/img', cb);
-});
+}
 
-gulp.task('bundle-js', function (cb) {
+// bundle js
+function bundleJs(cb) {
   // update the banner contents (has a date in it which should stay up to date)
   bannerPlugin.banner = createBanner();
-
   compiler.run(function (err, stats) {
     handleCompilerCallback(err, stats);
     cb();
   });
-});
+}
 
 // bundle and minify css
-gulp.task('bundle-css', function () {
-  return gulp.src('./lib/**/*.css')
+function bundleCss() {
+  return src('./lib/**/*.css')
       .pipe(concat(TIMELINE_CSS))
-      .pipe(gulp.dest(DIST))
+      .pipe(dest(DIST))
       // TODO: nicer to put minifying css in a separate task?
       .pipe(cleanCSS())
       .pipe(rename(TIMELINE_MIN_CSS))
-      .pipe(gulp.dest(DIST));
-});
+        .pipe(dest(DIST));
+}
 
-gulp.task('minify', gulp.series('bundle-js', function (cb) {
-  var result = uglify.minify([DIST + '/' + TIMELINE_JS], uglifyConfig);
-
+// minify js
+function minifyJs(cb) {
+  const result = uglify.minify([DIST + '/' + TIMELINE_JS], uglifyConfig);
+  
   // note: we add a newline '\n' to the end of the minified file to prevent
   //       any issues when concatenating the file downstream (the file ends
   //       with a comment).
   fs.writeFileSync(DIST + '/' + TIMELINE_MIN_JS, result.code + '\n');
   fs.writeFileSync(DIST + '/' + TIMELINE_MAP, result.map.replace(/"\.\/dist\//g, '"'));
-
+  
   cb();
-}));
-
-gulp.task('bundle', gulp.series('bundle-js', 'bundle-css'));
-
-// read command line arguments --bundle and --minify
-var bundle = 'bundle' in argv;
-var minify = 'minify' in argv;
-var watchTasks = [];
-if (bundle || minify) {
-  // do bundling and/or minifying only when specified on the command line
-  watchTasks = [];
-  if (bundle) watchTasks.push('bundle');
-  if (minify) watchTasks.push('minify');
-}
-else {
-  // by default, do both bundling and minifying
-  watchTasks = ['bundle', 'minify'];
 }
 
 // The watch task (to automatically rebuild when the source code changes)
-gulp.task('watch', gulp.series(...watchTasks, function() {
-  gulp.watch(['index.js', 'lib/**/*']);
-}));
+function watchFiles() {
+  const minify = 'minify' in argv; 
+  if (minify) {
+    watch('index.js',  series(bundleJs, minifyJs, bundleCss));
+    watch('lib/**/*', series(bundleJs, minifyJs, bundleCss));
+  } else {
+    watch('index.js',  series(bundleJs, bundleCss));
+    watch('lib/**/*', series(bundleJs, bundleCss));
+  }
+}
 
 
-//
-// Linting usage:
-//
-//    > gulp lint
-// or > npm run lint
-//
-gulp.task('lint', function () {
-  return gulp.src(['lib/**/*.js', '!node_modules/**'])
+// linting task
+function lint(cb) {
+  return src(['lib/**/*.js', '!node_modules/**'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
-});
+}
 
+const bundle = series(
+  clean,
+  parallel(
+    bundleCss,
+    series(bundleJs, minifyJs)
+  )
+)
 
-// Generate the documentation files
-gulp.task('docs', function(cb) {
-  var targetDir = 'gen/docs';
-
-  // Not sure if this is the best way to handle 'cb'; at least it works.
-  var hasError = false;
-  var onError = function(error) {
-    if (error !== undefined && error !== null) {
-      console.error('Error while running task: ' + error);
-      hasError = true;
-      cb();
-    }
-  }
-
-  rimraf(__dirname + '/' + targetDir, onError);  // Clean up previous generation
-
-  if (!hasError) {
-    var params = '-c ./jsdoc.json -r -t docs -d ' + targetDir;
-    child_exec('node ./node_modules/jsdoc/jsdoc.js ' + params + ' lib', undefined, cb);
-  }
-});
-
-// The default task (called when you run `gulp`)
-gulp.task('default', gulp.series('clean', 'bundle', 'minify'));
+exports.clean = clean;
+exports.build = bundle;
+exports.watch = watchFiles;
+exports.lint = lint;
+exports.default = series(clean, lint, bundle);
