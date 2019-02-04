@@ -6,6 +6,7 @@ test('Is correct nested order restored?', async t => {
 	const groups = Selector('.timeline-label');
 	const nesting = groups.withText('1');
 	const nested  = groups.withText('3');
+	
 	await t
 		.expect(groups.count).eql(3)
 		.click(nesting);
@@ -18,6 +19,6 @@ test('Is correct nested order restored?', async t => {
 	await t.click(nesting);
 	
 	await t
-	.expect(nesting.nextSibling(0))
+	.expect(nesting.nextSibling(0).textContent)
 	.contains('3');
 })
