@@ -37,6 +37,7 @@
   "dependencies": {
     "emitter-component": "^1.1.1",
     "hammerjs": "^2.0.8",
+    "js-logger": "^1.6.0",
     "keycharm": "^0.2.0",
     "moment": "^2.18.1",
     "propagating-hammerjs": "^1.4.6",
@@ -51,6 +52,7 @@
     "async": "^2.5.0",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-js-logger": "^1.0.17",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-es3-property-literals": "^6.22.0",
     "babelify": "^7.3.0",
