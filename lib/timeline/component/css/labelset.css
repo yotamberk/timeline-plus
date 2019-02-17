@@ -25,6 +25,10 @@
   cursor: pointer;
 }
 
+.timeline-group-is-dragging {
+  background: rgba(0, 0, 0, .1);
+}
+
 .timeline-labelset .timeline-label:last-child {
   border-bottom: none;
 }
