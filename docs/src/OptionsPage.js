@@ -696,7 +696,7 @@ class OptionsPage extends React.Component {
         <tr parent="cluster">
           <td className="indent">cluster.fitOnDoubleClick</td>
           <td>boolean</td>
-          <td><code>{`false`}</code></td>
+          <td><code>{`true`}</code></td>
           <td>If true, the cluster will be centered on double click.</td>
         </tr>
 
