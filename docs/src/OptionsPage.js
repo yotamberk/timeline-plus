@@ -694,7 +694,7 @@ class OptionsPage extends React.Component {
           <td>If true, line from cluster to time axis is displayed when content overflows.</td>
         </tr>
         <tr parent="cluster">
-          <td className="indent">cluster.showStipes</td>
+          <td className="indent">cluster.fitOnDoubleClick</td>
           <td>boolean</td>
           <td><code>{`false`}</code></td>
           <td>If true, the cluster will be centered on double click.</td>
