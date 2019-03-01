@@ -790,7 +790,6 @@ class OptionsPage extends React.Component {
           <td><code>{`false`}</code></td>
           <td>If true, tooltips will follow the mouse as they move around in the item.</td>
         </tr>
-
         <tr parent="tooltip">
           <td className="indent">tooltip.overflowMethod</td>
           <td>String</td>
@@ -800,6 +799,14 @@ class OptionsPage extends React.Component {
             Choose from <code>{`'cap'`}</code> and <code>{`'flip'`}</code>. <br />
             If it is set to <code>{`'cap'`}</code>, the tooltip will just cap its position to inside to timeline. <br />
             While if it is set to <code>{`'flip'`}</code>, the position of the tooltip will flip around the cursor so that a corner is at the cursor, and the rest of it is visible. <br />
+          </td>
+        </tr>
+        <tr parent="tooltip">
+          <td className="indent">tooltip.delay</td>
+          <td>Number</td>
+          <td><code>{`'500'`}</code></td>
+          <td>
+            Set a value (in ms) that the tooltip is delayed before showing.
           </td>
         </tr>
 
