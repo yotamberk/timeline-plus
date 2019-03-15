@@ -41,16 +41,16 @@
   background: #f5f5f5;
 }
 
+
+/* expanded/collapsed indicators */
 .timeline-label.timeline-nesting-group.expanded:before {
   content: "\25BC";
 }
-
-.timeline-label.timeline-nesting-group.collapsed-rtl:before {
-  content: "\25C0";
-}
-
 .timeline-label.timeline-nesting-group.collapsed:before {
   content: "\25B6";
+}
+.timeline-rtl .timeline-label.timeline-nesting-group.collapsed:before {
+  content: "\25C0";
 }
 
 .timeline-overlay {
