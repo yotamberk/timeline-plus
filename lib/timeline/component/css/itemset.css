@@ -37,12 +37,121 @@
   cursor: pointer;
 }
 
-.timeline-nested-group {
+.timeline-label.timeline-nested-group.timeline-group-level-unknown-but-gte1 {
   background: #f5f5f5;
 }
+.timeline-label.timeline-nested-group.timeline-group-level-0 {
+  background-color: #ffffff;
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-0 .timeline-inner {
+  padding-left: 0;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-0 .timeline-inner {
+  padding-right: 0;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-1 {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-1 .timeline-inner {
+  padding-left: 15px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-1 .timeline-inner {
+  padding-right: 15px;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-2 {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-2 .timeline-inner {
+  padding-left: 30px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-2 .timeline-inner {
+  padding-right: 30px;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-3 {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-3 .timeline-inner {
+  padding-left: 45px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-3 .timeline-inner {
+  padding-right: 45px;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-4 {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-4 .timeline-inner {
+  padding-left: 60px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-4 .timeline-inner {
+  padding-right: 60px;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-5 {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-5 .timeline-inner {
+  padding-left: 75px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-5 .timeline-inner {
+  padding-right: 75px;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-6 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-6 .timeline-inner {
+  padding-left: 90px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-6 .timeline-inner {
+  padding-right: 90px;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-7 {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-7 .timeline-inner {
+  padding-left: 105px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-7 .timeline-inner {
+  padding-right: 105px;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-8 {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-8 .timeline-inner {
+  padding-left: 120px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-8 .timeline-inner {
+  padding-right: 120px;
+}
+.timeline-label.timeline-nested-group.timeline-group-level-9 {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+.timeline-ltr .timeline-label.timeline-nested-group.timeline-group-level-9 .timeline-inner {
+  padding-left: 135px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group.timeline-group-level-9 .timeline-inner {
+  padding-right: 135px;
+}
+/* default takes over beginning with level-10 (thats why we add .timeline-nested-group
+  to the selectors above, to have higher specifity than these rules for the defaults) */
+.timeline-label.timeline-nested-group {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.timeline-ltr .timeline-label.timeline-nested-group .timeline-inner {
+  padding-left: 150px;
+}
+.timeline-rtl .timeline-label.timeline-nested-group .timeline-inner {
+  padding-right: 150px;
+}
 
+.timeline-group-level-unknown-but-gte1 {
+  border: 1px solid red;
+}
 
 /* expanded/collapsed indicators */
+.timeline-label.timeline-nesting-group:before,
+.timeline-label.timeline-nesting-group:before {
+  display: inline-block;
+  width: 15px;
+}
 .timeline-label.timeline-nesting-group.expanded:before {
   content: "\25BC";
 }
@@ -51,6 +160,13 @@
 }
 .timeline-rtl .timeline-label.timeline-nesting-group.collapsed:before {
   content: "\25C0";
+}
+/* compensate missing expanded/collapsed indicator, but only at levels > 0 */
+.timeline-ltr .timeline-label:not(.timeline-nesting-group):not(.timeline-group-level-0) {
+  padding-left: 15px;
+}
+.timeline-rtl .timeline-label:not(.timeline-nesting-group):not(.timeline-group-level-0) {
+  padding-right: 15px;
 }
 
 .timeline-overlay {
