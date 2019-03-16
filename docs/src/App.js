@@ -164,18 +164,18 @@ class App extends React.Component {
           <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/getting-started/installation" component={InstallationPage} />
-            <Route exact path="/getting-started/usage" component={UsagePage} />
-            <Route exact path="/items" component={ItemsPage} />
-            <Route exact path="/groups" component={GroupsPage} />
-            <Route exact path="/options" component={OptionsPage} />
-            <Route exact path="/methods" component={MethodsPage} />
-            <Route exact path="/events" component={EventsPage} />
-            <Route exact path="/templates" component={TemplatesPage} />
-            <Route exact path="/localization" component={LocalizationPage} />
-            <Route exact path="/examples" component={ExamplesPage} />
-            <Route exact path="/styles" component={StylesPage} />
+            <Route exact path="/timeline-plus/" component={HomePage} />
+            <Route exact path="/timeline-plus/getting-started/installation" component={InstallationPage} />
+            <Route exact path="/timeline-plus/getting-started/usage" component={UsagePage} />
+            <Route exact path="/timeline-plus/items" component={ItemsPage} />
+            <Route exact path="/timeline-plus/groups" component={GroupsPage} />
+            <Route exact path="/timeline-plus/options" component={OptionsPage} />
+            <Route exact path="/timeline-plus/methods" component={MethodsPage} />
+            <Route exact path="/timeline-plus/events" component={EventsPage} />
+            <Route exact path="/timeline-plus/templates" component={TemplatesPage} />
+            <Route exact path="/timeline-plus/localization" component={LocalizationPage} />
+            <Route exact path="/timeline-plus/examples" component={ExamplesPage} />
+            <Route exact path="/timeline-plus/styles" component={StylesPage} />
 
           </main>
         </div>
