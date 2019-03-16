@@ -13,8 +13,8 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "npm run build  --prefix ../ && cp -R ../dist ./public/ && cp -R ../examples ./public/ && react-scripts start",
-    "build": "npm run build  --prefix ../ && cp -R ../dist ./public/ && cp -R ../examples ./public/&& react-scripts build",
+    "start": "npm run build && react-scripts start",
+    "build": "npm run build  --prefix ../ && cp -R ../dist ./public/ && cp -R ../examples ./public/ && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
