@@ -815,6 +815,18 @@ class OptionsPage extends React.Component {
             Set a value (in ms) that the tooltip is delayed before showing.
           </td>
         </tr>
+        <tr parent="tooltip">
+          <td className="indent">tooltip.template</td>
+          <td>Function</td>
+          <td>none</td>
+          <td>
+            A template function used to generate the contents of the tooltip.
+            The function is called by the Timeline with an item data as the first argument, and the item's title as second argument.
+            It must return HTML code, a string or a template as result.
+            See section <a href="#Templates">Templates</a> for a detailed explanation.
+            See also: <code>tooltipOnItemUpdateTime.template</code>.
+          </td>
+        </tr>
 
         <tr className='toggle collapsible'>
           <td><span parent="tooltipOnItemUpdateTime"></span> tooltipOnItemUpdateTime</td>
