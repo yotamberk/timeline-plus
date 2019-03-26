@@ -287,7 +287,7 @@ class OptionsPage extends React.Component {
           <td>Boolean</td>
           <td>false</td>
           <td>This option allows you to scroll horizontally to move backwards and forwards in the time range.
-          Only applicable when option <code>{`zoomCtrl`}</code> is defined or <code>{`zoomable`}</code> is <code>{`false`}</code>.
+          Only applicable when option <code>{`zoomKey`}</code> is defined or <code>{`zoomable`}</code> is <code>{`false`}</code>.
           </td>
         </tr>
 
@@ -810,7 +810,7 @@ class OptionsPage extends React.Component {
         <tr parent="tooltip">
           <td className="indent">tooltip.delay</td>
           <td>Number</td>
-          <td><code>{`'500'`}</code></td>
+          <td><code>{`500`}</code></td>
           <td>
             Set a value (in ms) that the tooltip is delayed before showing.
           </td>
