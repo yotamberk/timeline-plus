@@ -32,7 +32,8 @@
     "watch-dev": "gulp watch --bundle",
     "prepublishOnly": "npm run build",
     "predeploy": "npm run build --prefix ./docs",
-    "deploy": "gh-pages -d ./docs/build"
+    "deploy": "gh-pages -d ./docs/build",
+    "test" : "testcafe chrome tests/UI/"
   },
   "dependencies": {
     "emitter-component": "^1.1.1",
@@ -46,10 +47,11 @@
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-env": "^7.3.1",
     "@babel/runtime": "^7.2.0",
     "async": "^2.5.0",
     "babel-cli": "^6.26.0",
+    "babel-jest": "^24.0.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-es3-property-literals": "^6.22.0",
@@ -62,6 +64,7 @@
     "gulp-eslint": "^4.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.8",
+    "jest": "^24.0.0",
     "jsdoc": "^3.5.5",
     "jsdom": "11.3.0",
     "jsdom-global": "^3.0.2",
@@ -69,9 +72,13 @@
     "mocha": "^5.2.0",
     "nyc": "^11.2.1",
     "rimraf": "^2.6.1",
+    "testcafe": "^0.23.3",
     "uglify-js": "^2.8.29",
     "uuid": "^3.1.0",
     "webpack": "^3.3.0",
     "yargs": "^8.0.2"
+  },
+  "scripts" : {
+    "test" : "testcafe chrome tests/UI/"
   }
 }
