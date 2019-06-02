@@ -58,7 +58,7 @@ const webpackModule = {
 };
 
 const webpackConfig = {
-  entry: ["@babel/polyfill", ENTRY],
+  entry: ["@babel/polyfill/noConflict", ENTRY],
   output: {
     library: 'timeline',
     libraryTarget: 'umd',
