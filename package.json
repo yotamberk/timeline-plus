@@ -20,6 +20,9 @@
     "url": "git+https://github.com/yotamberk/timeline-plus.git"
   },
   "author": "",
+  "contributors": [
+    "RylandCai <ryland.cai@philips.com>"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yotamberk/timeline-plus/issues"
