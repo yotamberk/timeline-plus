@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="../../dist/timeline.js"></script>
+  <link href="../../dist/timeline.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div id="timeline"></div>
+  <script>
+  	var container = document.getElementById('timeline');
+	var data = [
+	  {id: 1, content: 'item 1', start: '2019-01-29T14:20:00Z', end: '2019-01-29T18:20:00Z',
+	   group: 1},
+	  {id: 2, content: "hello!", start: '2019-01-29T14:20:00Z', end: '2019-01-29T18:20:00Z',
+	  group: 2}
+	];
+
+	var groups = [
+	  {id: 1, content: 1, nestedGroups: [2]},
+	  {id: 2, content: 2}
+	]
+
+	var options = {};
+	var tv = new timeline.Timeline(container, data, groups, options);
+
+	// tv.on('select', function (properties) {alert('selected items: ' + properties.items);});
+
+  </script>
+</body>
+</html>
