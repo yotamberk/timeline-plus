@@ -29,7 +29,7 @@ class NavMenu extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    
     return (
       <div className={classes.root}>
         <List component='nav' disablePadding>
@@ -38,14 +38,14 @@ class NavMenu extends React.Component {
           </ListItem>
           <Collapse in={this.state.openSection==='gettingStarted'} timeout='auto' unmountOnExit>
             <List component='div' disablePadding>
-              <Link to='/getting-started/installation'>
+              <Link to='/timeline-plus/getting-started/installation'>
                 <ListItem button className={classes.nested}>
                   <ListItemText primary='installation' />
                 </ListItem>
               </Link>
             </List>
             <List component='div' disablePadding>
-              <Link to='/getting-started/usage'>
+              <Link to='/timeline-plus/getting-started/usage'>
                 <ListItem button className={classes.nested}>
                   <ListItemText primary='usage' />
                 </ListItem>
@@ -54,63 +54,63 @@ class NavMenu extends React.Component {
           </Collapse>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/items'>
+          <Link to='/timeline-plus/items'>
             <ListItem button>
               <ListItemText primary='items' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/groups'>
+          <Link to='/timeline-plus/groups'>
             <ListItem button>
               <ListItemText primary='groups' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/options'>
+          <Link to='/timeline-plus/options'>
             <ListItem button>
               <ListItemText primary='options' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/methods'>
+          <Link to='/timeline-plus/methods'>
             <ListItem button>
               <ListItemText primary='methods' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/events'>
+          <Link to='/timeline-plus/events'>
             <ListItem button>
               <ListItemText primary='events' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/templates'>
+          <Link to='/timeline-plus/templates'>
             <ListItem button>
               <ListItemText primary='templates' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/localization'>
+          <Link to='/timeline-plus/localization'>
             <ListItem button>
               <ListItemText primary='localization' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/examples'>
+          <Link to='/timeline-plus/examples'>
             <ListItem button>
               <ListItemText primary='examples' />
             </ListItem>
           </Link>
         </List>
         <List component='nav' disablePadding>
-          <Link to='/styles'>
+          <Link to='/timeline-plus/styles'>
             <ListItem button>
               <ListItemText primary='styles' />
             </ListItem>

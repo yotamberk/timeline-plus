@@ -287,7 +287,7 @@ class OptionsPage extends React.Component {
           <td>Boolean</td>
           <td>false</td>
           <td>This option allows you to scroll horizontally to move backwards and forwards in the time range.
-          Only applicable when option <code>{`zoomCtrl`}</code> is defined or <code>{`zoomable`}</code> is <code>{`false`}</code>.
+          Only applicable when option <code>{`zoomKey`}</code> is defined or <code>{`zoomable`}</code> is <code>{`false`}</code>.
           </td>
         </tr>
 
@@ -577,6 +577,15 @@ class OptionsPage extends React.Component {
           <td>Orientation of the timeline items: 'top' or 'bottom' (default). Determines whether items are aligned to the top or bottom of the Timeline.</td>
         </tr>
 
+    <tr>
+    <td>preferZoom</td>
+    <td>boolean</td>
+    <td><code>{`false`}</code></td>
+    <td>
+    If true, scrolling vertically on timeline center panel will be prevented, and zoom action will be preferred, without need of <code>zoomKey</code>.
+  </td>
+    </tr>
+
         <tr className='toggle collapsible'>
           <td><span parent="rollingMode"></span> rollingMode</td>
           <td>Object</td>
@@ -698,6 +707,12 @@ class OptionsPage extends React.Component {
           <td><code>{`false`}</code></td>
           <td>If true, line from cluster to time axis is displayed when content overflows.</td>
         </tr>
+        <tr parent="cluster">
+          <td className="indent">cluster.fitOnDoubleClick</td>
+          <td>boolean</td>
+          <td><code>{`true`}</code></td>
+          <td>If true, the cluster will be centered on double click.</td>
+        </tr>
 
         <tr>
           <td>snap</td>
@@ -781,16 +796,37 @@ class OptionsPage extends React.Component {
           <td><code>{`false`}</code></td>
           <td>If true, tooltips will follow the mouse as they move around in the item.</td>
         </tr>
-
         <tr parent="tooltip">
           <td className="indent">tooltip.overflowMethod</td>
           <td>String</td>
           <td><code>{`'flip'`}</code></td>
           <td>
             Set how the tooltip should act if it is about to overflow out of the timeline.<br />
-            Choose from <code>{`'cap'`}</code> and <code>{`'flip'`}</code>. <br />
+            Choose from <code>{`'cap'`}</code>, <code>{`'flip'`}</code> and <code>{`'none'`}</code>. <br />
             If it is set to <code>{`'cap'`}</code>, the tooltip will just cap its position to inside to timeline. <br />
-            While if it is set to <code>{`'flip'`}</code>, the position of the tooltip will flip around the cursor so that a corner is at the cursor, and the rest of it is visible. <br />
+            If set to <code>{`'flip'`}</code>, the position of the tooltip will flip around the cursor so that a corner is at the cursor, and the rest of it is visible. <br />
+            If set to <code>{`'none'`}</code>, the tooltip will be positioned independently of the timeline, so parts of the tooltip could possibly be hidden or stick ouf of
+            the timeline, depending how CSS overflow is defined for the timeline (by default it's hidden). <br />
+          </td>
+        </tr>
+        <tr parent="tooltip">
+          <td className="indent">tooltip.delay</td>
+          <td>Number</td>
+          <td><code>{`500`}</code></td>
+          <td>
+            Set a value (in ms) that the tooltip is delayed before showing.
+          </td>
+        </tr>
+        <tr parent="tooltip">
+          <td className="indent">tooltip.template</td>
+          <td>Function</td>
+          <td>none</td>
+          <td>
+            A template function used to generate the contents of the tooltip.
+            The function is called by the Timeline with an items' data as the first argument, and the edited data as the second argument.
+            It must return HTML code, a string or a template as result.
+            See section <a href="#Templates">Templates</a> for a detailed explanation.
+            See also: <code>tooltipOnItemUpdateTime.template</code>.
           </td>
         </tr>
 
@@ -801,10 +837,11 @@ class OptionsPage extends React.Component {
           <td>Show a tooltip on updating an item's time. Note: <code>{`editable.updateTime`}</code> must be <code>{`true`}</code></td>
         </tr>
         <tr parent="tooltipOnItemUpdateTime">
-          <td className="indent">template</td>
+          <td className="indent">tooltipOnItemUpdateTime.template</td>
           <td>Function</td>
           <td>none</td>
           <td>A template function used to generate the contents of the tooltip. The function is called by the Timeline with an item data as the first argument, and must return HTML code, a string or a template as result. See section <a href="#Templates">Templates</a> for a detailed explanation.
+            See also: <code>tooltip.template</code>.
           </td>
         </tr>
         <tr>
@@ -833,11 +870,21 @@ class OptionsPage extends React.Component {
         </tr>
 
         <tr>
+          <td>zoomFriction</td>
+          <td>number</td>
+          <td><code>5</code></td>
+          <td>
+            Specifies how strong the zooming is for each scroll tick. Higher zooming friction will slow
+            zooming speed.
+          </td>
+        </tr>
+
+        <tr>
           <td>zoomKey</td>
           <td>String</td>
           <td><code>{`''`}</code></td>
           <td>Specifies whether the Timeline is only zoomed when an additional key is down.
-            Available values are '' (does not apply), 'altKey', 'ctrlKey', or 'metaKey'.
+            Available values are '' (does not apply), 'altKey', 'ctrlKey', 'shiftKey' or 'metaKey'.
             Only applicable when option <code>{`moveable`}</code> is set <code>{`true`}</code>.
           </td>
         </tr>
