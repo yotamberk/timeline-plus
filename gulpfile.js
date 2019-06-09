@@ -19,6 +19,7 @@ const TIMELINE_MAP      = 'timeline.map';
 const TIMELINE_MIN_JS   = 'timeline.min.js';
 const TIMELINE_CSS      = 'timeline.css';
 const TIMELINE_MIN_CSS  = 'timeline.min.css';
+var TIMELINE_D_TS     = 'timeline.d.ts';
 
 /**
  * Generate banner with today's date and correct version
@@ -147,6 +148,29 @@ function minifyJs(cb) {
   fs.writeFileSync(DIST + '/' + TIMELINE_MAP, result.map.replace(/"\.\/dist\//g, '"'));
   
   cb();
+});
+
+function typings() {
+  return src('./index.d.ts')
+      .pipe(rename(TIMELINE_D_TS))
+      .pipe(dest(DIST));
+});
+
+gulp.task('bundle', ['bundle-js', 'bundle-css']);
+
+// read command line arguments --bundle and --minify
+var bundle = 'bundle' in argv;
+var minify = 'minify' in argv;
+var watchTasks = [];
+if (bundle || minify) {
+  // do bundling and/or minifying only when specified on the command line
+  watchTasks = [];
+  if (bundle) watchTasks.push('bundle');
+  if (minify) watchTasks.push('minify');
+}
+else {
+  // by default, do both bundling and minifying
+  watchTasks = ['bundle', 'minify'];
 }
 
 // The watch task (to automatically rebuild when the source code changes)
@@ -182,4 +206,5 @@ exports.clean = clean;
 exports.build = bundle;
 exports.watch = watchFiles;
 exports.lint = lint;
-exports.default = series(clean, lint, bundle);
+exports.typing = typing;
+exports.default = series(clean, lint, bundle, typings);
