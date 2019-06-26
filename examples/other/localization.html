@@ -13,7 +13,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.1/moment-with-locales.min.js"></script>
   <script src="../../dist/timeline.js"></script>
   <link href="../../dist/timeline.min.css" rel="stylesheet" type="text/css" />
-  
+
 </head>
 <body>
 <p>
@@ -40,8 +40,8 @@
 
   // Create a DataSet (allows two way data-binding)
   var items = new timeline.DataSet([
-    {id: 1, content: 'item 1', start: new Date(new Date().valueOf() - DAY)},
-    {id: 2, content: 'item 2', start: new Date(new Date().valueOf() + 2 * DAY)}
+    {id: 1, content: 'item 1', start: new Date(Date.now() - DAY)},
+    {id: 2, content: 'item 2', start: new Date(Date.now() + 2 * DAY)}
   ]);
 
   // Configuration for the Timeline
@@ -53,7 +53,7 @@
   var timeline = new timeline.Timeline(container, items, options);
   timeline.addCustomTime(new Date());
 
-  timeline.setCustomTime(new Date(new Date().valueOf() + DAY));
+  timeline.setCustomTime(new Date(Date.now() + DAY));
 
   // update the locale when changing the select box value
   var select = document.getElementById('locale');
