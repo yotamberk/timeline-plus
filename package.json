@@ -1,6 +1,6 @@
 {
   "name": "timeline-plus",
-  "version": "2.3.7",
+  "version": "2.4.0",
   "description": "",
   "main": "./dist/timeline.js",
   "types": "./dist/timeline.d.ts",
@@ -29,14 +29,7 @@
   },
   "homepage": "http://yotamberk.github.io/timeline-plus",
   "scripts": {
-    "build": "gulp",
-    "lint": "gulp lint",
-    "watch": "gulp watch --minify",
-    "watch-dev": "gulp watch",
-    "prepublishOnly": "npm run build",
-    "predeploy": "npm run build --prefix ./docs",
-    "deploy": "gh-pages -d ./docs/build",
-    "test" : "testcafe chrome tests/UI/"
+    "test": "testcafe chrome tests/UI/"
   },
   "dependencies": {
     "emitter-component": "^1.1.1",
@@ -80,8 +73,5 @@
     "uuid": "^3.1.0",
     "webpack": "^3.3.0",
     "yargs": "^8.0.2"
-  },
-  "scripts" : {
-    "test" : "testcafe chrome tests/UI/"
   }
 }
