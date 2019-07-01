@@ -103,7 +103,7 @@ class App extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar}>
-          <Link to='/'>
+          <Link to='/timeline-plus/'>
             <div className={classes.logoLink}>
               <img src={process.env.PUBLIC_URL + '/logo2.png'} alt='logo' className={classes.logoImg}/>
               <Typography variant="title" color="inherit" noWrap className={classes.logoTitle}>
