@@ -148,29 +148,12 @@ function minifyJs(cb) {
   fs.writeFileSync(DIST + '/' + TIMELINE_MAP, result.map.replace(/"\.\/dist\//g, '"'));
   
   cb();
-});
+}
 
 function typings() {
   return src('./index.d.ts')
       .pipe(rename(TIMELINE_D_TS))
       .pipe(dest(DIST));
-});
-
-gulp.task('bundle', ['bundle-js', 'bundle-css']);
-
-// read command line arguments --bundle and --minify
-var bundle = 'bundle' in argv;
-var minify = 'minify' in argv;
-var watchTasks = [];
-if (bundle || minify) {
-  // do bundling and/or minifying only when specified on the command line
-  watchTasks = [];
-  if (bundle) watchTasks.push('bundle');
-  if (minify) watchTasks.push('minify');
-}
-else {
-  // by default, do both bundling and minifying
-  watchTasks = ['bundle', 'minify'];
 }
 
 // The watch task (to automatically rebuild when the source code changes)
@@ -184,7 +167,6 @@ function watchFiles() {
     watch('lib/**/*', series(bundleJs, bundleCss));
   }
 }
-
 
 // linting task
 function lint(cb) {
@@ -206,5 +188,5 @@ exports.clean = clean;
 exports.build = bundle;
 exports.watch = watchFiles;
 exports.lint = lint;
-exports.typing = typing;
+exports.typing = typings;
 exports.default = series(clean, lint, bundle, typings);
