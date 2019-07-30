@@ -31,6 +31,18 @@
   "scripts": {
     "test": "testcafe chrome tests/UI/"
   },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "@babel/preset-env"
+          ]
+        }
+      ]
+    ]
+  },
   "dependencies": {
     "emitter-component": "^1.1.1",
     "hammerjs": "^2.0.8",
