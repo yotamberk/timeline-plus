@@ -1,3 +1,11 @@
+# DEPRECATED: This project has been deprecated! All the features have been moved to [vis-timeline](https://github.com/visjs/vis-timeline) (released in > v6.0.0) and is now maintained only there. 
+
+### Feel free to check that project out and to submit [issues](https://github.com/visjs/vis-timeline/issues) \ [pull requests](https://github.com/visjs/vis-timeline/pulls) there.
+
+
+
+
+
 # Timeline
 
 Based on vis.js Timeline (v4.21.0) - [https://github.com/almende/vis.git](https://github.com/almende/vis.git).
