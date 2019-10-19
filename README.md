@@ -29,13 +29,6 @@ and
 
 [https://unpkg.com/timeline-plus/dist/timeline.css](https://unpkg.com/timeline-plus/dist/timeline.css).
 
-
-Or download the library from the github project:
-[https://github.com/yotamberk/timeline.git](https://github.com/yotamberk/timeline.git).
-
-## API and Examples
-[https://yotamberk.github.io/timeline-plus/](https://yotamberk.github.io/timeline-plus/)
-
 ## Basic Example
 
 A basic example on loading a Timeline is shown below. More examples can be
